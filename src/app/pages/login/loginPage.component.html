@@ -1,1 +1,10 @@
-<h3>Login Page</h3>
+<div class="example-container">
+    <mat-form-field>
+        <input matInput placeholder="Email">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <input matInput placeholder="Password" [type]="hidePass ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </mat-form-field>
+</div>
