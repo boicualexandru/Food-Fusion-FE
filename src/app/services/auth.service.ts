@@ -15,7 +15,7 @@ export class AuthService {
         this.http.post(this.apiPath + '/Token', loginModel, { responseType: 'text' })
             .subscribe(
                 (token: string) => {
-                    console.log('success');
+                    localStorage.setItem('jwt', token);
                     console.log(token); this.token = token; },
                 error => { console.log(error); }
             );
