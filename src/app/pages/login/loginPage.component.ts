@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { LoginModel } from 'src/app/models/loginModel';
 
 @Component({
     templateUrl: './loginPage.component.html',
@@ -10,15 +12,21 @@ export class LoginPageComponent implements OnInit {
     email: string;
     password: string;
 
-    constructor() { }
+    constructor(private authService: AuthService) { }
 
     ngOnInit(): void { }
 
     login(): void {
-        if (this.email === 'admin' && this.password === 'admin') {
-            alert('Success');
-        } else {
-            alert('Invalid credentials');
-        }
+        const loginModel: LoginModel = {
+            email: this.email,
+            password: this.password
+        };
+        this.authService.login(loginModel);
+
+        // if (this.email === 'admin' && this.password === 'admin') {
+        //     alert('Success');
+        // } else {
+        //     alert('Invalid credentials');
+        // }
     }
 }
