@@ -1,6 +1,6 @@
 export interface UserState {
     token: string;
-    ExpirationDate: Date;
+    expirationDate: Date;
     userId: string;
     fullName: string;
     email: string;
