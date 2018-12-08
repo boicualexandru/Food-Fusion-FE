@@ -12,7 +12,11 @@ export class AuthService {
     private tokenSubject: BehaviorSubject<string>;
     private userStateSubject: BehaviorSubject<UserState>;
 
-    public get currentUser(): Observable<UserState> {
+    public get currentUser(): UserState {
+        return this.userStateSubject.value;
+    }
+
+    public get currentUserObservable(): Observable<UserState> {
         return this.userStateSubject.asObservable();
     }
 
