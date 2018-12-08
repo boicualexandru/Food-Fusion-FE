@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginModel } from '../models/loginModel';
 import { UserState } from '../models/userState';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -18,15 +18,6 @@ export class AuthService {
 
     public get currentUserObservable(): Observable<UserState> {
         return this.userStateSubject.asObservable();
-    }
-
-    public get httpOptions(): any {
-        return {
-            headers: new HttpHeaders({
-              'Content-Type':  'application/json',
-              'Authorization': 'Bearer ' + this.tokenSubject.value
-            })
-          };
     }
 
     constructor(private http: HttpClient) {
