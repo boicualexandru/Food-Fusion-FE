@@ -1,0 +1,12 @@
+.restaurants-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    .restaurant-card{
+        padding: 16px;
+        box-sizing: border-box;
+        max-width: 50%;
+    }
+}
