@@ -17,7 +17,8 @@ import { RestaurantsPageComponent } from './pages/restaurants/restaurantsPage.co
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginPageComponent },
-  { path: 'restaurants', component: RestaurantsPageComponent }
+  { path: 'restaurants', component: RestaurantsPageComponent },
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({
