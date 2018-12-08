@@ -1,9 +1,14 @@
-<div class="restaurants-list">
-    <div *ngFor="let restaurant of restaurants" class="restaurant-card">
-        <mat-card>
-            <mat-card-title>{{restaurant.name}}</mat-card-title>
-            <mat-card-subtitle>{{restaurant.city}}</mat-card-subtitle>
-            <mat-card-content>{{restaurant.description}}</mat-card-content>
-        </mat-card>
+<div class="container">
+    <div class="row">
+        <div *ngFor="let restaurant of restaurants" class="col px-2 mt-2">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{restaurant.name}}</mat-card-title>
+                    <mat-card-subtitle>{{restaurant.city}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="{{getImage()}}" alt="{{restaurant.name}}">
+                <mat-card-content>{{restaurant.description}}</mat-card-content>
+            </mat-card>
+        </div>
     </div>
 </div>
