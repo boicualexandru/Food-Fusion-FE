@@ -1,4 +1,23 @@
-{{id}}
+
 <div *ngIf="restaurant">
-    {{restaurant.name}}
+    <div class="restaurant-image-header pb-4" [ngStyle]="{'background-image': getImage()}">
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <h2>{{restaurant.name}}</h2>
+                    <h4>{{restaurant.city}}</h4>
+                </div>
+                <div class="col-4 text-right">
+                    <button mat-raised-button color="accent">
+                        <mat-icon>date_range</mat-icon>
+                        Book Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pt-4">
+        <p>{{restaurant.description}}</p>
+    </div>
 </div>
