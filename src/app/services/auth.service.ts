@@ -4,6 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginModel } from '../models/loginModel';
 import { UserState } from '../models/userState';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -27,29 +28,24 @@ export class AuthService {
         this.userStateSubject = new BehaviorSubject<UserState>(userState);
     }
 
-    login(loginModel: LoginModel) {
-        console.log('AuthService login');
-        this.http.post(this.apiPath + '/Token', loginModel, { responseType: 'text' })
-            .subscribe(
-                (token: string) => {
-                    const userState: UserState = this.parseToken(token);
-
-                    localStorage.setItem('jwt', token);
-
-                    this.tokenSubject.next(token);
-                    this.userStateSubject.next(userState);
-
-                    console.log(token);
-                    console.log(userState);
-                },
-                error => { console.log(error); }
-            );
+    login(loginModel: LoginModel): Observable<string> {
+        return this.http.post(this.apiPath + '/Token', loginModel, { responseType: 'text' })
+            .pipe(tap(token => this.storeToken(token)));
     }
 
     logout() {
         localStorage.removeItem('jwt');
         this.tokenSubject.next(null);
         this.userStateSubject.next(null);
+    }
+
+    private storeToken(token: string): void {
+        const userState: UserState = this.parseToken(token);
+
+        localStorage.setItem('jwt', token);
+
+        this.tokenSubject.next(token);
+        this.userStateSubject.next(userState);
     }
 
     private parseToken(token: string): UserState {
