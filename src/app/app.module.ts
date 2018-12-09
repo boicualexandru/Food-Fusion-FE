@@ -14,10 +14,12 @@ import { RestaurantsService } from './services/restaurants.service';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { RestaurantsPageComponent } from './pages/restaurants/restaurantsPage.component';
+import { RestaurantPageComponent } from './pages/restaurant/restaurantPage.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'restaurants', component: RestaurantsPageComponent },
+  { path: 'restaurant/:id', component: RestaurantPageComponent },
   { path: '**', redirectTo: 'login' }
 ];
 
