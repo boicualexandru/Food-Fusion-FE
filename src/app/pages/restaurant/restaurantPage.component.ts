@@ -1,21 +1,23 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RestaurantsService } from 'src/app/services/restaurants.service';
+import { RestaurantDetailed } from 'src/app/models/restaurant/restaurantDetailed';
 
 @Component({
     templateUrl: './restaurantPage.component.html',
     styleUrls: ['./restaurantPage.component.scss']
 })
 export class RestaurantPageComponent implements OnInit, OnDestroy {
-    id: number;
+    restaurant: RestaurantDetailed;
     private sub: any;
 
-    constructor(private route: ActivatedRoute) { }
+    constructor(private route: ActivatedRoute, private restaurantsService: RestaurantsService) { }
 
     ngOnInit(): void {
         this.sub = this.route.params.subscribe(params => {
-            this.id = +params['id']; // (+) converts string 'id' to a number
-
-            // In a real app: dispatch action to load the details here.
+            this.restaurantsService.getRestaurant(+params['id']).subscribe(
+                restaurant => this.restaurant = restaurant
+            );
         });
     }
 
