@@ -26,7 +26,15 @@
             </mat-tab>
             <mat-tab label="Menu" class="pt-4">
                 <div class="pt-4">
-                    Menu
+                    <mat-list role="list">
+                        <div *ngFor="let item of restaurant.menu.items">
+                            <mat-list-item role="listitem">
+                                <h4 mat-line>{{item.name}}</h4>
+                                <mat-icon mat-button mat-list-icon>restaurant</mat-icon>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                        </div>
+                    </mat-list>
                 </div>
             </mat-tab>
         </mat-tab-group>
