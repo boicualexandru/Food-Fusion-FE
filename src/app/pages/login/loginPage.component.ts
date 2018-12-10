@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { LoginModel } from 'src/app/models/loginModel';
+import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './loginPage.component.html',
@@ -10,15 +13,20 @@ export class LoginPageComponent implements OnInit {
     email: string;
     password: string;
 
-    constructor() { }
+    constructor(private router: Router, private authService: AuthService) { }
 
     ngOnInit(): void { }
 
     login(): void {
-        if (this.email === 'admin' && this.password === 'admin') {
-            alert('Success');
-        } else {
-            alert('Invalid credentials');
-        }
+        const loginModel: LoginModel = {
+            email: this.email,
+            password: this.password
+        };
+        this.authService.login(loginModel).subscribe(
+            token =>  {
+                console.log('test');
+                this.router.navigate(['/restaurants']);
+            }
+        );
     }
 }

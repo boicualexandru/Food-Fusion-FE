@@ -10,7 +10,7 @@
             <mat-form-field class="input-full-width">
                 <input matInput placeholder="Password" [(ngModel)]="password" [type]="hidePass ? 'password' : 'text'"
                     name="password" required>
-                <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <button mat-icon-button matSuffix><mat-icon (click)="hidePass = !hidePass">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon></button>
             </mat-form-field>
         </form>
         <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>

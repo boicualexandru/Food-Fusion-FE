@@ -1,0 +1,47 @@
+
+<div *ngIf="restaurant">
+    <div class="restaurant-image-header" [ngStyle]="{'background-image': getImage()}">
+        <div class="container mb-2">
+            <div class="row">
+                <div class="col-8">
+                    <h2>{{restaurant.name}}</h2>
+                    <h4>{{restaurant.city}}</h4>
+                </div>
+                <div class="col-4 text-right">
+                    <button mat-raised-button color="accent">
+                        <mat-icon>date_range</mat-icon>
+                        Book Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <mat-tab-group dynamicHeight class="restaurant-tabs">
+            <mat-tab label="Description" class="pt-4">
+                <div class="pt-4">
+                    {{restaurant.description}}
+                </div>
+            </mat-tab>
+            <mat-tab label="Menu" class="pt-4">
+                <div class="pt-4">
+                    <mat-list role="list">
+                        <div *ngFor="let item of restaurant.menu.items; last as isLast">
+                            <mat-list-item role="listitem">
+                                <h4 mat-line>{{item.name}}</h4>
+                                <div class="w-25 text-right">
+                                    <span class="mat-small">{{item.price}} Lei</span>
+                                    <button mat-icon-button color="accent">
+                                        <mat-icon aria-label="Add Item">add</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-list-item>
+                            <mat-divider *ngIf="!isLast"></mat-divider>
+                        </div>
+                    </mat-list>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

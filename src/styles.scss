@@ -4,4 +4,22 @@
     padding: 0;
   }
 
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/utilities';
+button:focus { outline: none; }
+
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.restaurant-tabs {
+  margin-top: -48px;
+
+  .mat-tab-label{
+      color: white !important;
+      opacity: 1;
+  }
+
+  .mat-ink-bar{
+    background-color: white !important;
+  }
+}
