@@ -28,6 +28,6 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
     getImage(): string {
         const d = Math.random();
 
-        return 'url(https://images.unsplash.com/photo-1532719880791-ea2b56fdfa87?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9)';
+        return 'url(https://images.unsplash.com/photo-1516709315038-c53bf87e8f48?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9)';
     }
 }
