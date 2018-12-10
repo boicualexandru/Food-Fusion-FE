@@ -27,12 +27,17 @@
             <mat-tab label="Menu" class="pt-4">
                 <div class="pt-4">
                     <mat-list role="list">
-                        <div *ngFor="let item of restaurant.menu.items">
+                        <div *ngFor="let item of restaurant.menu.items; last as isLast">
                             <mat-list-item role="listitem">
                                 <h4 mat-line>{{item.name}}</h4>
-                                <mat-icon mat-button mat-list-icon>restaurant</mat-icon>
+                                <div class="w-25 text-right">
+                                    <span class="mat-small">{{item.price}} Lei</span>
+                                    <button mat-icon-button color="accent">
+                                        <mat-icon aria-label="Add Item">add</mat-icon>
+                                    </button>
+                                </div>
                             </mat-list-item>
-                            <mat-divider></mat-divider>
+                            <mat-divider *ngIf="!isLast"></mat-divider>
                         </div>
                     </mat-list>
                 </div>
