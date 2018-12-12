@@ -4,7 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginModel } from '../models/loginModel';
 import { UserState } from '../models/userState';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -19,6 +19,20 @@ export class AuthService {
 
     public get currentUserObservable(): Observable<UserState> {
         return this.userStateSubject.asObservable();
+    }
+
+    public get isAdmin(): boolean {
+        return this.userStateSubject.value.role === 'Admin';
+    }
+
+    public isManager(restaurantId: number): boolean {
+        if (this.userStateSubject.value.managedRestaurants == null) { return false; }
+        return this.userStateSubject.value.managedRestaurants.includes(restaurantId);
+    }
+
+    public isEmployee(restaurantId: number): boolean {
+        if (this.userStateSubject.value.employeeOfRestaurants == null) { return false; }
+        return this.userStateSubject.value.employeeOfRestaurants.includes(restaurantId);
     }
 
     constructor(private http: HttpClient) {
@@ -62,8 +76,9 @@ export class AuthService {
             userId: decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
             email: decodedToken['email'],
             fullName: decodedToken['full_name'],
-            managedRestaurants: decodedToken['managed_restaurant'],
-            employeeOfRestaurants: decodedToken['employee_of_restaurant']
+            role: decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
+            managedRestaurants: (decodedToken['managed_restaurant'] || []).map(rId => Number(rId)),
+            employeeOfRestaurants: (decodedToken['employee_of_restaurant'] || []).map(rId => Number(rId))
         };
 
         return userState;

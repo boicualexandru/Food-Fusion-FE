@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestaurantsService } from 'src/app/services/restaurants.service';
 import { RestaurantDetailed } from 'src/app/models/restaurant/restaurantDetailed';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     templateUrl: './restaurantPage.component.html',
@@ -9,14 +10,20 @@ import { RestaurantDetailed } from 'src/app/models/restaurant/restaurantDetailed
 })
 export class RestaurantPageComponent implements OnInit, OnDestroy {
     restaurant: RestaurantDetailed;
+    isManager: boolean;
+    isEmmployee: boolean;
     private sub: any;
 
-    constructor(private route: ActivatedRoute, private restaurantsService: RestaurantsService) { }
+    constructor(private route: ActivatedRoute, private restaurantsService: RestaurantsService, private authService: AuthService) { }
 
     ngOnInit(): void {
         this.sub = this.route.params.subscribe(params => {
             this.restaurantsService.getRestaurant(+params['id']).subscribe(
-                restaurant => this.restaurant = restaurant
+                restaurant => {
+                    this.restaurant = restaurant;
+                    this.isManager = this.authService.isManager(this.restaurant.id);
+                    this.isEmmployee = this.authService.isEmployee(this.restaurant.id);
+                }
             );
         });
     }
