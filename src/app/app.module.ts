@@ -15,6 +15,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { RestaurantsPageComponent } from './pages/restaurants/restaurantsPage.component';
 import { RestaurantPageComponent } from './pages/restaurant/restaurantPage.component';
+import { EmployeesService } from './services/employees.service';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -42,7 +43,7 @@ const appRoutes: Routes = [
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    AuthService, RestaurantsService ],
+    AuthService, RestaurantsService, EmployeesService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

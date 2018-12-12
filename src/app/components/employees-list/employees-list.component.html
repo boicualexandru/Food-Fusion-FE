@@ -1,0 +1,13 @@
+<mat-list role="list">
+    <h3 mat-subheader>Manager</h3>
+    <mat-list-item *ngIf="manager" role="listitem">
+        <mat-icon mat-list-icon>account_circle</mat-icon>
+        <h4 mat-line>{{manager.fullName}}</h4>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>Employees</h3>
+    <mat-list-item *ngFor="let employee of employees" role="listitem">
+        <mat-icon mat-list-icon>account_circle</mat-icon>
+        <h4 mat-line>{{employee.fullName}}</h4>
+    </mat-list-item>
+</mat-list>
