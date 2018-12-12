@@ -1,4 +1,16 @@
 .restaurant-image-header{
+    position: relative;
     color: white;
     padding: 260px 0 50px;
+    background-size: cover;
+    background-position: 50% 50%;
+
+    .gradient{
+        display: block;
+        width: 100%;
+        height: 164px;
+        position: absolute;
+        bottom: 0;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.33) 80%, rgba(0,0,0,0) 100%);
+    }
 }
