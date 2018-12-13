@@ -76,6 +76,13 @@ export class AuthService {
         const helper = new JwtHelperService();
         const decodedToken = helper.decodeToken(token);
 
+        if (typeof decodedToken['managed_restaurant'] === 'string') {
+            decodedToken['managed_restaurant'] = [decodedToken['managed_restaurant']];
+        }
+        if (typeof decodedToken['employee_of_restaurant'] === 'string') {
+            decodedToken['employee_of_restaurant'] = [decodedToken['employee_of_restaurant']];
+        }
+
         const userState: UserState = {
             token: token,
             expirationDate: helper.getTokenExpirationDate(token),
