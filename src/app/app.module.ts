@@ -16,9 +16,11 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
 import { RestaurantsPageComponent } from './pages/restaurants/restaurantsPage.component';
 import { RestaurantPageComponent } from './pages/restaurant/restaurantPage.component';
 import { EmployeesService } from './services/employees.service';
+import { RegisterPageComponent } from './pages/register/registerPage.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginPageComponent },
+  { path: 'register', component: RegisterPageComponent },
   { path: 'restaurants', component: RestaurantsPageComponent },
   { path: 'restaurant/:id', component: RestaurantPageComponent },
   { path: '**', redirectTo: 'login' }

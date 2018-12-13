@@ -16,10 +16,6 @@ export class RestaurantsPageComponent implements OnInit {
         this.restaurantsService.getAll().subscribe(restaurants => this.restaurants = restaurants);
     }
 
-    goToRestaurant(restaurantId: number) {
-        this.router.navigate(['/restaurant', restaurantId]);
-    }
-
     getImage(): string {
         const d = Math.random();
 

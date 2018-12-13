@@ -1,6 +1,6 @@
-<div class="login-page">
+<div class="auth-page">
     <div class="bg-image"></div>
-    <mat-card class="login-card">
+    <mat-card class="auth-card">
         <mat-card-header>
             <mat-card-title class="text-center">Login</mat-card-title>
         </mat-card-header>
@@ -22,7 +22,7 @@
                 <button mat-raised-button (click)="login()" color="primary" class="w-100">Login</button>
             </div>
             <div class="mat-body-strong font-weight-bold text-center pt-3">
-                Don't have an account? <a href="#">Sign up</a>
+                Don't have an account? <a routerLink="/register">Sign up</a>
             </div>
         </mat-card-actions>
     </mat-card>

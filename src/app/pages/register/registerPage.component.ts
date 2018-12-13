@@ -1,29 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { LoginModel } from 'src/app/models/loginModel';
 import { Router } from '@angular/router';
+import { RegisterModel } from 'src/app/models/registerModel';
 
 @Component({
-    templateUrl: './loginPage.component.html',
-    styleUrls: ['./loginPage.component.scss']
+    templateUrl: './registerPage.component.html',
+    styleUrls: ['../login/loginPage.component.scss']
 })
-export class LoginPageComponent implements OnInit {
+export class RegisterPageComponent implements OnInit {
     hidePass = true;
 
     email: string;
+    fullName: string;
     password: string;
 
     constructor(private router: Router, private authService: AuthService) { }
 
     ngOnInit(): void { }
 
-    login(): void {
-        const loginModel: LoginModel = {
+    register(): void {
+        const registerModel: RegisterModel = {
             email: this.email,
+            fullName: this.fullName,
             password: this.password
         };
 
-        this.authService.login(loginModel).subscribe(
+        this.authService.register(registerModel).subscribe(
             token =>  {
                 this.router.navigate(['/restaurants']);
             }

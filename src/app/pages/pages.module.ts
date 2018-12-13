@@ -6,10 +6,12 @@ import { MaterialCustomModule } from '../maerial-custom.module';
 import { RestaurantsPageComponent } from './restaurants/restaurantsPage.component';
 import { RestaurantPageComponent } from './restaurant/restaurantPage.component';
 import { ComponentsModule } from '../components/components.module';
+import { AppRoutingModule } from '../app-routing.module';
+import { RegisterPageComponent } from './register/registerPage.component';
 
 @NgModule({
-    declarations: [ LoginPageComponent, RestaurantsPageComponent, RestaurantPageComponent ],
-    imports: [ CommonModule, MaterialCustomModule, FormsModule, ComponentsModule ],
-    exports: [ LoginPageComponent, RestaurantsPageComponent, RestaurantPageComponent ],
+    declarations: [ LoginPageComponent, RegisterPageComponent, RestaurantsPageComponent, RestaurantPageComponent ],
+    imports: [ CommonModule, MaterialCustomModule, FormsModule, ComponentsModule, AppRoutingModule ],
+    exports: [ LoginPageComponent, RegisterPageComponent, RestaurantsPageComponent, RestaurantPageComponent ],
 })
 export class PagesModule {}
