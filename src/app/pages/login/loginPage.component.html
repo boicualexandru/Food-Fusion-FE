@@ -1,21 +1,29 @@
-<mat-card class="login-card">
-    <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <form class="example-form">
-            <mat-form-field class="input-full-width">
-                <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
-            </mat-form-field>
-            <mat-form-field class="input-full-width">
-                <input matInput placeholder="Password" [(ngModel)]="password" [type]="hidePass ? 'password' : 'text'"
-                    name="password" required>
-                <button mat-icon-button matSuffix><mat-icon (click)="hidePass = !hidePass">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon></button>
-            </mat-form-field>
-        </form>
-        <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button (click)="login()" color="primary">Login</button>
-    </mat-card-actions>
-</mat-card>
+<div class="login-page">
+    <div class="bg-image"></div>
+    <mat-card class="login-card">
+        <mat-card-header>
+            <mat-card-title class="text-center">Login</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="example-form">
+                <mat-form-field class="input-full-width">
+                    <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
+                </mat-form-field>
+                <mat-form-field class="input-full-width">
+                    <input matInput placeholder="Password" [(ngModel)]="password" [type]="hidePass ? 'password' : 'text'"
+                        name="password" required>
+                    <button mat-icon-button matSuffix><mat-icon (click)="hidePass = !hidePass">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+                </mat-form-field>
+            </form>
+            <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="text-right">
+                <button mat-raised-button (click)="login()" color="primary" class="w-100">Login</button>
+            </div>
+            <div class="mat-body-strong font-weight-bold text-center pt-3">
+                Don't have an account? <a href="#">Sign up</a>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</div>

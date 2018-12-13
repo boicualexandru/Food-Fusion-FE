@@ -1,8 +1,27 @@
-.login-card {
-    margin: 100px auto 0;
-    max-width: 250px;
+.login-page{
+    position: absolute;
+    width: 100%;
 
-    .input-full-width {
-        width: 100%;
+    .bg-image{
+        height: calc(100% + 40px);
+        width: calc(100% + 40px);
+        left: -20px;
+        top: -20px;
+        background-image: url('https://images.unsplash.com/photo-1530062845289-9109b2c9c868?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80');
+        position: fixed;
+        background-size: cover;
+        background-position: 50% 50%;
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+        z-index: -1;
+    }
+
+    .login-card {
+        margin: 200px auto 0;
+        max-width: 320px;
+    
+        .input-full-width {
+            width: 100%;
+        }
     }
 }
