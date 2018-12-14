@@ -7,8 +7,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
     templateUrl: './employee-edit-dialog.component.html'
 })
 export class EmpoyeeEditDialogComponent implements OnInit {
-    constructor(public dialogRef: MatDialogRef<EmpoyeeEditDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: string) { }
+    email = '';
+
+    constructor(public dialogRef: MatDialogRef<EmpoyeeEditDialogComponent>) { }
 
     ngOnInit(): void { }
 
