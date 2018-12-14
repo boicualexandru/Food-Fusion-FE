@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { EmployeesListComponent } from './employees-list/employees-list.component';
-import { MaterialCustomModule } from '../maerial-custom.module';
+import { EmpoyeeEditDialogComponent } from './employees-list/employee-edit-dialog.component';
+import { SharedModule } from '../shared.module';
 
 @NgModule({
-    declarations: [ EmployeesListComponent ],
-    imports: [ CommonModule, MaterialCustomModule ],
-    exports: [ EmployeesListComponent ],
+    declarations: [ EmployeesListComponent, EmpoyeeEditDialogComponent ],
+    imports: [ SharedModule ],
+    exports: [ EmployeesListComponent],
     providers: [],
+    entryComponents: [ EmpoyeeEditDialogComponent ]
 })
 export class ComponentsModule { }

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Employee } from 'src/app/models/employee/employee';
+import { MatDialog } from '@angular/material';
+import { EmpoyeeEditDialogComponent } from './employee-edit-dialog.component';
 
 @Component({
     selector: 'app-employees-list',
@@ -13,7 +15,7 @@ export class EmployeesListComponent implements OnInit {
     manager: Employee;
     employees: Employee[] = [];
 
-    constructor(private employeesService: EmployeesService) { }
+    constructor(private employeesService: EmployeesService, public dialog: MatDialog) { }
 
     ngOnInit(): void {
         this.employeesService.getManagerByRestaurantId(this.restaurantId)
@@ -21,5 +23,24 @@ export class EmployeesListComponent implements OnInit {
 
         this.employeesService.getEmployeesByRestaurantId(this.restaurantId)
             .subscribe(employees => this.employees = employees);
+    }
+
+    openDialogForAddEmployee(): void {
+        const dialogRef = this.dialog.open(EmpoyeeEditDialogComponent, {
+            width: '250px'
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+            // this.addEmployee(result.email);
+        });
+    }
+
+    addEmployee(userEmail: string) {
+        alert(userEmail);
+    }
+
+    openDialogForRemoveEmployee(userId: number): void {
+
     }
 }
