@@ -27,12 +27,13 @@ export class EmployeesListComponent implements OnInit {
 
     openDialogForAddEmployee(): void {
         const dialogRef = this.dialog.open(EmpoyeeEditDialogComponent, {
-            width: '250px'
+            width: '250px',
+            data: this.restaurantId
         });
 
-        dialogRef.afterClosed().subscribe(result => {
-            console.log(result);
-            // this.addEmployee(result.email);
+        dialogRef.afterClosed().subscribe(employee => {
+            if (employee == null) { return; }
+            this.employees.push(employee);
         });
     }
 

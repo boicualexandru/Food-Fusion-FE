@@ -15,4 +15,9 @@ export class EmployeesService {
     getManagerByRestaurantId(id: number) {
         return this.http.get<Employee>(this.apiPath + '/Restaurants/' + id + '/Manager');
     }
+
+    addEmployeeByEmail(restaurantId: number, email: string) {
+        return this.http.post<Employee>(this.apiPath + '/Restaurants/' + restaurantId + '/Employees', email,
+            {headers: {'Content-Type': 'application/json'}});
+    }
 }
