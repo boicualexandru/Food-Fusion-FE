@@ -3,6 +3,7 @@ import { Employee } from 'src/app/models/employee/employee';
 import { MAT_DIALOG_DATA, MatDialogRef, ErrorStateMatcher } from '@angular/material';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Validators, FormControl, FormGroupDirective, NgForm, AbstractControl, ValidatorFn } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 
 export class DirtyTouchedSubmittedErrorStateMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -16,13 +17,13 @@ export class DirtyTouchedSubmittedErrorStateMatcher implements ErrorStateMatcher
     templateUrl: './employee-edit-dialog.component.html'
 })
 export class EmpoyeeEditDialogComponent implements OnInit {
+    serverErrorMessage: BehaviorSubject<any> = new BehaviorSubject<any>({});
     emailFormControl = new FormControl('', [
         Validators.required,
         Validators.email,
-        this.serverSideValidator()
+        this.serverSideValidator(this.serverErrorMessage)
     ]);
     matcher = new DirtyTouchedSubmittedErrorStateMatcher();
-    serverErrorMessage: any = {};
 
     constructor(public dialogRef: MatDialogRef<EmpoyeeEditDialogComponent>,
         private employeesService: EmployeesService,
@@ -30,7 +31,9 @@ export class EmpoyeeEditDialogComponent implements OnInit {
 
     ngOnInit(): void {
         this.emailFormControl.valueChanges.subscribe(() => {
-            this.serverErrorMessage[''] = null;
+            const errMessage = this.serverErrorMessage.value;
+            errMessage[''] = null;
+            this.serverErrorMessage.next(errMessage);
         });
     }
 
@@ -43,19 +46,19 @@ export class EmpoyeeEditDialogComponent implements OnInit {
             .subscribe(
                 employee => this.dialogRef.close(employee),
                 err => {
-                    this.serverErrorMessage = err.error || {};
+                    this.serverErrorMessage.next(err.error || {});
                     this.emailFormControl.updateValueAndValidity();
                     console.log(err);
                 });
     }
 
-    serverSideValidator(fieldName: string = ''): ValidatorFn {
+    serverSideValidator(serverErrorMessage: BehaviorSubject<any>, fieldName: string = ''): ValidatorFn {
         return (control: AbstractControl): {[key: string]: any} | null => {
-            console.log(this.serverErrorMessage);
+            console.log(serverErrorMessage.value);
 
-            if (this.serverErrorMessage == null) { return; }
-            const isInvalid = this.serverErrorMessage[fieldName] != null;
-            return isInvalid ? {'serverSideValidator': {value: this.serverErrorMessage[fieldName]}} : null;
+            if (serverErrorMessage.value == null) { return; }
+            const isInvalid = serverErrorMessage.value[fieldName] != null;
+            return isInvalid ? {'serverSideValidator': {value: serverErrorMessage.value[fieldName]}} : null;
         };
     }
 }
