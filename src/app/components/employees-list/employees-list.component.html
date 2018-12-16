@@ -7,8 +7,8 @@
     <mat-divider></mat-divider>
     <div>
         <h3 mat-subheader class="d-inline-block mt-0">Employees</h3>
-        <button mat-icon-button color="primary" class="float-right mr-3">
-            <mat-icon (click)="openDialogForAddEmployee()" aria-label="Add Employee">add</mat-icon>
+        <button mat-icon-button (click)="openDialogForAddEmployee()" color="primary" class="float-right mr-3">
+            <mat-icon aria-label="Add Employee">add</mat-icon>
         </button>
     </div>
     <mat-list-item *ngFor="let employee of employees" role="listitem">
