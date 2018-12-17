@@ -4,7 +4,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginModel } from '../models/loginModel';
 import { UserState } from '../models/userState';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+import { RegisterModel } from '../models/registerModel';
 
 @Injectable()
 export class AuthService {
@@ -21,6 +22,20 @@ export class AuthService {
         return this.userStateSubject.asObservable();
     }
 
+    public get isAdmin(): boolean {
+        return this.userStateSubject.value.role === 'Admin';
+    }
+
+    public isManager(restaurantId: number): boolean {
+        if (this.userStateSubject.value.managedRestaurants == null) { return false; }
+        return this.userStateSubject.value.managedRestaurants.includes(restaurantId);
+    }
+
+    public isEmployee(restaurantId: number): boolean {
+        if (this.userStateSubject.value.employeeOfRestaurants == null) { return false; }
+        return this.userStateSubject.value.employeeOfRestaurants.includes(restaurantId);
+    }
+
     constructor(private http: HttpClient) {
         this.tokenSubject = new BehaviorSubject<string>(localStorage.getItem('jwt'));
 
@@ -30,6 +45,11 @@ export class AuthService {
 
     login(loginModel: LoginModel): Observable<string> {
         return this.http.post(this.apiPath + '/Token', loginModel, { responseType: 'text' })
+            .pipe(tap(token => this.storeToken(token)));
+    }
+
+    register(registerModel: RegisterModel): Observable<string> {
+        return this.http.post(this.apiPath + '/Token/Register', registerModel, { responseType: 'text' })
             .pipe(tap(token => this.storeToken(token)));
     }
 
@@ -56,14 +76,22 @@ export class AuthService {
         const helper = new JwtHelperService();
         const decodedToken = helper.decodeToken(token);
 
+        if (typeof decodedToken['managed_restaurant'] === 'string') {
+            decodedToken['managed_restaurant'] = [decodedToken['managed_restaurant']];
+        }
+        if (typeof decodedToken['employee_of_restaurant'] === 'string') {
+            decodedToken['employee_of_restaurant'] = [decodedToken['employee_of_restaurant']];
+        }
+
         const userState: UserState = {
             token: token,
             expirationDate: helper.getTokenExpirationDate(token),
             userId: decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
             email: decodedToken['email'],
             fullName: decodedToken['full_name'],
-            managedRestaurants: decodedToken['managed_restaurant'],
-            employeeOfRestaurants: decodedToken['employee_of_restaurant']
+            role: decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
+            managedRestaurants: (decodedToken['managed_restaurant'] || []).map(rId => Number(rId)),
+            employeeOfRestaurants: (decodedToken['employee_of_restaurant'] || []).map(rId => Number(rId))
         };
 
         return userState;

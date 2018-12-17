@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>New Employee</h1>
+<div mat-dialog-content>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('serverSideValidator')">
+        {{emailFormControl.errors.serverSideValidator.value}}
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="add()" cdkFocusInitial>Add</button>
+</div>
