@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Employee } from 'src/app/models/employee/employee';
 import { MAT_DIALOG_DATA, MatDialogRef, ErrorStateMatcher } from '@angular/material';
 import { EmployeesService } from 'src/app/services/employees.service';
-import { Validators, FormControl, FormGroupDirective, NgForm, AbstractControl, ValidatorFn } from '@angular/forms';
+import { Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
+import { serverSideValidator } from 'src/app/helpers/serverSideValidator';
 
 export class DirtyTouchedSubmittedErrorStateMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -21,7 +21,7 @@ export class EmpoyeeEditDialogComponent implements OnInit {
     emailFormControl = new FormControl('', [
         Validators.required,
         Validators.email,
-        this.serverSideValidator(this.serverErrorMessage)
+        serverSideValidator(this.serverErrorMessage)
     ]);
     matcher = new DirtyTouchedSubmittedErrorStateMatcher();
 
@@ -50,15 +50,5 @@ export class EmpoyeeEditDialogComponent implements OnInit {
                     this.emailFormControl.updateValueAndValidity();
                     console.log(err);
                 });
-    }
-
-    serverSideValidator(serverErrorMessage: BehaviorSubject<any>, fieldName: string = ''): ValidatorFn {
-        return (control: AbstractControl): {[key: string]: any} | null => {
-            console.log(serverErrorMessage.value);
-
-            if (serverErrorMessage.value == null) { return; }
-            const isInvalid = serverErrorMessage.value[fieldName] != null;
-            return isInvalid ? {'serverSideValidator': {value: serverErrorMessage.value[fieldName]}} : null;
-        };
     }
 }
