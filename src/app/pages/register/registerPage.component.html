@@ -6,16 +6,19 @@
             </mat-card-header>
             <mat-card-content>
                 <form class="example-form">
-                    <mat-form-field class="input-full-width">
+                    <mat-form-field appearance="standard" class="input-full-width">
+                        <mat-label>Email</mat-label>
                         <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
                     </mat-form-field>
-                    <mat-form-field class="input-full-width">
-                            <input matInput placeholder="Full Name" [(ngModel)]="fullName" name="fullName" required>
-                        </mat-form-field>
-                    <mat-form-field class="input-full-width">
-                        <input matInput placeholder="Password" [(ngModel)]="password" [type]="hidePass ? 'password' : 'text'"
+                    <mat-form-field appearance="standard" class="input-full-width">
+                        <mat-label>Full Name</mat-label>
+                        <input matInput [(ngModel)]="fullName" name="fullName" required>
+                    </mat-form-field>
+                    <mat-form-field appearance="standard" class="input-full-width">
+                        <mat-label>Password</mat-label>
+                        <input matInput [(ngModel)]="password" [type]="hidePass ? 'password' : 'text'"
                             name="password" required>
-                        <button mat-icon-button matSuffix><mat-icon (click)="hidePass = !hidePass">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+                        <mat-icon matSuffix (click)="hidePass = !hidePass" class="c-pointer">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </mat-form-field>
                 </form>
                 <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
