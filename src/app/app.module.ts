@@ -15,12 +15,14 @@ import { RestaurantPageComponent } from './pages/restaurant/restaurantPage.compo
 import { EmployeesService } from './services/employees.service';
 import { RegisterPageComponent } from './pages/register/registerPage.component';
 import { SharedModule } from './shared.module';
+import { RestaurantCreatePageComponent } from './pages/restaurant-create/restaurant-create-page.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
   { path: 'restaurants', component: RestaurantsPageComponent },
   { path: 'restaurant/:id', component: RestaurantPageComponent },
+  { path: 'restaurant-create', component: RestaurantCreatePageComponent },
   { path: '**', redirectTo: 'login' }
 ];
 

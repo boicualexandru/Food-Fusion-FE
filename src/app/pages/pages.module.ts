@@ -6,10 +6,13 @@ import { ComponentsModule } from '../components/components.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { RegisterPageComponent } from './register/registerPage.component';
 import { SharedModule } from '../shared.module';
+import { RestaurantCreatePageComponent } from './restaurant-create/restaurant-create-page.component';
 
 @NgModule({
-    declarations: [ LoginPageComponent, RegisterPageComponent, RestaurantsPageComponent, RestaurantPageComponent ],
+    declarations: [ LoginPageComponent, RegisterPageComponent, RestaurantsPageComponent, RestaurantPageComponent,
+        RestaurantCreatePageComponent ],
     imports: [ SharedModule, ComponentsModule, AppRoutingModule ],
-    exports: [ LoginPageComponent, RegisterPageComponent, RestaurantsPageComponent, RestaurantPageComponent ],
+    exports: [ LoginPageComponent, RegisterPageComponent, RestaurantsPageComponent, RestaurantPageComponent,
+        RestaurantCreatePageComponent ],
 })
 export class PagesModule {}
