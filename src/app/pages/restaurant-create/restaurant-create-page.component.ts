@@ -39,9 +39,8 @@ export class RestaurantCreatePageComponent implements OnInit {
     ngOnInit(): void { }
 
     create(): void {
-        debugger;
         this.restaurantsService.create(this.form.value)
             .subscribe(
-                restaurantId => this.router.navigate(['restaurant', restaurantId]));
+                restaurant => this.router.navigate(['restaurant', restaurant.id]));
     }
 }

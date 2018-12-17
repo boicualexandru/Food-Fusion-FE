@@ -18,6 +18,6 @@ export class RestaurantsService {
     }
 
     create(restaurant: Restaurant) {
-        return this.http.post<number>(this.apiPath + '/Restaurants', restaurant);
+        return this.http.post<Restaurant>(this.apiPath + '/Restaurants', restaurant);
     }
 }
