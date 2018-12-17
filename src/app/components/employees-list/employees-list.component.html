@@ -14,7 +14,7 @@
     <mat-list-item *ngFor="let employee of employees" role="listitem">
         <mat-icon mat-list-icon>account_circle</mat-icon>
         <h4 mat-line>{{employee.fullName}}</h4>
-        <button mat-icon-button (click)="openDialogForRemoveEmployee(employee.id)" color="warn" class="float-right">
+        <button mat-icon-button (click)="openDialogForRemoveEmployee(employee)" color="warn" class="float-right">
             <mat-icon aria-label="Remove Employee">delete</mat-icon>
         </button>
     </mat-list-item>

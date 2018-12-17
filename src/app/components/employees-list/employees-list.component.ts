@@ -3,6 +3,7 @@ import { EmployeesService } from 'src/app/services/employees.service';
 import { Employee } from 'src/app/models/employee/employee';
 import { MatDialog } from '@angular/material';
 import { EmpoyeeEditDialogComponent } from './employee-edit-dialog.component';
+import { EmployeeRemoveDialogComponent } from './employee-remove-dialog.component';
 
 @Component({
     selector: 'app-employees-list',
@@ -37,11 +38,17 @@ export class EmployeesListComponent implements OnInit {
         });
     }
 
-    addEmployee(userEmail: string) {
-        alert(userEmail);
-    }
+    openDialogForRemoveEmployee(employee: Employee): void {
+        const dialogRef = this.dialog.open(EmployeeRemoveDialogComponent, {
+            width: '250px',
+            data: { restaurantId: this.restaurantId, employee: employee }
+        });
 
-    openDialogForRemoveEmployee(userId: number): void {
-
+        dialogRef.afterClosed().subscribe(userId => {
+            if (userId == null) { return; }
+            const employeeIndex = this.employees.findIndex(emp => emp.userId === userId);
+            if (employeeIndex < 0) { return; }
+            this.employees.splice(employeeIndex, 1);
+        });
     }
 }
