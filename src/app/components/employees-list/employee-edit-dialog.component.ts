@@ -4,13 +4,7 @@ import { EmployeesService } from 'src/app/services/employees.service';
 import { Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { serverSideValidator } from 'src/app/helpers/serverSideValidator';
-
-export class DirtyTouchedSubmittedErrorStateMatcher implements ErrorStateMatcher {
-    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-        const isSubmitted = form && form.submitted;
-        return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-    }
-}
+import { DirtyTouchedSubmittedErrorStateMatcher } from 'src/app/helpers/dirtyTouchedSubmittedErrorStateMatcher';
 
 @Component({
     selector: 'app-employee-edit-dialog',

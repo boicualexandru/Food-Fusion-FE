@@ -16,4 +16,8 @@ export class RestaurantsService {
     getRestaurant(id: number) {
         return this.http.get<RestaurantDetailed>(this.apiPath + '/Restaurants/' + id);
     }
+
+    create(restaurant: Restaurant) {
+        return this.http.post<number>(this.apiPath + '/Restaurants', restaurant);
+    }
 }
