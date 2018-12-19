@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { RestaurantsService } from 'src/app/services/restaurants.service';
 import { RestaurantDetailed } from 'src/app/models/restaurant/restaurantDetailed';
 import { AuthService } from 'src/app/services/auth.service';
+import { MenuItem } from 'src/app/models/menu/menuItem';
+import { MatDialog } from '@angular/material';
+import { ItemEditDialogComponent } from './menu/item-edit-dialog/item-edit-dialog.component';
 
 @Component({
     templateUrl: './restaurantPage.component.html',
@@ -14,7 +17,8 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
     isEmmployee: boolean;
     private sub: any;
 
-    constructor(private route: ActivatedRoute, private restaurantsService: RestaurantsService, private authService: AuthService) { }
+    constructor(private route: ActivatedRoute, private restaurantsService: RestaurantsService, private authService: AuthService,
+        public dialog: MatDialog) { }
 
     ngOnInit(): void {
         this.sub = this.route.params.subscribe(params => {
@@ -32,9 +36,37 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
         this.sub.unsubscribe();
     }
 
+    openDialogForAddItem(): void {
+        const dialogRef = this.dialog.open(ItemEditDialogComponent, {
+            width: '250px',
+            data: { menuId: this.restaurant.menu.id }
+        });
+
+        dialogRef.afterClosed().subscribe(menuItem => {
+            if (menuItem == null) { return; }
+            this.restaurant.menu.items.push(menuItem);
+        });
+    }
+
+    openDialogForEditItem(menuItem: MenuItem): void {
+        const dialogRef = this.dialog.open(ItemEditDialogComponent, {
+            width: '250px',
+            data: { menuId: this.restaurant.menu.id, menuItem: menuItem }
+        });
+
+        dialogRef.afterClosed().subscribe(savedMenuItem => {
+            if (savedMenuItem == null) { return; }
+
+            const itemIndex = this.restaurant.menu.items.findIndex(item => item.id === savedMenuItem.id);
+            if (itemIndex < 0) { return; }
+            this.restaurant.menu.items[itemIndex] = savedMenuItem;
+        });
+    }
+
     getImage(): string {
         const d = Math.random();
 
+        // tslint:disable-next-line:max-line-length
         return 'url(https://images.unsplash.com/photo-1516709315038-c53bf87e8f48?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9)';
     }
 }
