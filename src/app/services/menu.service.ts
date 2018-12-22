@@ -14,14 +14,14 @@ export class MenuService {
     }
 
     addMenuItem(menuId: number, menuItem: MenuItem) {
-        return this.http.post<MenuItem>(this.apiPath + '/Menu/' + menuId + '/Items', menuItem);
+        return this.http.post<MenuItem>(this.apiPath + '/Restaurants/Menu/' + menuId + '/Items', menuItem);
     }
 
     editMenuItem(menuItem: MenuItem) {
-        return this.http.put<MenuItem>(this.apiPath + '/Menu/Items/' + menuItem.id, menuItem);
+        return this.http.put<MenuItem>(this.apiPath + '/Restaurants/Menu/Items/' + menuItem.id, menuItem);
     }
 
     removeMenuItem(menuItemId: MenuItem) {
-        return this.http.delete<MenuItem>(this.apiPath + '/Menu/Items/' + menuItemId);
+        return this.http.delete<MenuItem>(this.apiPath + '/Restaurants/Menu/Items/' + menuItemId);
     }
 }

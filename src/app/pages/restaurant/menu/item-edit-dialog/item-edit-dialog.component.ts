@@ -32,11 +32,15 @@ export class ItemEditDialogComponent implements OnInit {
         private menuService: MenuService,
         @Inject(MAT_DIALOG_DATA) public data: { menuId: number, menuItem: MenuItem }) {
             this.isNew = data.menuItem == null;
+
             if (this.isNew) {
-                this.form.setValue({
+                this.initializeForm({
+                    id: 0,
                     name: '',
                     price: 0
                 });
+            } else {
+                this.initializeForm(data.menuItem);
             }
         }
 
@@ -55,21 +59,27 @@ export class ItemEditDialogComponent implements OnInit {
     }
 
     add(): void {
-        this.menuService.addMenuItem(this.data.menuId, this.getEditedMenuItem())
+        this.menuService.addMenuItem(this.data.menuId, this.formMenuItem)
             .subscribe(menuItem => this.dialogRef.close(menuItem));
     }
 
     edit(): void {
-        this.menuService.editMenuItem(this.getEditedMenuItem())
+        this.menuService.editMenuItem(this.formMenuItem)
             .subscribe(menuItem => this.dialogRef.close(menuItem));
     }
 
-    private getEditedMenuItem(): MenuItem {
-        const menuItem: MenuItem = {
-            id: this.data.menuId,
+    private get formMenuItem(): MenuItem {
+        return {
+            id: this.isNew ? 0 : this.data.menuItem.id,
             name: this.form.value.name,
             price: this.form.value.price
         };
-        return menuItem;
+    }
+
+    private initializeForm(menuItem: MenuItem): void {
+        this.form.setValue({
+            name: menuItem.name,
+            price: menuItem.price
+        });
     }
 }
