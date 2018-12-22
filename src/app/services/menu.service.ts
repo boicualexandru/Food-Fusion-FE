@@ -21,7 +21,7 @@ export class MenuService {
         return this.http.put<MenuItem>(this.apiPath + '/Restaurants/Menu/Items/' + menuItem.id, menuItem);
     }
 
-    removeMenuItem(menuItemId: MenuItem) {
+    removeMenuItem(menuItemId: number) {
         return this.http.delete<MenuItem>(this.apiPath + '/Restaurants/Menu/Items/' + menuItemId);
     }
 }

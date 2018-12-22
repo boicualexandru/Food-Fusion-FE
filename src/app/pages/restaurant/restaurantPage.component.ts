@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MenuItem } from 'src/app/models/menu/menuItem';
 import { MatDialog } from '@angular/material';
 import { ItemEditDialogComponent } from './menu/item-edit-dialog/item-edit-dialog.component';
+import { MenuService } from 'src/app/services/menu.service';
+import { ItemRemoveDialogComponent } from './menu/item-remove-dialog/item-remove-dialog.component';
 
 @Component({
     templateUrl: './restaurantPage.component.html',
@@ -17,7 +19,9 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
     isEmmployee: boolean;
     private sub: any;
 
-    constructor(private route: ActivatedRoute, private restaurantsService: RestaurantsService, private authService: AuthService,
+    constructor(private route: ActivatedRoute,
+        private restaurantsService: RestaurantsService,
+        private authService: AuthService,
         public dialog: MatDialog) { }
 
     ngOnInit(): void {
@@ -57,10 +61,29 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
         dialogRef.afterClosed().subscribe(savedMenuItem => {
             if (savedMenuItem == null) { return; }
 
-            const itemIndex = this.restaurant.menu.items.findIndex(item => item.id === savedMenuItem.id);
+            const itemIndex = this.getItemIndexById(savedMenuItem.id);
             if (itemIndex < 0) { return; }
             this.restaurant.menu.items[itemIndex] = savedMenuItem;
         });
+    }
+
+    openDialogForRemoveItem(menuItem: MenuItem): void {
+        const dialogRef = this.dialog.open(ItemRemoveDialogComponent, {
+            width: '250px',
+            data: menuItem
+        });
+
+        dialogRef.afterClosed().subscribe(success => {
+            if (success !== true) { return; }
+
+            const itemIndex = this.getItemIndexById(menuItem.id);
+            if (itemIndex < 0) { return; }
+            this.restaurant.menu.items.splice(itemIndex, 1);
+        });
+    }
+
+    private getItemIndexById(itemId: number) {
+        return this.restaurant.menu.items.findIndex(item => item.id === itemId);
     }
 
     getImage(): string {
