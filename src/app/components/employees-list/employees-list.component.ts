@@ -4,6 +4,7 @@ import { Employee } from 'src/app/models/employee/employee';
 import { MatDialog } from '@angular/material';
 import { EmpoyeeEditDialogComponent } from './employee-edit-dialog.component';
 import { EmployeeRemoveDialogComponent } from './employee-remove-dialog.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-employees-list',
@@ -39,9 +40,17 @@ export class EmployeesListComponent implements OnInit {
     }
 
     openDialogForRemoveEmployee(employee: Employee): void {
-        const dialogRef = this.dialog.open(EmployeeRemoveDialogComponent, {
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
             width: '250px',
-            data: { restaurantId: this.restaurantId, employee: employee }
+            data: {
+                title: 'Remove Employee',
+                content: employee.fullName,
+                action: {
+                    name: 'Remove',
+                    color: 'warn',
+                    method: this.employeesService.removeEmployee(this.restaurantId, employee.userId)
+                }
+            }
         });
 
         dialogRef.afterClosed().subscribe(success => {

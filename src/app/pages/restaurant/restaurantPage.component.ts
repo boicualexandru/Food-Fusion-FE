@@ -7,7 +7,7 @@ import { MenuItem } from 'src/app/models/menu/menuItem';
 import { MatDialog } from '@angular/material';
 import { ItemEditDialogComponent } from './menu/item-edit-dialog/item-edit-dialog.component';
 import { MenuService } from 'src/app/services/menu.service';
-import { ItemRemoveDialogComponent } from './menu/item-remove-dialog/item-remove-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
     templateUrl: './restaurantPage.component.html',
@@ -22,6 +22,7 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute,
         private restaurantsService: RestaurantsService,
         private authService: AuthService,
+        private menuService: MenuService,
         public dialog: MatDialog) { }
 
     ngOnInit(): void {
@@ -68,9 +69,17 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
     }
 
     openDialogForRemoveItem(menuItem: MenuItem): void {
-        const dialogRef = this.dialog.open(ItemRemoveDialogComponent, {
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
             width: '250px',
-            data: menuItem
+            data: {
+                title: 'Remove Item',
+                content: menuItem.name,
+                action: {
+                    name: 'Remove',
+                    color: 'warn',
+                    method: this.menuService.removeMenuItem(menuItem.id)
+                }
+            }
         });
 
         dialogRef.afterClosed().subscribe(success => {
