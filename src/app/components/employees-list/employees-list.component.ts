@@ -2,8 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Employee } from 'src/app/models/employee/employee';
 import { MatDialog } from '@angular/material';
-import { EmpoyeeEditDialogComponent } from './employee-edit-dialog.component';
-import { EmployeeRemoveDialogComponent } from './employee-remove-dialog.component';
+import { EmpoyeeEditDialogComponent } from './employee-edit-dialog/employee-edit-dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({

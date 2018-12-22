@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { EmployeesListComponent } from './employees-list/employees-list.component';
-import { EmpoyeeEditDialogComponent } from './employees-list/employee-edit-dialog.component';
+import { EmpoyeeEditDialogComponent } from './employees-list/employee-edit-dialog/employee-edit-dialog.component';
 import { SharedModule } from '../shared.module';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
