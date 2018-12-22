@@ -20,6 +20,6 @@ export class EmployeeRemoveDialogComponent implements OnInit {
 
     remove(): void {
         this.employeesService.removeEmployee(this.employeeRestaurant.restaurantId, this.employeeRestaurant.employee.userId)
-            .subscribe(() => this.dialogRef.close(this.employeeRestaurant.employee.userId));
+            .subscribe(() => this.dialogRef.close(true));
     }
 }

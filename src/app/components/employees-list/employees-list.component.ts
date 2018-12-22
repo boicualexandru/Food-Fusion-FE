@@ -44,9 +44,10 @@ export class EmployeesListComponent implements OnInit {
             data: { restaurantId: this.restaurantId, employee: employee }
         });
 
-        dialogRef.afterClosed().subscribe(userId => {
-            if (userId == null) { return; }
-            const employeeIndex = this.employees.findIndex(emp => emp.userId === userId);
+        dialogRef.afterClosed().subscribe(success => {
+            if (success !== true) { return; }
+
+            const employeeIndex = this.employees.findIndex(emp => emp.userId === employee.userId);
             if (employeeIndex < 0) { return; }
             this.employees.splice(employeeIndex, 1);
         });
