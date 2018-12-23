@@ -5,19 +5,22 @@ import { EmpoyeeEditDialogComponent } from './employees-list/employee-edit-dialo
 import { ItemEditDialogComponent } from './menu/item-edit-dialog/item-edit-dialog.component';
 import { SharedModule } from 'src/app/shared.module';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
     declarations: [
         RestaurantPageComponent,
         EmployeesListComponent,
         EmpoyeeEditDialogComponent,
+        MenuComponent,
         ItemEditDialogComponent],
     imports: [
         SharedModule,
         ComponentsModule],
     exports: [
         RestaurantPageComponent,
-        EmployeesListComponent],
+        EmployeesListComponent,
+        MenuComponent],
     entryComponents: [
         EmpoyeeEditDialogComponent,
         ItemEditDialogComponent]

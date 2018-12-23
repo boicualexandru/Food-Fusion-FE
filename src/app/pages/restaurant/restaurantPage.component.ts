@@ -3,11 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RestaurantsService } from 'src/app/services/restaurants.service';
 import { RestaurantDetailed } from 'src/app/models/restaurant/restaurantDetailed';
 import { AuthService } from 'src/app/services/auth.service';
-import { MenuItem } from 'src/app/models/menu/menuItem';
 import { MatDialog } from '@angular/material';
-import { ItemEditDialogComponent } from './menu/item-edit-dialog/item-edit-dialog.component';
-import { MenuService } from 'src/app/services/menu.service';
-import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
     templateUrl: './restaurantPage.component.html',
@@ -20,7 +16,6 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute,
         private restaurantsService: RestaurantsService,
         public authService: AuthService,
-        private menuService: MenuService,
         public dialog: MatDialog) { }
 
     ngOnInit(): void {
@@ -35,60 +30,6 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.sub.unsubscribe();
-    }
-
-    openDialogForAddItem(): void {
-        const dialogRef = this.dialog.open(ItemEditDialogComponent, {
-            width: '250px',
-            data: { menuId: this.restaurant.menu.id }
-        });
-
-        dialogRef.afterClosed().subscribe(menuItem => {
-            if (menuItem == null) { return; }
-            this.restaurant.menu.items.push(menuItem);
-        });
-    }
-
-    openDialogForEditItem(menuItem: MenuItem): void {
-        const dialogRef = this.dialog.open(ItemEditDialogComponent, {
-            width: '250px',
-            data: { menuId: this.restaurant.menu.id, menuItem: menuItem }
-        });
-
-        dialogRef.afterClosed().subscribe(savedMenuItem => {
-            if (savedMenuItem == null) { return; }
-
-            const itemIndex = this.getItemIndexById(savedMenuItem.id);
-            if (itemIndex < 0) { return; }
-            this.restaurant.menu.items[itemIndex] = savedMenuItem;
-        });
-    }
-
-    openDialogForRemoveItem(menuItem: MenuItem): void {
-        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-            width: '250px',
-            data: {
-                title: 'Remove Item',
-                content: menuItem.name,
-                action: {
-                    name: 'Remove',
-                    color: 'warn',
-                    method: this.menuService.removeMenuItem(menuItem.id)
-                }
-            }
-        });
-
-        dialogRef.afterClosed().subscribe(success => {
-            if (success !== true) { return; }
-
-            const itemIndex = this.getItemIndexById(menuItem.id);
-            if (itemIndex < 0) { return; }
-            this.restaurant.menu.items.splice(itemIndex, 1);
-        });
-    }
-
-    private getItemIndexById(itemId: number) {
-        return this.restaurant.menu.items.findIndex(item => item.id === itemId);
     }
 
     getImage(): string {

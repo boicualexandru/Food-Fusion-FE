@@ -27,30 +27,9 @@
             </mat-tab>
             <mat-tab label="Menu" class="pt-4">
                 <div class="pt-4">
-                    <div class="text-right">
-                        <button mat-raised-button color="primary" (click)="openDialogForAddItem()">
-                            <mat-icon aria-label="Add Item">add</mat-icon>
-                            Add Item
-                        </button>
-                    </div>
-                    <mat-list *ngIf="restaurant.menu" role="list" class="row">
-                        <div *ngFor="let item of restaurant.menu.items; last as isLast">
-                            <mat-list-item role="listitem">
-                                <h4 mat-line>{{item.name}}</h4>
-                                <div class="mat-small text-nowrap">{{item.price}} Lei</div>
-                                <button mat-icon-button color="primary">
-                                    <mat-icon aria-label="Add Item to cart">add</mat-icon>
-                                </button>
-                                <button mat-icon-button color="primary">
-                                    <mat-icon aria-label="Edit Menu Item" (click)="openDialogForEditItem(item)">edit</mat-icon>
-                                </button>
-                                <button mat-icon-button (click)="openDialogForRemoveItem(item)" color="warn">
-                                    <mat-icon aria-label="Remove Menu Item">delete</mat-icon>
-                                </button>
-                            </mat-list-item>
-                            <mat-divider *ngIf="!isLast"></mat-divider>
-                        </div>
-                    </mat-list>
+                    <ng-template matTabContent>
+                        <app-menu [restaurantId]="restaurant.id" [menu]="restaurant.menu"></app-menu>
+                    </ng-template>
                 </div>
             </mat-tab>
             <mat-tab *ngIf="authService.isManager(restaurant.id)" label="Staff" class="pt-4">
