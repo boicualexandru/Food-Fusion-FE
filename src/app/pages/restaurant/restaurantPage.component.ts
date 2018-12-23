@@ -4,6 +4,7 @@ import { RestaurantsService } from 'src/app/services/restaurants.service';
 import { RestaurantDetailed } from 'src/app/models/restaurant/restaurantDetailed';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material';
+import { Location } from '@angular/common';
 
 @Component({
     templateUrl: './restaurantPage.component.html',
@@ -11,12 +12,15 @@ import { MatDialog } from '@angular/material';
 })
 export class RestaurantPageComponent implements OnInit, OnDestroy {
     restaurant: RestaurantDetailed;
+    activeTabIndex = 0;
     private sub: any;
+    private tabRouteNames = ['description', 'menu', 'staff'];
 
     constructor(private route: ActivatedRoute,
         private restaurantsService: RestaurantsService,
         public authService: AuthService,
-        public dialog: MatDialog) { }
+        public dialog: MatDialog,
+        private location: Location) { }
 
     ngOnInit(): void {
         this.sub = this.route.params.subscribe(params => {
@@ -25,7 +29,14 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
                     this.restaurant = restaurant;
                 }
             );
+
+            const tabIndex = this.tabRouteNames.indexOf(params['tab']);
+            this.activeTabIndex = tabIndex >= 0 ? tabIndex : this.activeTabIndex;
         });
+    }
+
+    onTabChange(tabIndex) {
+        this.location.replaceState('restaurant/' + this.restaurant.id + '/' + this.tabRouteNames[tabIndex]);
     }
 
     ngOnDestroy() {

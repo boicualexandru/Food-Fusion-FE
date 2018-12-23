@@ -19,7 +19,7 @@
     </div>
 
     <div class="container">
-        <mat-tab-group dynamicHeight class="restaurant-tabs">
+        <mat-tab-group dynamicHeight [selectedIndex]="activeTabIndex" (selectedIndexChange)="onTabChange($event)" class="restaurant-tabs">
             <mat-tab label="Description" class="pt-4">
                 <div class="pt-4">
                     {{restaurant.description}}
