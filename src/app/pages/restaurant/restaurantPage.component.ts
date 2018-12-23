@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { RestaurantsService } from 'src/app/services/restaurants.service';
 import { RestaurantDetailed } from 'src/app/models/restaurant/restaurantDetailed';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatDialog } from '@angular/material';
+import { Location } from '@angular/common';
 
 @Component({
     templateUrl: './restaurantPage.component.html',
@@ -10,22 +12,31 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RestaurantPageComponent implements OnInit, OnDestroy {
     restaurant: RestaurantDetailed;
-    isManager: boolean;
-    isEmmployee: boolean;
+    activeTabIndex = 0;
     private sub: any;
+    private tabRouteNames = ['description', 'menu', 'staff'];
 
-    constructor(private route: ActivatedRoute, private restaurantsService: RestaurantsService, private authService: AuthService) { }
+    constructor(private route: ActivatedRoute,
+        private restaurantsService: RestaurantsService,
+        public authService: AuthService,
+        public dialog: MatDialog,
+        private location: Location) { }
 
     ngOnInit(): void {
         this.sub = this.route.params.subscribe(params => {
             this.restaurantsService.getRestaurant(+params['id']).subscribe(
                 restaurant => {
                     this.restaurant = restaurant;
-                    this.isManager = this.authService.isManager(this.restaurant.id);
-                    this.isEmmployee = this.authService.isEmployee(this.restaurant.id);
                 }
             );
+
+            const tabIndex = this.tabRouteNames.indexOf(params['tab']);
+            this.activeTabIndex = tabIndex >= 0 ? tabIndex : this.activeTabIndex;
         });
+    }
+
+    onTabChange(tabIndex) {
+        this.location.replaceState('restaurant/' + this.restaurant.id + '/' + this.tabRouteNames[tabIndex]);
     }
 
     ngOnDestroy() {
@@ -35,6 +46,7 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
     getImage(): string {
         const d = Math.random();
 
+        // tslint:disable-next-line:max-line-length
         return 'url(https://images.unsplash.com/photo-1516709315038-c53bf87e8f48?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9)';
     }
 }

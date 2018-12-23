@@ -9,6 +9,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { EmployeesService } from './services/employees.service';
 import { SharedModule } from './shared.module';
+import { MenuService } from './services/menu.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { SharedModule } from './shared.module';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    AuthService, RestaurantsService, EmployeesService ],
+    AuthService, RestaurantsService, EmployeesService, MenuService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

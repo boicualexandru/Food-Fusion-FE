@@ -11,6 +11,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterPageComponent },
   { path: 'restaurants', component: RestaurantsPageComponent },
   { path: 'restaurant/:id', component: RestaurantPageComponent },
+  { path: 'restaurant/:id/:tab', component: RestaurantPageComponent },
   { path: 'restaurant-create', component: RestaurantCreatePageComponent },
   { path: '**', redirectTo: 'restaurants' }
 ];

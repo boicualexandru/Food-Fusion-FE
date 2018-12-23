@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Employee } from 'src/app/models/employee/employee';
 import { MatDialog } from '@angular/material';
-import { EmpoyeeEditDialogComponent } from './employee-edit-dialog.component';
-import { EmployeeRemoveDialogComponent } from './employee-remove-dialog.component';
+import { EmpoyeeEditDialogComponent } from './employee-edit-dialog/employee-edit-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-employees-list',
@@ -39,14 +39,23 @@ export class EmployeesListComponent implements OnInit {
     }
 
     openDialogForRemoveEmployee(employee: Employee): void {
-        const dialogRef = this.dialog.open(EmployeeRemoveDialogComponent, {
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
             width: '250px',
-            data: { restaurantId: this.restaurantId, employee: employee }
+            data: {
+                title: 'Remove Employee',
+                content: employee.fullName,
+                action: {
+                    name: 'Remove',
+                    color: 'warn',
+                    method: this.employeesService.removeEmployee(this.restaurantId, employee.userId)
+                }
+            }
         });
 
-        dialogRef.afterClosed().subscribe(userId => {
-            if (userId == null) { return; }
-            const employeeIndex = this.employees.findIndex(emp => emp.userId === userId);
+        dialogRef.afterClosed().subscribe(success => {
+            if (success !== true) { return; }
+
+            const employeeIndex = this.employees.findIndex(emp => emp.userId === employee.userId);
             if (employeeIndex < 0) { return; }
             this.employees.splice(employeeIndex, 1);
         });
