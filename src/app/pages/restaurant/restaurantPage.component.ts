@@ -15,13 +15,11 @@ import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confir
 })
 export class RestaurantPageComponent implements OnInit, OnDestroy {
     restaurant: RestaurantDetailed;
-    isManager: boolean;
-    isEmmployee: boolean;
     private sub: any;
 
     constructor(private route: ActivatedRoute,
         private restaurantsService: RestaurantsService,
-        private authService: AuthService,
+        public authService: AuthService,
         private menuService: MenuService,
         public dialog: MatDialog) { }
 
@@ -30,8 +28,6 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
             this.restaurantsService.getRestaurant(+params['id']).subscribe(
                 restaurant => {
                     this.restaurant = restaurant;
-                    this.isManager = this.authService.isManager(this.restaurant.id);
-                    this.isEmmployee = this.authService.isEmployee(this.restaurant.id);
                 }
             );
         });

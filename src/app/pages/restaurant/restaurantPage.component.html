@@ -53,7 +53,7 @@
                     </mat-list>
                 </div>
             </mat-tab>
-            <mat-tab *ngIf="isManager" label="Staff" class="pt-4">
+            <mat-tab *ngIf="authService.isManager(restaurant.id)" label="Staff" class="pt-4">
                 <div class="pt-4">
                     <ng-template matTabContent>
                         <app-employees-list [restaurantId]="restaurant.id"></app-employees-list>
