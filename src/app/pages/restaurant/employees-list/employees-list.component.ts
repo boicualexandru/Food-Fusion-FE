@@ -3,7 +3,7 @@ import { EmployeesService } from 'src/app/services/employees.service';
 import { Employee } from 'src/app/models/employee/employee';
 import { MatDialog } from '@angular/material';
 import { EmpoyeeEditDialogComponent } from './employee-edit-dialog/employee-edit-dialog.component';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-employees-list',

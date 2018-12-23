@@ -7,13 +7,15 @@ import { RegisterPageComponent } from './register/registerPage.component';
 import { SharedModule } from '../shared.module';
 import { RestaurantCreatePageComponent } from './restaurant-create/restaurant-create-page.component';
 import { ItemEditDialogComponent } from './restaurant/menu/item-edit-dialog/item-edit-dialog.component';
+import { EmployeesListComponent } from './restaurant/employees-list/employees-list.component';
+import { EmpoyeeEditDialogComponent } from './restaurant/employees-list/employee-edit-dialog/employee-edit-dialog.component';
 
 @NgModule({
     declarations: [ LoginPageComponent, RegisterPageComponent, RestaurantsPageComponent, RestaurantPageComponent,
-        RestaurantCreatePageComponent, ItemEditDialogComponent ],
+        RestaurantCreatePageComponent, ItemEditDialogComponent, EmployeesListComponent, EmpoyeeEditDialogComponent ],
     imports: [ SharedModule, ComponentsModule ],
     exports: [ LoginPageComponent, RegisterPageComponent, RestaurantsPageComponent, RestaurantPageComponent,
-        RestaurantCreatePageComponent ],
-    entryComponents: [ ItemEditDialogComponent ]
+        RestaurantCreatePageComponent, EmployeesListComponent ],
+    entryComponents: [ ItemEditDialogComponent, EmpoyeeEditDialogComponent ]
 })
 export class PagesModule {}
