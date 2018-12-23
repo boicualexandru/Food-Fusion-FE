@@ -1,21 +1,27 @@
 import { NgModule } from '@angular/core';
 import { LoginPageComponent } from './login/loginPage.component';
 import { RestaurantsPageComponent } from './restaurants/restaurantsPage.component';
-import { RestaurantPageComponent } from './restaurant/restaurantPage.component';
 import { ComponentsModule } from '../components/components.module';
 import { RegisterPageComponent } from './register/registerPage.component';
 import { SharedModule } from '../shared.module';
 import { RestaurantCreatePageComponent } from './restaurant-create/restaurant-create-page.component';
-import { ItemEditDialogComponent } from './restaurant/menu/item-edit-dialog/item-edit-dialog.component';
-import { EmployeesListComponent } from './restaurant/employees-list/employees-list.component';
-import { EmpoyeeEditDialogComponent } from './restaurant/employees-list/employee-edit-dialog/employee-edit-dialog.component';
+import { RestaurantPageModule } from './restaurant/restaurantPage.module';
 
 @NgModule({
-    declarations: [ LoginPageComponent, RegisterPageComponent, RestaurantsPageComponent, RestaurantPageComponent,
-        RestaurantCreatePageComponent, ItemEditDialogComponent, EmployeesListComponent, EmpoyeeEditDialogComponent ],
-    imports: [ SharedModule, ComponentsModule ],
-    exports: [ LoginPageComponent, RegisterPageComponent, RestaurantsPageComponent, RestaurantPageComponent,
-        RestaurantCreatePageComponent, EmployeesListComponent ],
-    entryComponents: [ ItemEditDialogComponent, EmpoyeeEditDialogComponent ]
+    declarations: [
+        LoginPageComponent,
+        RegisterPageComponent,
+        RestaurantsPageComponent,
+        RestaurantCreatePageComponent],
+    imports: [
+        SharedModule,
+        ComponentsModule,
+        RestaurantPageModule],
+    exports: [
+        LoginPageComponent,
+        RegisterPageComponent,
+        RestaurantsPageComponent,
+        RestaurantCreatePageComponent,
+        RestaurantPageModule]
 })
-export class PagesModule {}
+export class PagesModule { }
