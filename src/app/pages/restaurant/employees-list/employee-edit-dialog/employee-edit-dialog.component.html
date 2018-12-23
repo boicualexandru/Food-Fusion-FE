@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>New Employee</h1>
 <div mat-dialog-content>
-  <form class="example-form">
+  <form class="example-form" (keydown.enter)="add()">
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher" cdkFocusInitial>
       <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
