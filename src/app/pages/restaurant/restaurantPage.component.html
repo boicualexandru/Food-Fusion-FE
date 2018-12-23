@@ -33,7 +33,7 @@
                             Add Item
                         </button>
                     </div>
-                    <mat-list *ngIf="restaurant.menu" role="list">
+                    <mat-list *ngIf="restaurant.menu" role="list" class="row">
                         <div *ngFor="let item of restaurant.menu.items; last as isLast">
                             <mat-list-item role="listitem">
                                 <h4 mat-line>{{item.name}}</h4>
