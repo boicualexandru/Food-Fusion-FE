@@ -19,10 +19,35 @@
     </div>
 
     <div class="container">
-        <mat-tab-group dynamicHeight [selectedIndex]="activeTabIndex" (selectedIndexChange)="onTabChange($event)" class="restaurant-tabs">
+        <mat-tab-group dynamicHeight [selectedIndex]="activeTabIndex" (selectedIndexChange)="onTabChange($event)" animationDuration="0" class="restaurant-tabs">
             <mat-tab label="Description" class="pt-4">
-                <div class="pt-4">
-                    {{restaurant.description}}
+                <div class="row pt-4">
+                    <div class="col">
+                        {{restaurant.description}}
+                    </div>
+                    <div class="col">
+                        <h4>Book Now</h4>
+                        <div class="w-100">
+                            <span class="d-inline-block py-2">Participants</span>
+                            <div class="float-right">
+                                <button mat-icon-button (click)="participantsCount = participantsCount - 1" [disabled]="participantsCount < 2">
+                                    <mat-icon aria-label="Decrement participants">remove_circle_outline</mat-icon>
+                                </button>
+                                <span class="align-middle">{{participantsCount}}</span>
+                                <button mat-icon-button (click)="participantsCount = participantsCount + 1">
+                                    <mat-icon aria-label="Increment participants">add_circle_outline</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="w-100">
+                            <span class="d-inline-block pt-3">Date</span>
+                            <mat-form-field class="float-right">
+                                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </div>
             </mat-tab>
             <mat-tab label="Menu" class="pt-4">

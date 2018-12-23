@@ -16,6 +16,8 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
     private sub: any;
     private tabRouteNames = ['description', 'menu', 'staff'];
 
+    participantsCount = 2;
+
     constructor(private route: ActivatedRoute,
         private restaurantsService: RestaurantsService,
         public authService: AuthService,
