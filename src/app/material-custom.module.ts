@@ -3,14 +3,16 @@ import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, 
     MatCardModule, MatProgressSpinnerModule, MatMenuModule, MatDividerModule, MatTabsModule, MatListModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatNativeDateModule} from '@angular/material';
+    MatNativeDateModule,
+    MatSliderModule} from '@angular/material';
+import 'hammerjs';
 
 @NgModule({
     imports: [MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, MatInputModule, MatToolbarModule, MatCardModule,
         MatProgressSpinnerModule, MatMenuModule, MatDividerModule, MatTabsModule, MatListModule, MatDialogModule, MatDatepickerModule,
-        MatNativeDateModule ],
+        MatNativeDateModule, MatSliderModule ],
     exports: [MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, MatInputModule, MatToolbarModule, MatCardModule,
         MatProgressSpinnerModule, MatMenuModule, MatDividerModule, MatTabsModule, MatListModule, MatDialogModule, MatDatepickerModule,
-        MatNativeDateModule ],
+        MatNativeDateModule, MatSliderModule ],
 })
 export class MaterialCustomModule { }

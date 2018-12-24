@@ -47,6 +47,16 @@
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
                         </div>
+                        <div class="w-100 pt-4">
+                            <span class="d-inline-block pt-3">Interval</span>
+                            <mat-slider
+                                thumbLabel
+                                [displayWith]="formatLabel"
+                                tickInterval="1"
+                                min="1"
+                                max="1440"
+                                style="width: 500px;"></mat-slider>
+                        </div>
                     </div>
                 </div>
             </mat-tab>

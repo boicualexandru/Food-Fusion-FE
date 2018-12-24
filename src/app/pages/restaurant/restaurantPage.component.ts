@@ -41,6 +41,24 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
         this.location.replaceState('restaurant/' + this.restaurant.id + '/' + this.tabRouteNames[tabIndex]);
     }
 
+    formatLabel(value: number | null) {
+        let minutesCount = value;
+
+        if (!value) {
+            minutesCount = 0;
+        }
+        const hours = Math.floor(minutesCount / 60);
+        const minutes = minutesCount - (hours * 60);
+
+        let hoursString: string = hours.toString();
+        if (hours < 10) { hoursString = '0' + hoursString; }
+
+        let minutesString: string = minutes.toString();
+        if (minutes < 10) { minutesString = '0' + minutesString; }
+
+        return hoursString + ':' + minutesString;
+    }
+
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
