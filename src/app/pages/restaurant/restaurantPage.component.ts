@@ -17,6 +17,11 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
     private tabRouteNames = ['description', 'menu', 'staff'];
 
     participantsCount = 2;
+    interval: number[] = [100, 350];
+
+    onSliderChange(event: number[]): void {
+        console.log(this.interval);
+    }
 
     constructor(private route: ActivatedRoute,
         private restaurantsService: RestaurantsService,
