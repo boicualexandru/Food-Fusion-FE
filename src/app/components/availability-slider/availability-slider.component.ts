@@ -312,6 +312,17 @@ export class AvailabilitySliderComponent extends _MatSliderMixinBase
 
     private _vertical = false;
 
+    @Input()
+    get unavailableFrames(): number[][] {
+        return this._unavailableFrames;
+    }
+
+    set unavailableFrames(value: number[][]) {
+        this._unavailableFrames = value;
+    }
+
+    private _unavailableFrames: number[][] = [];
+
     /** Event emitted when the slider value has changed. */
     @Output() readonly change: EventEmitter<MatSliderChange> = new EventEmitter<MatSliderChange>();
 
@@ -512,6 +523,28 @@ export class AvailabilitySliderComponent extends _MatSliderMixinBase
                 transform: `translate${axis}(${sign}${this._thumbGap}px) scale3d(${scale})`
             };
         }
+    }
+
+    _unavailableFrameStyles(unavailableFrame: number[]): { [key: string]: string } {
+        const framePercentages: number[] = this._calculatePercentage(unavailableFrame) as number[];
+
+        const axis = this.vertical ? 'Y' : 'X';
+        let scale: string = '';
+        scale = this.vertical ?
+            `1, ${framePercentages[1] - framePercentages[0]}, 1` :
+            `${framePercentages[1] - framePercentages[0]}, 1, 1`;
+
+        let invertOffset = (this._getDirection() == 'rtl' && !this.vertical) ?
+            !this._invertAxis : this._invertAxis;
+
+        let offset: number = (invertOffset ? 1 - framePercentages[1] : framePercentages[0]) * 100;
+
+        const sign = this._shouldInvertMouseCoords() ? '' : '-';
+
+        return {
+            // scale3d avoids some rendering issues in Chrome. See #12071.
+            transform: `translate${axis}(${offset}%) scale3d(${scale})`
+        };
     }
 
     /** CSS styles for the ticks container element. */

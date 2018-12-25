@@ -54,12 +54,14 @@
                                 thumbLabel
                                 [displayWith]="formatLabel"
                                 [(value)]="interval"
+                                [unavailableFrames]="[[1,400], [800,1400]]"
+                                (input)="onSlideMove($event)"
                                 (valueChange)="onSliderChange($event)"
                                 color="primary"
                                 tickInterval="1"
                                 min="1"
                                 max="1440"
-                                class="w-100 mt-3"
+                                class="time-interval-slider w-100 mt-3"
                                 style="width: 500px;"></app-availability-slider>
                         <app-availability-slider
                                 thumbLabel
@@ -68,7 +70,7 @@
                                 tickInterval="1"
                                 min="1"
                                 max="1440"
-                                class="w-100 mt-3"
+                                class="time-interval-slider w-100 mt-3"
                                 style="width: 500px;"></app-availability-slider>
                     </div>
                 </div>

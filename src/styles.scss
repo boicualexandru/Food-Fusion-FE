@@ -24,6 +24,24 @@ button:focus { outline: none; }
   }
 }
 
+.time-interval-slider {
+  .mat-slider-thumb-label-text{
+    font-size: 10px;
+  }
+
+  .mat-slider-track-wrapper {
+    overflow: visible;
+    
+    .unavailable-frame {
+      height: 10px;
+      top: -4px;
+      background-color: #f44336;
+      z-index: 1;
+      border-radius: 10px;
+    }
+  }
+}
+
 .c-pointer{
     cursor: pointer;
 }

@@ -20,7 +20,11 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
     interval: number[] = [100, 350];
 
     onSliderChange(event: number[]): void {
-        console.log(this.interval);
+        // console.log(this.interval);
+    }
+
+    onSlideMove(event: any) {
+        this.interval = event.value;
     }
 
     constructor(private route: ActivatedRoute,
