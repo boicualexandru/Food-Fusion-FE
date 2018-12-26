@@ -27,7 +27,7 @@
                     </div>
                     <div class="col">
                         <h4>Book Now</h4>
-                        <div class="w-100">
+                        <div class="w-100 mt-2">
                             <span class="d-inline-block py-2">Participants</span>
                             <div class="float-right">
                                 <button mat-icon-button (click)="participantsCount = participantsCount - 1" [disabled]="participantsCount < 2">
@@ -39,7 +39,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="w-100">
+                        <div class="w-100 mt-2">
                             <span class="d-inline-block pt-3">Date</span>
                             <mat-form-field class="float-right">
                                 <input matInput [matDatepicker]="picker" placeholder="Choose a date">
@@ -47,10 +47,9 @@
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
                         </div>
-                        <div class="w-100">
+                        <div class="w-100 mt-2">
                             <span class="d-inline-block pt-3">Interval</span>
-                        </div>
-                        <app-availability-slider
+                            <app-availability-slider #availabilitySlider
                                 thumbLabel
                                 [displayWith]="formatLabel"
                                 [(value)]="interval"
@@ -63,15 +62,20 @@
                                 max="1440"
                                 class="time-interval-slider w-100 mt-3"
                                 style="width: 500px;"></app-availability-slider>
-                        <app-availability-slider
-                                thumbLabel
-                                [displayWith]="formatLabel"
-                                [(value)]="interval"
-                                tickInterval="1"
-                                min="1"
-                                max="1440"
-                                class="time-interval-slider w-100 mt-3"
-                                style="width: 500px;"></app-availability-slider>
+                            <mat-error *ngIf="availabilitySlider.intersectsWithUnavailableFrame">
+                                The selected time interval intersects with an unavailable frame.
+                            </mat-error>
+                        </div>
+                        <div class="w-100 mt-2">
+                            <div class="d-inline-block float-left">
+                                <span class="d-block">From</span>
+                                <input type="time" [(ngModel)]="formattedInterval.value[0]">
+                            </div>
+                            <div class="d-inline-block float-right">
+                                <span class="d-block">To</span>
+                                <input type="time" [(ngModel)]="formattedInterval.value[1]">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </mat-tab>

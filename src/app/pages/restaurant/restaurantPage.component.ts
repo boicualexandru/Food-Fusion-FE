@@ -5,6 +5,7 @@ import { RestaurantDetailed } from 'src/app/models/restaurant/restaurantDetailed
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material';
 import { Location } from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     templateUrl: './restaurantPage.component.html',
@@ -18,6 +19,7 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
 
     participantsCount = 2;
     interval: number[] = [100, 350];
+    formattedInterval: BehaviorSubject<string[]>;
 
     onSliderChange(event: number[]): void {
         // console.log(this.interval);
@@ -25,13 +27,16 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
 
     onSlideMove(event: any) {
         this.interval = event.value;
+        this.formattedInterval.next(this.getFormattedInterval());
     }
 
     constructor(private route: ActivatedRoute,
         private restaurantsService: RestaurantsService,
         public authService: AuthService,
         public dialog: MatDialog,
-        private location: Location) { }
+        private location: Location) {
+                this.formattedInterval = new BehaviorSubject<string[]>(this.getFormattedInterval());
+    }
 
     ngOnInit(): void {
         this.sub = this.route.params.subscribe(params => {
@@ -66,6 +71,13 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
         if (minutes < 10) { minutesString = '0' + minutesString; }
 
         return hoursString + ':' + minutesString;
+    }
+
+    getFormattedInterval(): string[] {
+        return [
+            this.formatLabel(this.interval[0]),
+            this.formatLabel(this.interval[1])
+        ];
     }
 
     ngOnDestroy() {

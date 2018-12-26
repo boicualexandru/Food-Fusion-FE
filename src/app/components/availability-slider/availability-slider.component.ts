@@ -134,7 +134,7 @@ export const _MatSliderMixinBase:
         '[class.mat-slider-sliding]': '_isSliding',
         '[class.mat-slider-thumb-label-showing]': 'thumbLabel',
         '[class.mat-slider-vertical]': 'vertical',
-        '[class.mat-slider-min-value]': '_isMinValue || _intersectsWithUnavailableFrame',
+        '[class.mat-slider-min-value]': '_isMinValue || intersectsWithUnavailableFrame',
         '[class.mat-range-slider]': 'isRangeSlider()',
         '[class.mat-slider-hide-last-tick]': 'disabled || _isMinValue && _thumbGap && _invertAxis',
         '[class._mat-animation-noopable]': '_animationMode === "NoopAnimations"',
@@ -444,7 +444,8 @@ export class AvailabilitySliderComponent extends _MatSliderMixinBase
         }
     }
 
-    get _intersectsWithUnavailableFrame(): boolean {
+    @Output()
+    get intersectsWithUnavailableFrame(): boolean {
         for (const unavailableFrame of this.unavailableFrames) {
             if (this.value instanceof Array) {
                 if ((this.value[0] < unavailableFrame[1] && unavailableFrame[0] < this.value[1])) {
