@@ -21,8 +21,22 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
     interval: number[] = [100, 350];
     formattedInterval: BehaviorSubject<string[]>;
 
-    onSliderChange(event: number[]): void {
-        // console.log(this.interval);
+    get intervalStart(): string {
+        return this.formattedInterval.value[0];
+    }
+    set intervalStart(value: string) {
+        const interval = this.formattedInterval.value;
+        interval[0] = value;
+        this.formattedInterval.next(interval);
+    }
+
+    get intervalEnd(): string {
+        return this.formattedInterval.value[1];
+    }
+    set intervalEnd(value: string) {
+        const interval = this.formattedInterval.value;
+        interval[1] = value;
+        this.formattedInterval.next(interval);
     }
 
     onSlideMove(event: any) {
@@ -36,6 +50,12 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
         public dialog: MatDialog,
         private location: Location) {
                 this.formattedInterval = new BehaviorSubject<string[]>(this.getFormattedInterval());
+                this.formattedInterval.subscribe(value => {
+                    this.interval = [
+                        this.timeStringToMinutes(value[0]),
+                        this.timeStringToMinutes(value[1])
+                    ];
+                });
     }
 
     ngOnInit(): void {
@@ -78,6 +98,13 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
             this.formatLabel(this.interval[0]),
             this.formatLabel(this.interval[1])
         ];
+    }
+
+    private timeStringToMinutes(time: string) {
+        const hoursMinutes = time.split(/[.:]/);
+        const hours = parseInt(hoursMinutes[0], 10);
+        const minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
+        return minutes + hours * 60;
     }
 
     ngOnDestroy() {

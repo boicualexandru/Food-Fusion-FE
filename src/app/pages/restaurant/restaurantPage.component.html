@@ -55,25 +55,28 @@
                                 [(value)]="interval"
                                 [unavailableFrames]="[[1230,1300]]"
                                 (input)="onSlideMove($event)"
-                                (valueChange)="onSliderChange($event)"
                                 color="primary"
                                 tickInterval="1"
-                                min="1"
-                                max="1440"
+                                min="0"
+                                max="1439"
                                 class="time-interval-slider w-100 mt-3"
                                 style="width: 500px;"></app-availability-slider>
                             <mat-error *ngIf="availabilitySlider.intersectsWithUnavailableFrame">
                                 The selected time interval intersects with an unavailable frame.
                             </mat-error>
                         </div>
-                        <div class="w-100 mt-2">
-                            <div class="d-inline-block float-left">
+                        <div class="row mt-2">
+                            <div class="col-6">
                                 <span class="d-block">From</span>
-                                <input type="time" [(ngModel)]="formattedInterval.value[0]">
+                                <mat-form-field class="w-100">
+                                    <input matInput type="time" [(ngModel)]="intervalStart">
+                                </mat-form-field>
                             </div>
-                            <div class="d-inline-block float-right">
+                            <div class="col-6">
                                 <span class="d-block">To</span>
-                                <input type="time" [(ngModel)]="formattedInterval.value[1]">
+                                <mat-form-field class="w-100">
+                                    <input matInput type="time" [(ngModel)]="intervalEnd">
+                                </mat-form-field>
                             </div>
                         </div>
                     </div>
