@@ -6,11 +6,10 @@ import { UserState } from '../models/userState';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { RegisterModel } from '../models/registerModel';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AuthService {
-    private apiPath = 'http://localhost:56416/api';
-
     private tokenSubject: BehaviorSubject<string>;
     private userStateSubject: BehaviorSubject<UserState>;
 
@@ -44,12 +43,12 @@ export class AuthService {
     }
 
     login(loginModel: LoginModel): Observable<string> {
-        return this.http.post(this.apiPath + '/Token', loginModel, { responseType: 'text' })
+        return this.http.post(environment.apiBaseUrl + '/Token', loginModel, { responseType: 'text' })
             .pipe(tap(token => this.storeToken(token)));
     }
 
     register(registerModel: RegisterModel): Observable<string> {
-        return this.http.post(this.apiPath + '/Token/Register', registerModel, { responseType: 'text' })
+        return this.http.post(environment.apiBaseUrl + '/Token/Register', registerModel, { responseType: 'text' })
             .pipe(tap(token => this.storeToken(token)));
     }
 
