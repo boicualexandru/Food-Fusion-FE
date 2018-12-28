@@ -22,17 +22,20 @@ export class AuthService {
     }
 
     public get isAdmin(): boolean {
-        return this.userStateSubject.value.role === 'Admin';
+        if (this.currentUser == null) { return false; }
+        return this.currentUser.role === 'Admin';
     }
 
     public isManager(restaurantId: number): boolean {
-        if (this.userStateSubject.value.managedRestaurants == null) { return false; }
-        return this.userStateSubject.value.managedRestaurants.includes(restaurantId);
+        if (this.currentUser == null) { return false; }
+        if (this.currentUser.managedRestaurants == null) { return false; }
+        return this.currentUser.managedRestaurants.includes(restaurantId);
     }
 
     public isEmployee(restaurantId: number): boolean {
-        if (this.userStateSubject.value.employeeOfRestaurants == null) { return false; }
-        return this.userStateSubject.value.employeeOfRestaurants.includes(restaurantId);
+        if (this.currentUser == null) { return false; }
+        if (this.currentUser.employeeOfRestaurants == null) { return false; }
+        return this.currentUser.employeeOfRestaurants.includes(restaurantId);
     }
 
     constructor(private http: HttpClient) {
