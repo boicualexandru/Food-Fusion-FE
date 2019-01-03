@@ -10,6 +10,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
 import { EmployeesService } from './services/employees.service';
 import { SharedModule } from './shared.module';
 import { MenuService } from './services/menu.service';
+import { BookingService } from './services/booking service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { MenuService } from './services/menu.service';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    AuthService, RestaurantsService, EmployeesService, MenuService ],
+    AuthService, RestaurantsService, EmployeesService, MenuService, BookingService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

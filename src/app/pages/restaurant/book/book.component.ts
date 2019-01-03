@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { BookingService } from 'src/app/services/booking service';
 
 @Component({
     selector: 'app-book',
@@ -8,6 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class BookComponent implements OnInit {
     participantsCount = 2;
+    date: Date = new Date();
     interval: number[] = [100, 350];
     formattedInterval: BehaviorSubject<string[]>;
 
@@ -29,7 +31,7 @@ export class BookComponent implements OnInit {
         this.formattedInterval.next(interval);
     }
 
-    constructor() {
+    constructor(private bookingService: BookingService) {
         this.formattedInterval = new BehaviorSubject<string[]>(this.getFormattedInterval());
         this.formattedInterval.subscribe(value => {
             this.interval = [
