@@ -1,0 +1,43 @@
+<div class="d-flex w-100 mt-2">
+    <span class="flex-shrink-1 pt-1 pr-3">Participants</span>
+    <div class="w-100 text-right">
+        <button mat-icon-button (click)="participantsCount = participantsCount - 1" [disabled]="participantsCount < 2">
+            <mat-icon aria-label="Decrement participants">remove_circle_outline</mat-icon>
+        </button>
+        <span class="align-middle">{{participantsCount}}</span>
+        <button mat-icon-button (click)="participantsCount = participantsCount + 1">
+            <mat-icon aria-label="Increment participants">add_circle_outline</mat-icon>
+        </button>
+    </div>
+</div>
+<div class="d-flex w-100 mt-2">
+    <span class="flex-shrink-1 pt-3 pr-3">Date</span>
+    <mat-form-field class="w-100">
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+</div>
+<div class="row mt-2">
+    <div class="col-6">
+        <span class="d-block">From</span>
+        <mat-form-field class="w-100">
+            <input matInput type="time" [(ngModel)]="intervalStart">
+        </mat-form-field>
+    </div>
+    <div class="col-6">
+        <span class="d-block">To</span>
+        <mat-form-field class="w-100">
+            <input matInput type="time" [(ngModel)]="intervalEnd">
+        </mat-form-field>
+    </div>
+    <div class="col-12">
+        <app-availability-slider #availabilitySlider thumbLabel [displayWith]="formatLabel" [(value)]="interval"
+            [unavailableFrames]="[[1230,1300]]" (input)="onSlideMove($event)" color="primary" tickInterval="1" min="0"
+            max="1439" class="time-interval-slider w-100 mt-1" style="width: 500px;"></app-availability-slider>
+        <mat-error *ngIf="availabilitySlider.intersectsWithUnavailableFrame">
+            The selected time interval intersects with an unavailable frame.
+        </mat-error>
+    </div>
+</div>
+<button mat-flat-button color="primary" class="w-100 mt-2">Book</button>
