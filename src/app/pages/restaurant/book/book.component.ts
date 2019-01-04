@@ -79,4 +79,13 @@ export class BookComponent implements OnInit {
         const minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
         return minutes + hours * 60;
     }
+
+    dateFilter(date: Date): boolean {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (date < today) { return false; }
+
+        return true;
+    }
 }
