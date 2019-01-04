@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { BookingService } from 'src/app/services/booking service';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-book',
@@ -8,10 +9,14 @@ import { BookingService } from 'src/app/services/booking service';
     styleUrls: ['./book.component.scss']
 })
 export class BookComponent implements OnInit {
+    @Input()
+    restaurantId: number;
+
     participantsCount = 2;
     date: Date = new Date();
     interval: number[] = [100, 350];
     formattedInterval: BehaviorSubject<string[]>;
+    unavailableFrames: number[][] = [];
 
     get intervalStart(): string {
         return this.formattedInterval.value[0];
@@ -42,6 +47,16 @@ export class BookComponent implements OnInit {
     }
 
     ngOnInit(): void { }
+
+    incrementParticipants(): void {
+        this.participantsCount ++;
+        this.updateAvailability();
+    }
+
+    decrementParticipants(): void {
+        this.participantsCount --;
+        this.updateAvailability();
+    }
 
     onSlideMove(event: any) {
         this.interval = event.value;
@@ -88,4 +103,23 @@ export class BookComponent implements OnInit {
 
         return true;
     }
+
+    updateAvailability(): void {
+        this.bookingService.getUnavailableFramesByDay(this.restaurantId, this.participantsCount, this.date)
+            .subscribe(unavailableFrames => {
+                // console.log(unavailableFrames);
+                this.unavailableFrames = unavailableFrames.map(unavailableFrame => [
+                    this.timeToMinutes(unavailableFrame.start),
+                    this.timeToMinutes(unavailableFrame.end)]);
+            });
+    }
+
+    private timeToMinutes(date: Date): number {
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+
+        return hours * 60 + minutes;
+    }
+
+    private dateFrameToMinutesFrame
 }

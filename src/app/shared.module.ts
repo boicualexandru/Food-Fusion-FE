@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialCustomModule } from './material-custom.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +13,6 @@ import { AppRoutingModule } from './app-routing.module';
         ReactiveFormsModule, MaterialCustomModule, AppRoutingModule],
     exports: [ CommonModule, BrowserModule, BrowserAnimationsModule, HttpClientModule, FormsModule,
         ReactiveFormsModule, MaterialCustomModule, AppRoutingModule],
-    providers: [],
+    providers: [ DatePipe ],
 })
 export class SharedModule {}

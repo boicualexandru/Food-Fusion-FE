@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:56416/api'
+  apiBaseUrl: 'http://localhost:56416/api',
+  apiDateFormatMinutePrecision: 'yyyy-MM-ddTHH:mm'
 };
 
 /*
