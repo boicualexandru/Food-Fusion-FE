@@ -23,3 +23,25 @@ button:focus { outline: none; }
     background-color: white !important;
   }
 }
+
+.time-interval-slider {
+  .mat-slider-thumb-label-text{
+    font-size: 10px;
+  }
+
+  .mat-slider-track-wrapper {
+    overflow: visible;
+    
+    .unavailable-frame {
+      height: 6px;
+      top: -2px;
+      background-color: #f44336;
+      z-index: 1;
+      border-radius: 10px;
+    }
+  }
+}
+
+.c-pointer{
+    cursor: pointer;
+}

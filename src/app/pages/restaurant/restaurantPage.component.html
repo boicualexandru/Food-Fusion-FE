@@ -19,10 +19,15 @@
     </div>
 
     <div class="container">
-        <mat-tab-group dynamicHeight [selectedIndex]="activeTabIndex" (selectedIndexChange)="onTabChange($event)" class="restaurant-tabs">
+        <mat-tab-group dynamicHeight [selectedIndex]="activeTabIndex" (selectedIndexChange)="onTabChange($event)" animationDuration="0" class="restaurant-tabs">
             <mat-tab label="Description" class="pt-4">
-                <div class="pt-4">
-                    {{restaurant.description}}
+                <div class="row pt-4">
+                    <div class="col">
+                        {{restaurant.description}}
+                    </div>
+                    <div class="col">
+                        <app-book [restaurantId]="restaurant.id"></app-book>
+                    </div>
                 </div>
             </mat-tab>
             <mat-tab label="Menu" class="pt-4">

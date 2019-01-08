@@ -6,6 +6,7 @@ import { ItemEditDialogComponent } from './menu/item-edit-dialog/item-edit-dialo
 import { SharedModule } from 'src/app/shared.module';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { MenuComponent } from './menu/menu.component';
+import { BookComponent } from './book/book.component';
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { MenuComponent } from './menu/menu.component';
         EmployeesListComponent,
         EmpoyeeEditDialogComponent,
         MenuComponent,
-        ItemEditDialogComponent],
+        ItemEditDialogComponent,
+        BookComponent ],
     imports: [
         SharedModule,
         ComponentsModule],

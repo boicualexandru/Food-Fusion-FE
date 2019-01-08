@@ -6,11 +6,10 @@ import { UserState } from '../models/userState';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { RegisterModel } from '../models/registerModel';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AuthService {
-    private apiPath = 'http://localhost:56416/api';
-
     private tokenSubject: BehaviorSubject<string>;
     private userStateSubject: BehaviorSubject<UserState>;
 
@@ -23,17 +22,20 @@ export class AuthService {
     }
 
     public get isAdmin(): boolean {
-        return this.userStateSubject.value.role === 'Admin';
+        if (this.currentUser == null) { return false; }
+        return this.currentUser.role === 'Admin';
     }
 
     public isManager(restaurantId: number): boolean {
-        if (this.userStateSubject.value.managedRestaurants == null) { return false; }
-        return this.userStateSubject.value.managedRestaurants.includes(restaurantId);
+        if (this.currentUser == null) { return false; }
+        if (this.currentUser.managedRestaurants == null) { return false; }
+        return this.currentUser.managedRestaurants.includes(restaurantId);
     }
 
     public isEmployee(restaurantId: number): boolean {
-        if (this.userStateSubject.value.employeeOfRestaurants == null) { return false; }
-        return this.userStateSubject.value.employeeOfRestaurants.includes(restaurantId);
+        if (this.currentUser == null) { return false; }
+        if (this.currentUser.employeeOfRestaurants == null) { return false; }
+        return this.currentUser.employeeOfRestaurants.includes(restaurantId);
     }
 
     constructor(private http: HttpClient) {
@@ -44,12 +46,12 @@ export class AuthService {
     }
 
     login(loginModel: LoginModel): Observable<string> {
-        return this.http.post(this.apiPath + '/Token', loginModel, { responseType: 'text' })
+        return this.http.post(environment.apiBaseUrl + '/Token', loginModel, { responseType: 'text' })
             .pipe(tap(token => this.storeToken(token)));
     }
 
     register(registerModel: RegisterModel): Observable<string> {
-        return this.http.post(this.apiPath + '/Token/Register', registerModel, { responseType: 'text' })
+        return this.http.post(environment.apiBaseUrl + '/Token/Register', registerModel, { responseType: 'text' })
             .pipe(tap(token => this.storeToken(token)));
     }
 
