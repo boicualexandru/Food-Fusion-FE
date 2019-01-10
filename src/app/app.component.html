@@ -2,6 +2,11 @@
   <mat-toolbar-row>
     <span>{{title}}</span>
     <span class="example-spacer"></span>
+
+    <button mat-icon-button [color]="isEditModeOn ? 'primary' : ''" (click)="totggleEditMode()">
+      <mat-icon>edit</mat-icon>
+    </button>
+
     <button mat-button routerLink="/restaurants" routerLinkActive="mat-accent">Restaurants</button>
 
     <button *ngIf="!currentUser" mat-button routerLink="/login" routerLinkActive="mat-accent">Login</button>
