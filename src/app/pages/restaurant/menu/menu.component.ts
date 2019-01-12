@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Menu } from 'src/app/models/menu/menu';
+import { Menu, MenuElement } from 'src/app/models/menu/menu';
 import { MatDialog } from '@angular/material';
 import { ItemEditDialogComponent } from './item-edit-dialog/item-edit-dialog.component';
 import { MenuItem } from 'src/app/models/menu/menuItem';
@@ -14,13 +14,16 @@ import { AuthService } from 'src/app/services/auth.service';
 export class MenuComponent implements OnInit {
     @Input() restaurantId: number;
     @Input() menu: Menu;
+    menuElement: MenuElement;
 
     constructor(
         public dialog: MatDialog,
         private menuService: MenuService,
         public authService: AuthService) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        this.menuElement = this.menuService.getMenuByRestaurantId(this.restaurantId);
+    }
 
     openDialogForAddItem(): void {
         const dialogRef = this.dialog.open(ItemEditDialogComponent, {

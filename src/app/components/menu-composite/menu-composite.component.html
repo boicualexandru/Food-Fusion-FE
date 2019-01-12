@@ -1,0 +1,5 @@
+<h4 *ngIf="!menuElement.isLeaf">{{menuElement.name}}</h4>
+<span *ngIf="menuElement.isLeaf">{{menuElement.name}}</span>
+<div *ngFor="let subMenuElement of menuElement.get()" class="pl-2">
+    <app-menu-composite [menuElement]="subMenuElement"></app-menu-composite>
+</div>
