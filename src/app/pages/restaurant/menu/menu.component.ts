@@ -6,6 +6,7 @@ import { MenuItem } from 'src/app/models/menu/menuItem';
 import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 import { MenuService } from 'src/app/services/menu.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { EditModeService } from 'src/app/services/editMode.service';
 
 @Component({
     selector: 'app-menu',
@@ -15,11 +16,15 @@ export class MenuComponent implements OnInit {
     @Input() restaurantId: number;
     @Input() menu: Menu;
     menuElement: MenuElement;
+    isEditModeOn = false;
 
     constructor(
         public dialog: MatDialog,
         private menuService: MenuService,
-        public authService: AuthService) { }
+        public authService: AuthService,
+        private editModeService: EditModeService) {
+            editModeService.subscribe((isEditModeOn) => this.isEditModeOn = isEditModeOn);
+        }
 
     ngOnInit(): void {
         this.menuElement = this.menuService.getMenuByRestaurantId(this.restaurantId);

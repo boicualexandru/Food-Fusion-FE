@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, BehaviorSubject, Subscription } from 'rxjs';
 
-export interface ICustomSubscriber {
-    notify(isEditModeOn: boolean): void;
-}
+// export interface IEditModeSubscriber {
+//     notifyEditMode(isEditModeOn: boolean): void;
+// }
 
 export interface SubscriptionEntity {
-    subscriber: ICustomSubscriber;
+    subFunction: (value: boolean) => void;
     subscription: Subscription;
 }
 
 @Injectable()
 export class EditModeService {
 
-    private subscriptions: SubscriptionEntity[];
-    private editModeOn: BehaviorSubject<boolean>;
+    private subscriptions: SubscriptionEntity[] = [];
+    private editModeOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor() {}
 
-    public subscribe(subscriber: ICustomSubscriber): void {
+    public subscribe(subFunction: (value: boolean) => void): void {
         const subscription = this.editModeOn
             .asObservable()
-            .subscribe(subscriber.notify);
+            .subscribe(subFunction);
 
         this.subscriptions.push({
-            subscriber: subscriber,
+            subFunction: subFunction,
             subscription: subscription
         });
     }
 
-    public unSubscribe(subscriber: ICustomSubscriber): void {
-        this.subscriptions.find(s => s.subscriber === subscriber)
+    public unSubscribe(subFunction: (value: boolean) => void): void {
+        this.subscriptions.find(s => s.subFunction === subFunction)
             .subscription.unsubscribe();
 
             // todo remove

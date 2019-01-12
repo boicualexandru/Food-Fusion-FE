@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { UserState } from './models/userState';
 import { Router } from '@angular/router';
 import { EditModeService } from './services/editMode.service';
@@ -15,10 +15,11 @@ export class AppComponent {
     title = 'FoodFusion';
     isEditModeOn = false;
 
-    constructor(private router: Router, private authService: AuthService) {
-        // private editModeService: EditModeService) {
+    constructor(private router: Router, private authService: AuthService,
+        private editModeService: EditModeService) {
             this.currentUser = this.authService.currentUser;
             this.authService.currentUserObservable.subscribe(user => this.currentUser = user);
+            this.editModeService.subscribe((isEditModeOn) => { this.isEditModeOn = isEditModeOn; });
     }
 
     logout() {
@@ -27,6 +28,6 @@ export class AppComponent {
     }
 
     totggleEditMode() {
-        this.isEditModeOn = !this.isEditModeOn;
+        this.editModeService.toggleEditMode();
     }
 }
