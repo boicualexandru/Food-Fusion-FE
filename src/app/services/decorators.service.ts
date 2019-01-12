@@ -5,7 +5,7 @@ export interface IDecoratedItem {
     getPrice(): number;
 }
 
-export class DecoratedItem implements IDecoratedComponent {
+export class DecoratedItem implements IDecoratedItem {
     private item: MenuItem;
 
     constructor(item: MenuItem) {
