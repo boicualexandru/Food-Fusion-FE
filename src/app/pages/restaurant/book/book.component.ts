@@ -16,7 +16,7 @@ export class BookComponent implements OnInit {
 
     participantsCount = 2;
     date: Date = new Date();
-    interval: number[] = [100, 350];
+    interval: number[] = [1170, 1320];
     formattedInterval: BehaviorSubject<string[]>;
     unavailableFrames: number[][] = [];
 
