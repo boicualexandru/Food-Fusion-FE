@@ -15,6 +15,22 @@ export class Timespan {
         return new Timespan(hours);
     }
 
+    static fromDate(date: Date): Timespan {
+        return new Timespan(date.getHours(), date.getMinutes());
+    }
+
+    static fromFormattedString(time: string): Timespan {
+        const hoursMinutes = time.split(/[.:]/);
+        const hours = parseInt(hoursMinutes[0], 10);
+        const minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
+
+        return new Timespan(hours, minutes);
+    }
+
+    public toMinutes(): number {
+        return this.hours * 60 + this.minutes;
+    }
+
     public toString(): string {
         let hoursString: string = this.hours.toString();
         if (this.hours < 10) { hoursString = '0' + hoursString; }

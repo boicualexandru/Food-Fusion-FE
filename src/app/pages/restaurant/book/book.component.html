@@ -34,7 +34,7 @@
         </mat-form-field>
     </div>
     <div class="col-12">
-        <app-availability-slider #availabilitySlider thumbLabel [displayWith]="formatLabel" [(value)]="interval"
+        <app-availability-slider #availabilitySlider thumbLabel [displayWith]="minutesToFormattedString" [(value)]="interval"
             [unavailableFrames]="unavailableFrames" (input)="onSlideMove($event)" color="primary" tickInterval="1" min="0"
             max="1439" class="time-interval-slider w-100 mt-1" style="width: 500px;"></app-availability-slider>
         <mat-error *ngIf="availabilitySlider.intersectsWithUnavailableFrame">

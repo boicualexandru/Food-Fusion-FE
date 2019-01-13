@@ -41,8 +41,8 @@ export class BookComponent implements OnInit {
         this.formattedInterval = new BehaviorSubject<string[]>(this.getFormattedInterval());
         this.formattedInterval.subscribe(value => {
             this.interval = [
-                this.timeStringToMinutes(value[0]),
-                this.timeStringToMinutes(value[1])
+                this.formattedStringToMinutes(value[0]),
+                this.formattedStringToMinutes(value[1])
             ];
         });
     }
@@ -64,38 +64,11 @@ export class BookComponent implements OnInit {
         this.formattedInterval.next(this.getFormattedInterval());
     }
 
-    formatLabel(value: number | null) {
-        // let minutesCount = value;
-        const timeSpan = Timespan.fromMinutes(value || 0);
-        return timeSpan.toString();
-
-        // if (!value) {
-        //     minutesCount = 0;
-        // }
-        // const hours = Math.floor(minutesCount / 60);
-        // const minutes = minutesCount - (hours * 60);
-
-        // let hoursString: string = hours.toString();
-        // if (hours < 10) { hoursString = '0' + hoursString; }
-
-        // let minutesString: string = minutes.toString();
-        // if (minutes < 10) { minutesString = '0' + minutesString; }
-
-        // return hoursString + ':' + minutesString;
-    }
-
     getFormattedInterval(): string[] {
         return [
-            this.formatLabel(this.interval[0]),
-            this.formatLabel(this.interval[1])
+            this.minutesToFormattedString(this.interval[0]),
+            this.minutesToFormattedString(this.interval[1])
         ];
-    }
-
-    private timeStringToMinutes(time: string) {
-        const hoursMinutes = time.split(/[.:]/);
-        const hours = parseInt(hoursMinutes[0], 10);
-        const minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
-        return minutes + hours * 60;
     }
 
     dateFilter(date: Date): boolean {
@@ -110,18 +83,25 @@ export class BookComponent implements OnInit {
     updateAvailability(): void {
         this.bookingService.getUnavailableFramesByDay(this.restaurantId, this.participantsCount, this.date)
             .subscribe(unavailableFrames => {
-                // console.log(unavailableFrames);
                 this.unavailableFrames = unavailableFrames.map(unavailableFrame => [
-                    this.timeToMinutes(unavailableFrame.start),
-                    this.timeToMinutes(unavailableFrame.end)]);
+                    this.dateToMinutes(unavailableFrame.start),
+                    this.dateToMinutes(unavailableFrame.end)]);
             });
     }
 
-    private timeToMinutes(date: Date): number {
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
+    minutesToFormattedString(value: number | null) {
+        const timeSpan = Timespan.fromMinutes(value || 0);
+        return timeSpan.toString();
+    }
 
-        return hours * 60 + minutes;
+    private dateToMinutes(date: Date): number {
+        const timespan = Timespan.fromDate(date);
+        return timespan.toMinutes();
+    }
+
+    private formattedStringToMinutes(time: string): number {
+        const timespan = Timespan.fromFormattedString(time);
+        return timespan.toMinutes();
     }
 
     book(): void {
