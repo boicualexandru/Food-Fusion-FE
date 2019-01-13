@@ -5,10 +5,15 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { map } from 'rxjs/operators';
+import { ReservationRequest } from '../models/reservation/reservationRequest';
+import { AuthService } from './auth.service';
+import { ReservationDetailed } from '../models/reservation/reservationDetailed';
 
 @Injectable()
 export class BookingService {
-    constructor(private http: HttpClient, private datePipe: DatePipe) { }
+    constructor(private http: HttpClient,
+        private datePipe: DatePipe,
+        private authService: AuthService) { }
 
     getUnavailableFramesByDay(restaurantId: number, participantsCount: number, day: Date): Observable<DateRange[]> {
         const start: Date = new Date(day);
@@ -33,7 +38,17 @@ export class BookingService {
             );
     }
 
-    addReservation(date: Date) {
+    addReservation(restaurantId: number, dateRange: DateRange, participantsCount: number): Observable<ReservationDetailed> {
+        const reservationRequest: ReservationRequest = {
+            restaurantId: restaurantId,
+            range: dateRange,
+            participantsCount: participantsCount,
+            userId: parseInt(this.authService.currentUser.userId, 10),
+            tableIds: []
+        };
 
+        return this.http.post<ReservationDetailed>(
+            environment.apiBaseUrl + '/Restaurants/' + restaurantId + '/Reservations',
+            reservationRequest);
     }
 }

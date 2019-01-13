@@ -3,6 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 import { BookingService } from 'src/app/services/booking service';
 import { DatePipe } from '@angular/common';
 import { Timespan } from 'src/app/models/boilerplate/timespan';
+import { ReservationRequest } from 'src/app/models/reservation/reservationRequest';
+import { DateRange } from 'src/app/models/boilerplate/dateRange';
 
 @Component({
     selector: 'app-book',
@@ -105,6 +107,18 @@ export class BookComponent implements OnInit {
     }
 
     book(): void {
-        // this.bookingService.addReservation(this.date, )
+        const timespanStart = Timespan.fromMinutes(this.interval[0]);
+        const timespanEnd = Timespan.fromMinutes(this.interval[1]);
+
+        const start = timespanStart.toDate(this.date);
+        const end = timespanEnd.toDate(this.date);
+
+        const dateRange: DateRange = {
+            start: start,
+            end: end
+        };
+
+        this.bookingService.addReservation(this.restaurantId, dateRange, this.participantsCount)
+            .subscribe(reservation => console.log(reservation));
     }
 }

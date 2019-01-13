@@ -40,4 +40,11 @@ export class Timespan {
 
         return hoursString + ':' + minutesString;
     }
+
+    public toDate(date: Date): Date {
+        const result: Date = new Date(date);
+        result.setHours(this.hours, this.minutes, 0, 0);
+
+        return result;
+    }
 }
