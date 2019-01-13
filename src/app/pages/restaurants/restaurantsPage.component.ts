@@ -19,6 +19,6 @@ export class RestaurantsPageComponent implements OnInit {
     getImage(): string {
         const d = Math.random();
 
-        return 'https://source.unsplash.com/800x600/?art,street&time=' + d.toString();
+        return 'https://source.unsplash.com/800x600/?dinner,food&a=' + d.toString();
     }
 }
