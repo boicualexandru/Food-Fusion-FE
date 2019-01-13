@@ -4,15 +4,9 @@
         <div class="gradient"></div>
         <div class="container mb-2">
             <div class="row">
-                <div class="col-8">
+                <div class="col-12">
                     <h2>{{restaurant.name}}</h2>
                     <h4><mat-icon class="align-bottom">location_city</mat-icon> {{restaurant.city}}</h4>
-                </div>
-                <div class="col-4 text-right">
-                    <button mat-raised-button color="accent">
-                        <!-- <mat-icon>date_range</mat-icon> -->
-                        Book Now
-                    </button>
                 </div>
             </div>
         </div>
@@ -20,7 +14,7 @@
 
     <div class="container mb-4">
         <mat-tab-group dynamicHeight [selectedIndex]="activeTabIndex" (selectedIndexChange)="onTabChange($event)" animationDuration="0" class="restaurant-tabs">
-            <mat-tab label="Description" class="pt-4">
+            <mat-tab label="Book" class="pt-4">
                 <div class="row pt-4">
                     <div class="col">
                         {{restaurant.description}}

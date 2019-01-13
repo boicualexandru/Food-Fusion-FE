@@ -1,4 +1,9 @@
-<mat-toolbar>
+
+<button *ngIf="!showNavBar()" mat-button routerLink="/restaurants" routerLinkActive="mat-accent" class="text-white mt-2 ml-2">
+  <mat-icon>keyboard_arrow_left</mat-icon>
+  Home Page
+</button>
+<mat-toolbar *ngIf="showNavBar()">
   <mat-toolbar-row>
     <span>{{title}}</span>
     <span class="example-spacer"></span>
