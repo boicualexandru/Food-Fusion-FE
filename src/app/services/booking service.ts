@@ -32,4 +32,8 @@ export class BookingService {
                 )
             );
     }
+
+    addReservation(date: Date) {
+
+    }
 }

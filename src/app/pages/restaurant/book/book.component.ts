@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { BookingService } from 'src/app/services/booking service';
 import { DatePipe } from '@angular/common';
+import { Timespan } from 'src/app/models/boilerplate/timespan';
 
 @Component({
     selector: 'app-book',
@@ -64,21 +65,23 @@ export class BookComponent implements OnInit {
     }
 
     formatLabel(value: number | null) {
-        let minutesCount = value;
+        // let minutesCount = value;
+        const timeSpan = Timespan.fromMinutes(value || 0);
+        return timeSpan.toString();
 
-        if (!value) {
-            minutesCount = 0;
-        }
-        const hours = Math.floor(minutesCount / 60);
-        const minutes = minutesCount - (hours * 60);
+        // if (!value) {
+        //     minutesCount = 0;
+        // }
+        // const hours = Math.floor(minutesCount / 60);
+        // const minutes = minutesCount - (hours * 60);
 
-        let hoursString: string = hours.toString();
-        if (hours < 10) { hoursString = '0' + hoursString; }
+        // let hoursString: string = hours.toString();
+        // if (hours < 10) { hoursString = '0' + hoursString; }
 
-        let minutesString: string = minutes.toString();
-        if (minutes < 10) { minutesString = '0' + minutesString; }
+        // let minutesString: string = minutes.toString();
+        // if (minutes < 10) { minutesString = '0' + minutesString; }
 
-        return hoursString + ':' + minutesString;
+        // return hoursString + ':' + minutesString;
     }
 
     getFormattedInterval(): string[] {
@@ -121,5 +124,7 @@ export class BookComponent implements OnInit {
         return hours * 60 + minutes;
     }
 
-    private dateFrameToMinutesFrame
+    book(): void {
+        // this.bookingService.addReservation(this.date, )
+    }
 }
