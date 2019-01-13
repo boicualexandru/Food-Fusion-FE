@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class RestaurantsPageComponent implements OnInit {
     restaurants: Restaurant[] = [];
 
-    constructor(private router: Router, private restaurantsService: RestaurantsService) { }
+    constructor(private restaurantsService: RestaurantsService) { }
 
     ngOnInit(): void {
         this.restaurantsService.getAll().subscribe(restaurants => this.restaurants = restaurants);

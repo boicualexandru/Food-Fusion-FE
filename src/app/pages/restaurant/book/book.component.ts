@@ -1,10 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { BookingService } from 'src/app/services/booking service';
-import { DatePipe } from '@angular/common';
 import { Timespan } from 'src/app/models/boilerplate/timespan';
-import { ReservationRequest } from 'src/app/models/reservation/reservationRequest';
 import { DateRange } from 'src/app/models/boilerplate/dateRange';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-book',
@@ -39,7 +38,7 @@ export class BookComponent implements OnInit {
         this.formattedInterval.next(interval);
     }
 
-    constructor(private bookingService: BookingService) {
+    constructor(private bookingService: BookingService, private router: Router) {
         this.formattedInterval = new BehaviorSubject<string[]>(this.getFormattedInterval());
         this.formattedInterval.subscribe(value => {
             this.interval = [
@@ -119,6 +118,6 @@ export class BookComponent implements OnInit {
         };
 
         this.bookingService.addReservation(this.restaurantId, dateRange, this.participantsCount)
-            .subscribe(reservation => console.log(reservation));
+            .subscribe(reservation => this.router.navigateByUrl('reservations'));
     }
 }
