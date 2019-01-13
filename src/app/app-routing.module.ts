@@ -5,6 +5,7 @@ import { RegisterPageComponent } from './pages/register/registerPage.component';
 import { RestaurantsPageComponent } from './pages/restaurants/restaurantsPage.component';
 import { RestaurantPageComponent } from './pages/restaurant/restaurantPage.component';
 import { RestaurantCreatePageComponent } from './pages/restaurant-create/restaurant-create-page.component';
+import { UserReservationsPageComponent } from './pages/user-reservations/user-reservations.page.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -13,6 +14,7 @@ const appRoutes: Routes = [
   { path: 'restaurant/:id', component: RestaurantPageComponent },
   { path: 'restaurant/:id/:tab', component: RestaurantPageComponent },
   { path: 'restaurant-create', component: RestaurantCreatePageComponent },
+  { path: 'reservations', component: UserReservationsPageComponent },
   { path: '**', redirectTo: 'restaurants' }
 ];
 

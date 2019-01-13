@@ -6,13 +6,15 @@ import { RegisterPageComponent } from './register/registerPage.component';
 import { SharedModule } from '../shared.module';
 import { RestaurantCreatePageComponent } from './restaurant-create/restaurant-create-page.component';
 import { RestaurantPageModule } from './restaurant/restaurantPage.module';
+import { UserReservationsPageComponent } from './user-reservations/user-reservations.page.component';
 
 @NgModule({
     declarations: [
         LoginPageComponent,
         RegisterPageComponent,
         RestaurantsPageComponent,
-        RestaurantCreatePageComponent],
+        RestaurantCreatePageComponent,
+        UserReservationsPageComponent],
     imports: [
         SharedModule,
         ComponentsModule,
@@ -22,6 +24,7 @@ import { RestaurantPageModule } from './restaurant/restaurantPage.module';
         RegisterPageComponent,
         RestaurantsPageComponent,
         RestaurantCreatePageComponent,
-        RestaurantPageModule]
+        RestaurantPageModule,
+        UserReservationsPageComponent]
 })
 export class PagesModule { }
