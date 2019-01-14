@@ -9,8 +9,11 @@ import { Router } from '@angular/router';
 })
 export class RestaurantsPageComponent implements OnInit {
     restaurants: Restaurant[] = [];
+    clientHeight: number;
 
-    constructor(private restaurantsService: RestaurantsService) { }
+    constructor(private restaurantsService: RestaurantsService) {
+        this.clientHeight = window.innerHeight;
+    }
 
     ngOnInit(): void {
         this.restaurantsService.getAll().subscribe(restaurants => this.restaurants = restaurants);
