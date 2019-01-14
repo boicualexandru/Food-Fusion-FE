@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ReservationsService } from 'src/app/services/reservations.service';
-import { Reservation } from 'src/app/models/reservation/reservation';
+import { ReservationDetailed } from 'src/app/models/reservation/reservationDetailed';
 
 @Component({
     selector: 'app-restaurant-reservations',
@@ -9,7 +9,7 @@ import { Reservation } from 'src/app/models/reservation/reservation';
 })
 export class RestaurantReservationsComponent implements OnInit {
     @Input() restaurantId: number;
-    reservations: Reservation[];
+    reservations: ReservationDetailed[];
 
     constructor(private reservationsService: ReservationsService) { }
 

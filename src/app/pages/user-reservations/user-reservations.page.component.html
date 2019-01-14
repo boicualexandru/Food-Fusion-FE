@@ -11,12 +11,18 @@
                     </div>
                 </div>
                 <div class="d-flex">
-                    <mat-card-subtitle class="flex-shrink-1 text-nowrap">
+                    <mat-card-subtitle class="flex-shrink-1 text-nowrap mb-2">
                         {{reservation.range.start | date}}
                     </mat-card-subtitle>
-                    <mat-card-subtitle class="w-100 text-right mt-0">
+                    <mat-card-subtitle class="w-100 text-right mt-0 mb-2">
                         {{reservation.range.start | date:'HH:mm'}} -
                         {{reservation.range.end | date:'HH:mm'}}
+                    </mat-card-subtitle>
+                </div>
+                <div>
+                    <mat-card-subtitle class="mb-2">
+                        Tables
+                        <span *ngFor="let table of reservation.tables" class="reserved-table">{{table.name}}</span>
                     </mat-card-subtitle>
                 </div>
             </mat-card>
