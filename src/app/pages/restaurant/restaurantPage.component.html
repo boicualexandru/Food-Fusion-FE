@@ -17,7 +17,20 @@
             <mat-tab label="Book" class="pt-4">
                 <div class="row pt-4">
                     <div class="col-md-6 com-12">
-                        {{restaurant.description}}
+                        <div class="mb-2">
+                            {{restaurant.description}}
+                        </div>
+                        <div>
+                            <strong>Amenities</strong>
+                            <span class="caption ml-2" style="font-size: 12px;">
+                                WiFi
+                                <mat-icon class="align-middle" style="font-size: 1rem;">wifi</mat-icon>
+                            </span>
+                            <span class="caption ml-2" style="font-size: 12px;">
+                                Pet Friendly
+                                <mat-icon class="align-middle" style="font-size: 1rem;">pets</mat-icon>
+                            </span>
+                        </div>
                     </div>
                     <div class="col-md-6 col-12">
                         <app-book [restaurantId]="restaurant.id"></app-book>
