@@ -38,6 +38,13 @@
                     </ng-template>
                 </div>
             </mat-tab>
+            <mat-tab *ngIf="authService.isManager(restaurant.id)" label="Reservations" class="pt-4">
+                <div class="pt-4">
+                    <ng-template matTabContent>
+                        <app-restaurant-reservations [restaurantId]="restaurant.id"></app-restaurant-reservations>
+                    </ng-template>
+                </div>
+            </mat-tab>
         </mat-tab-group>
     </div>
 </div>

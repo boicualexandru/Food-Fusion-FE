@@ -13,4 +13,8 @@ export class ReservationsService {
     getUserReservations(): Observable<Reservation[]> {
         return this.http.get<Reservation[]>(environment.apiBaseUrl + '/Reservations');
     }
+
+    getRestaurantReservations(restaurantId: number): Observable<Reservation[]> {
+        return this.http.get<Reservation[]>(environment.apiBaseUrl + '/Restaurant/' + restaurantId + '/Reservations');
+    }
 }

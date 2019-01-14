@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared.module';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { MenuComponent } from './menu/menu.component';
 import { BookComponent } from './book/book.component';
+import { RestaurantReservationsComponent } from './reservations/restaurant-reservations.component';
 
 @NgModule({
     declarations: [
@@ -14,6 +15,7 @@ import { BookComponent } from './book/book.component';
         EmployeesListComponent,
         EmpoyeeEditDialogComponent,
         MenuComponent,
+        RestaurantReservationsComponent,
         ItemEditDialogComponent,
         BookComponent ],
     imports: [
@@ -22,7 +24,8 @@ import { BookComponent } from './book/book.component';
     exports: [
         RestaurantPageComponent,
         EmployeesListComponent,
-        MenuComponent],
+        MenuComponent,
+        RestaurantReservationsComponent],
     entryComponents: [
         EmpoyeeEditDialogComponent,
         ItemEditDialogComponent]
