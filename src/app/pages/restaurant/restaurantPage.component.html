@@ -16,11 +16,16 @@
         <mat-tab-group dynamicHeight [selectedIndex]="activeTabIndex" (selectedIndexChange)="onTabChange($event)" animationDuration="0" class="restaurant-tabs">
             <mat-tab label="Book" class="pt-4">
                 <div class="row pt-4">
-                    <div class="col">
+                    <div class="col-6">
                         {{restaurant.description}}
                     </div>
-                    <div class="col">
+                    <div class="col-6">
                         <app-book [restaurantId]="restaurant.id"></app-book>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="18">
+                            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                        </agm-map>
                     </div>
                 </div>
             </mat-tab>
