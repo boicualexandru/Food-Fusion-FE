@@ -16,10 +16,10 @@
         <mat-tab-group dynamicHeight [selectedIndex]="activeTabIndex" (selectedIndexChange)="onTabChange($event)" animationDuration="0" class="restaurant-tabs">
             <mat-tab label="Book" class="pt-4">
                 <div class="row pt-4">
-                    <div class="col-6">
+                    <div class="col-md-6 com-12">
                         {{restaurant.description}}
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6 col-12">
                         <app-book [restaurantId]="restaurant.id"></app-book>
                     </div>
                     <div class="col-12 mt-4">
