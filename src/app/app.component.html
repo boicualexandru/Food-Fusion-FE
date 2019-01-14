@@ -1,8 +1,10 @@
 
-<button *ngIf="!showNavBar()" mat-button routerLink="/restaurants" routerLinkActive="mat-accent" class="text-white mt-2 ml-2">
-  <mat-icon>keyboard_arrow_left</mat-icon>
-  Home Page
-</button>
+<div>
+  <button *ngIf="!showNavBar()" mat-button routerLink="/restaurants" routerLinkActive="mat-accent" class="text-white mt-2 ml-2">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+    Home Page
+  </button>
+</div>
 <mat-toolbar *ngIf="showNavBar()">
   <mat-toolbar-row>
     <span>{{title}}</span>
@@ -37,7 +39,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>
-<footer class="text-white mt-auto border-top" style="background-color: #3f51b5;">
+<footer class="text-white mt-auto" style="background-color: #3f51b5;">
   <div class="container py-4">
     <div class="row">
       <div class="col-4">
