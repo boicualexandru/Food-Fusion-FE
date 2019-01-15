@@ -22,10 +22,10 @@ export interface IDecorator extends IDecoratedItem {
 }
 
 export class TomatoSauceDecorator implements IDecorator {
-    baseItem: IDecoratedItem;
+    baseItem: IDecorator;
     private price = 2;
 
-    constructor(baseItem: IDecoratedItem) {
+    constructor(baseItem: IDecorator) {
         this.baseItem = baseItem;
     }
 
@@ -35,10 +35,10 @@ export class TomatoSauceDecorator implements IDecorator {
 }
 
 export class SpicySauceDecorator implements IDecorator {
-    baseItem: IDecoratedItem;
+    baseItem: IDecorator;
     private price = 3;
 
-    constructor(baseItem: IDecoratedItem) {
+    constructor(baseItem: IDecorator) {
         this.baseItem = baseItem;
     }
 

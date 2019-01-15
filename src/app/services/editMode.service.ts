@@ -33,13 +33,9 @@ export class EditModeService {
         this.subscriptions.find(s => s.subFunction === subFunction)
             .subscription.unsubscribe();
 
-            // todo remove
+        const index = this.subscriptions.findIndex(s => s.subFunction === subFunction);
+        this.subscriptions.splice(index, 1);
     }
-
-    // redundant -- notify se apeleaza automat la modificarea valorii editModeOn
-    // public notifyObservers(): void {
-
-    // }
 
     public toggleEditMode() {
         this.editModeOn.next(!this.editModeOn.value);

@@ -23,7 +23,8 @@ export class MenuComponent implements OnInit {
         private menuService: MenuService,
         public authService: AuthService,
         private editModeService: EditModeService) {
-            editModeService.subscribe((isEditModeOn) => this.isEditModeOn = isEditModeOn);
+            this.editModeService.subscribe((isEditModeOn) => this.isEditModeOn = isEditModeOn);
+            this.editModeService.subscribe((isEditModeOn) => console.log(isEditModeOn));
         }
 
     ngOnInit(): void {
