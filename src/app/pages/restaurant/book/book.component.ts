@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { BookingService } from 'src/app/services/booking service';
 import { Timespan } from 'src/app/models/boilerplate/timespan';
-import { DateRange } from 'src/app/models/boilerplate/dateRange';
 import { Router } from '@angular/router';
+import { ReservationRequest } from 'src/app/models/reservation/reservationRequest';
 
 @Component({
     selector: 'app-book',
@@ -105,19 +105,23 @@ export class BookComponent implements OnInit {
         return timespan.toMinutes();
     }
 
-    book(): void {
+    get reservationRequest(): ReservationRequest {
         const timespanStart = Timespan.fromMinutes(this.interval[0]);
         const timespanEnd = Timespan.fromMinutes(this.interval[1]);
 
-        const start = timespanStart.toDate(this.date);
-        const end = timespanEnd.toDate(this.date);
-
-        const dateRange: DateRange = {
-            start: start,
-            end: end
+        return {
+            restaurantId: this.restaurantId,
+            range: {
+                start: timespanStart.toDate(this.date),
+                end: timespanEnd.toDate(this.date)
+            },
+            participantsCount: this.participantsCount,
+            tableIds: []
         };
+    }
 
-        this.bookingService.addReservation(this.restaurantId, dateRange, this.participantsCount)
+    book(): void {
+        this.bookingService.addReservation(this.reservationRequest)
             .subscribe(reservation => this.router.navigateByUrl('reservations'));
     }
 }

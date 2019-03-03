@@ -38,17 +38,9 @@ export class BookingService {
             );
     }
 
-    addReservation(restaurantId: number, dateRange: DateRange, participantsCount: number): Observable<ReservationDetailed> {
-        const reservationRequest: ReservationRequest = {
-            restaurantId: restaurantId,
-            range: dateRange,
-            participantsCount: participantsCount,
-            userId: parseInt(this.authService.currentUser.userId, 10),
-            tableIds: []
-        };
-
+    addReservation(reservationRequest: ReservationRequest): Observable<ReservationDetailed> {
         return this.http.post<ReservationDetailed>(
-            environment.apiBaseUrl + '/Restaurants/' + restaurantId + '/Reservations',
+            environment.apiBaseUrl + '/Restaurants/' + reservationRequest.restaurantId + '/Reservations',
             reservationRequest);
     }
 }
