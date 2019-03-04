@@ -9,6 +9,7 @@ import { RegisterModel } from 'src/app/models/registerModel';
 })
 export class RegisterPageComponent implements OnInit {
     hidePass = true;
+    showSpinner = false;
 
     email: string;
     fullName: string;
@@ -19,6 +20,7 @@ export class RegisterPageComponent implements OnInit {
     ngOnInit(): void { }
 
     register(): void {
+        this.showSpinner = true;
         const registerModel: RegisterModel = {
             email: this.email,
             fullName: this.fullName,
@@ -27,6 +29,7 @@ export class RegisterPageComponent implements OnInit {
 
         this.authService.register(registerModel).subscribe(
             token =>  {
+                this.showSpinner = false;
                 this.router.navigate(['/restaurants']);
             }
         );

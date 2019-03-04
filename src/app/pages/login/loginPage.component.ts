@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
     hidePass = true;
+    showSpinner = false;
 
     email: string;
     password: string;
@@ -18,6 +19,8 @@ export class LoginPageComponent implements OnInit {
     ngOnInit(): void { }
 
     login(): void {
+        this.showSpinner = true;
+
         const loginModel: LoginModel = {
             email: this.email,
             password: this.password
@@ -25,6 +28,7 @@ export class LoginPageComponent implements OnInit {
 
         this.authService.login(loginModel).subscribe(
             token =>  {
+                this.showSpinner = false;
                 this.router.navigate(['/restaurants']);
             }
         );
