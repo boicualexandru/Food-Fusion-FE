@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ReservationRequest } from 'src/app/models/reservation/reservationRequest';
 import { MatDialog } from '@angular/material';
 import { ChoosetableDialogComponent } from './choose-table-dialog/choose-table-dialog.component';
+import { Table } from 'src/app/models/restaurant/table';
 
 @Component({
     selector: 'app-book',
@@ -22,7 +23,7 @@ export class BookComponent implements OnInit {
     formattedInterval: BehaviorSubject<string[]>;
     unavailableFrames: number[][] = [];
 
-    tableIds: number[] = [];
+    selectedTables: Table[] = [];
 
     get intervalStart(): string {
         return this.formattedInterval.value[0];
@@ -120,7 +121,7 @@ export class BookComponent implements OnInit {
                 end: timespanEnd.toDate(this.date)
             },
             participantsCount: this.participantsCount,
-            tableIds: this.tableIds
+            tableIds: this.selectedTables.map(t => t.id)
         };
     }
 
@@ -135,9 +136,13 @@ export class BookComponent implements OnInit {
             data: this.reservationRequest
         });
 
-        dialogRef.afterClosed().subscribe(tableIds => {
-            if (tableIds == null) { return; }
-            this.tableIds = tableIds;
+        dialogRef.afterClosed().subscribe(table => {
+            if (table === undefined) { return; }
+            if (table === null) {
+                this.selectedTables = [];
+                return;
+            }
+            this.selectedTables = [ table ];
         });
     }
 }

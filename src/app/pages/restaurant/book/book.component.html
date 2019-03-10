@@ -41,7 +41,8 @@
             The selected time interval intersects with an unavailable frame.
         </mat-error>
     </div>
-    <div class="col-12 text-right">
+    <div class="col-12 d-flex justify-content-between">
+        <span>{{selectedTables[0]?.name}}</span>
         <button mat-button (click)="openDialogForChoosingTable()">Choose Table (optional)</button>
     </div>
 </div>

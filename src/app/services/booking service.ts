@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { ReservationRequest } from '../models/reservation/reservationRequest';
 import { AuthService } from './auth.service';
 import { ReservationDetailed } from '../models/reservation/reservationDetailed';
+import { Table } from '../models/restaurant/table';
 
 @Injectable()
 export class BookingService {
@@ -42,5 +43,12 @@ export class BookingService {
         return this.http.post<ReservationDetailed>(
             environment.apiBaseUrl + '/Restaurants/' + reservationRequest.restaurantId + '/Reservations',
             reservationRequest);
+    }
+
+    getAvailableTables(reservationRequest: ReservationRequest): Observable<Table[]> {
+        return this.http.get<Table[]>(environment.apiBaseUrl + '/Restaurants/' + reservationRequest.restaurantId + '/AvailableTables' +
+            '?participantsCount=' + reservationRequest.participantsCount +
+            '&start=' + this.datePipe.transform(reservationRequest.range.start, environment.apiDateFormatMinutePrecision) +
+            '&end=' + this.datePipe.transform(reservationRequest.range.end, environment.apiDateFormatMinutePrecision));
     }
 }
