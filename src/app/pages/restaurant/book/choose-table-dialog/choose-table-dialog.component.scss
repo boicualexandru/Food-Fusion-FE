@@ -1,0 +1,11 @@
+.participants-count{
+    font-size: 1.1em;
+}
+
+.table-btn{
+    transition: linear .3s;
+
+    &:hover{
+        background-color: #eee;
+    }
+}

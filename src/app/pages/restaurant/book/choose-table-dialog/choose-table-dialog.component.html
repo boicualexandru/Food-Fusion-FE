@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Choose table</h1>
+<div mat-dialog-content>
+    <div class="container">
+        <div class="row">
+            <div *ngFor="let table of tables" class="col-6">
+                <div class="shadow p-3 mb-2 rounded text-center c-pointer table-btn">
+                    <h4>{{table.name}}</h4>
+                    <span class="participants-count">
+                        {{table.participantsCount}} 
+                        <mat-icon aria-label="Participants" class="align-bottom">person</mat-icon>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

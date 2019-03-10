@@ -4,6 +4,8 @@ import { BookingService } from 'src/app/services/booking service';
 import { Timespan } from 'src/app/models/boilerplate/timespan';
 import { Router } from '@angular/router';
 import { ReservationRequest } from 'src/app/models/reservation/reservationRequest';
+import { MatDialog } from '@angular/material';
+import { ChoosetableDialogComponent } from './choose-table-dialog/choose-table-dialog.component';
 
 @Component({
     selector: 'app-book',
@@ -19,6 +21,8 @@ export class BookComponent implements OnInit {
     interval: number[] = [1170, 1320];
     formattedInterval: BehaviorSubject<string[]>;
     unavailableFrames: number[][] = [];
+
+    tableIds: number[] = [];
 
     get intervalStart(): string {
         return this.formattedInterval.value[0];
@@ -38,7 +42,7 @@ export class BookComponent implements OnInit {
         this.formattedInterval.next(interval);
     }
 
-    constructor(private bookingService: BookingService, private router: Router) {
+    constructor(private bookingService: BookingService, private router: Router, public dialog: MatDialog) {
         this.formattedInterval = new BehaviorSubject<string[]>(this.getFormattedInterval());
         this.formattedInterval.subscribe(value => {
             this.interval = [
@@ -116,12 +120,24 @@ export class BookComponent implements OnInit {
                 end: timespanEnd.toDate(this.date)
             },
             participantsCount: this.participantsCount,
-            tableIds: []
+            tableIds: this.tableIds
         };
     }
 
     book(): void {
         this.bookingService.addReservation(this.reservationRequest)
             .subscribe(reservation => this.router.navigateByUrl('reservations'));
+    }
+
+    openDialogForChoosingTable(): void {
+        const dialogRef = this.dialog.open(ChoosetableDialogComponent, {
+            width: '500px',
+            data: this.reservationRequest
+        });
+
+        dialogRef.afterClosed().subscribe(tableIds => {
+            if (tableIds == null) { return; }
+            this.tableIds = tableIds;
+        });
     }
 }

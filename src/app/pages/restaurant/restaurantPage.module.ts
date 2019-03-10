@@ -8,6 +8,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { MenuComponent } from './menu/menu.component';
 import { BookComponent } from './book/book.component';
 import { RestaurantReservationsComponent } from './reservations/restaurant-reservations.component';
+import { ChoosetableDialogComponent } from './book/choose-table-dialog/choose-table-dialog.component';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { RestaurantReservationsComponent } from './reservations/restaurant-reser
         MenuComponent,
         RestaurantReservationsComponent,
         ItemEditDialogComponent,
-        BookComponent ],
+        BookComponent,
+        ChoosetableDialogComponent],
     imports: [
         SharedModule,
         ComponentsModule],
@@ -28,6 +30,7 @@ import { RestaurantReservationsComponent } from './reservations/restaurant-reser
         RestaurantReservationsComponent],
     entryComponents: [
         EmpoyeeEditDialogComponent,
-        ItemEditDialogComponent]
+        ItemEditDialogComponent,
+        ChoosetableDialogComponent]
 })
 export class RestaurantPageModule { }
