@@ -25,7 +25,7 @@ export class ChoosetableDialogComponent implements OnInit {
         this.dialogRef.close(table);
     }
 
-    selectAuto(table: Table) {
+    selectAuto() {
         this.dialogRef.close(null);
     }
 
