@@ -14,7 +14,7 @@ export class ChoosetableDialogComponent implements OnInit {
 
     constructor(public dialogRef: MatDialogRef<ChoosetableDialogComponent>,
         private bookingService: BookingService,
-        @Inject(MAT_DIALOG_DATA) private reservationRequest: ReservationRequest) {
+        @Inject(MAT_DIALOG_DATA) public reservationRequest: ReservationRequest) {
             this.bookingService.getAvailableTables(this.reservationRequest)
                 .subscribe(tables => this.tables = tables);
     }
