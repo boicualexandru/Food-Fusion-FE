@@ -1,6 +1,5 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'http://localhost:56416/api',
-  // apiBaseUrl: 'http://25.81.160.55:56416/api', // hamachi
+  apiBaseUrl: 'http://34.245.155.215/api',
   apiDateFormatMinutePrecision: 'yyyy-MM-ddTHH:mm'
 };
