@@ -15,7 +15,7 @@ COPY . .
 
 ## Build the angular app in production mode and store the artifacts in dist folder
 
-RUN node --max_old_space_size=256 'node_modules/@angular/cli/bin/ng' build --configuration=$ENV --prod --output-path=dist
+RUN npm run ng build --prod --output-path=dist
 
 
 ### STAGE 2: Setup ###
