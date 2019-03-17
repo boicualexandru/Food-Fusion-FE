@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
@@ -11,6 +12,7 @@ import { EmployeesService } from './services/employees.service';
 import { SharedModule } from './shared.module';
 import { MenuService } from './services/menu.service';
 import { BookingService } from './services/booking service';
+import { ReservationsService } from './services/reservations.service';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,15 @@ import { BookingService } from './services/booking service';
   ],
   imports: [
     SharedModule,
-    PagesModule
+    PagesModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyACJzuFEFKJxVATZGSYpxRoNH0tfCB1cqk'
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    AuthService, RestaurantsService, EmployeesService, MenuService, BookingService ],
+    AuthService, RestaurantsService, EmployeesService, MenuService, BookingService, ReservationsService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

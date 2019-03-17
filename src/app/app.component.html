@@ -1,4 +1,11 @@
-<mat-toolbar>
+
+<div>
+  <button *ngIf="!showNavBar()" mat-button routerLink="/restaurants" routerLinkActive="mat-accent" class="text-white mt-2 ml-2">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+    Home Page
+  </button>
+</div>
+<mat-toolbar *ngIf="showNavBar()">
   <mat-toolbar-row>
     <span>{{title}}</span>
     <span class="example-spacer"></span>
@@ -10,6 +17,11 @@
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/reservations">
+        <mat-icon>today</mat-icon>
+        <span>My Reservations</span>
+      </button>
+      <mat-divider></mat-divider>
       <button mat-menu-item>
         <mat-icon>account_circle</mat-icon>
         <span>Account Settings</span>
@@ -27,3 +39,14 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>
+<footer class="text-white mt-auto" style="background-color: #3f51b5;">
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-4">
+        <span style="font-size: 1.2rem; font-weight: 500; letter-spacing: 0.5px;">FoodFusion</span>
+      </div>
+      <div class="col-4 text-center">Version: Pre-Alpha 1</div>
+      <div class="col-4 text-right">Iasi, Romania</div>
+    </div>
+  </div>
+</footer>

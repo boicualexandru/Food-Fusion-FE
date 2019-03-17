@@ -1,7 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { BookingService } from 'src/app/services/booking service';
-import { DatePipe } from '@angular/common';
+import { Timespan } from 'src/app/models/boilerplate/timespan';
+import { Router } from '@angular/router';
+import { ReservationRequest } from 'src/app/models/reservation/reservationRequest';
+import { MatDialog } from '@angular/material';
+import { ChoosetableDialogComponent } from './choose-table-dialog/choose-table-dialog.component';
+import { Table } from 'src/app/models/restaurant/table';
 
 @Component({
     selector: 'app-book',
@@ -14,9 +19,11 @@ export class BookComponent implements OnInit {
 
     participantsCount = 2;
     date: Date = new Date();
-    interval: number[] = [100, 350];
+    interval: number[] = [1170, 1320];
     formattedInterval: BehaviorSubject<string[]>;
     unavailableFrames: number[][] = [];
+
+    selectedTables: Table[] = [];
 
     get intervalStart(): string {
         return this.formattedInterval.value[0];
@@ -36,12 +43,12 @@ export class BookComponent implements OnInit {
         this.formattedInterval.next(interval);
     }
 
-    constructor(private bookingService: BookingService) {
+    constructor(private bookingService: BookingService, private router: Router, public dialog: MatDialog) {
         this.formattedInterval = new BehaviorSubject<string[]>(this.getFormattedInterval());
         this.formattedInterval.subscribe(value => {
             this.interval = [
-                this.timeStringToMinutes(value[0]),
-                this.timeStringToMinutes(value[1])
+                this.formattedStringToMinutes(value[0]),
+                this.formattedStringToMinutes(value[1])
             ];
         });
     }
@@ -63,36 +70,11 @@ export class BookComponent implements OnInit {
         this.formattedInterval.next(this.getFormattedInterval());
     }
 
-    formatLabel(value: number | null) {
-        let minutesCount = value;
-
-        if (!value) {
-            minutesCount = 0;
-        }
-        const hours = Math.floor(minutesCount / 60);
-        const minutes = minutesCount - (hours * 60);
-
-        let hoursString: string = hours.toString();
-        if (hours < 10) { hoursString = '0' + hoursString; }
-
-        let minutesString: string = minutes.toString();
-        if (minutes < 10) { minutesString = '0' + minutesString; }
-
-        return hoursString + ':' + minutesString;
-    }
-
     getFormattedInterval(): string[] {
         return [
-            this.formatLabel(this.interval[0]),
-            this.formatLabel(this.interval[1])
+            this.minutesToFormattedString(this.interval[0]),
+            this.minutesToFormattedString(this.interval[1])
         ];
-    }
-
-    private timeStringToMinutes(time: string) {
-        const hoursMinutes = time.split(/[.:]/);
-        const hours = parseInt(hoursMinutes[0], 10);
-        const minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
-        return minutes + hours * 60;
     }
 
     dateFilter(date: Date): boolean {
@@ -107,19 +89,60 @@ export class BookComponent implements OnInit {
     updateAvailability(): void {
         this.bookingService.getUnavailableFramesByDay(this.restaurantId, this.participantsCount, this.date)
             .subscribe(unavailableFrames => {
-                // console.log(unavailableFrames);
                 this.unavailableFrames = unavailableFrames.map(unavailableFrame => [
-                    this.timeToMinutes(unavailableFrame.start),
-                    this.timeToMinutes(unavailableFrame.end)]);
+                    this.dateToMinutes(unavailableFrame.start),
+                    this.dateToMinutes(unavailableFrame.end)]);
             });
     }
 
-    private timeToMinutes(date: Date): number {
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-
-        return hours * 60 + minutes;
+    minutesToFormattedString(value: number | null) {
+        const timeSpan = Timespan.fromMinutes(value || 0);
+        return timeSpan.toString();
     }
 
-    private dateFrameToMinutesFrame
+    private dateToMinutes(date: Date): number {
+        const timespan = Timespan.fromDate(date);
+        return timespan.toMinutes();
+    }
+
+    private formattedStringToMinutes(time: string): number {
+        const timespan = Timespan.fromFormattedString(time);
+        return timespan.toMinutes();
+    }
+
+    get reservationRequest(): ReservationRequest {
+        const timespanStart = Timespan.fromMinutes(this.interval[0]);
+        const timespanEnd = Timespan.fromMinutes(this.interval[1]);
+
+        return {
+            restaurantId: this.restaurantId,
+            range: {
+                start: timespanStart.toDate(this.date),
+                end: timespanEnd.toDate(this.date)
+            },
+            participantsCount: this.participantsCount,
+            tableIds: this.selectedTables.map(t => t.id)
+        };
+    }
+
+    book(): void {
+        this.bookingService.addReservation(this.reservationRequest)
+            .subscribe(reservation => this.router.navigateByUrl('reservations'));
+    }
+
+    openDialogForChoosingTable(): void {
+        const dialogRef = this.dialog.open(ChoosetableDialogComponent, {
+            width: '500px',
+            data: this.reservationRequest
+        });
+
+        dialogRef.afterClosed().subscribe(table => {
+            if (table === undefined) { return; }
+            if (table === null) {
+                this.selectedTables = [];
+                return;
+            }
+            this.selectedTables = [ table ];
+        });
+    }
 }

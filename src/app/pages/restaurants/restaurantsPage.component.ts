@@ -9,8 +9,11 @@ import { Router } from '@angular/router';
 })
 export class RestaurantsPageComponent implements OnInit {
     restaurants: Restaurant[] = [];
+    clientHeight: number;
 
-    constructor(private router: Router, private restaurantsService: RestaurantsService) { }
+    constructor(private restaurantsService: RestaurantsService) {
+        this.clientHeight = window.innerHeight;
+    }
 
     ngOnInit(): void {
         this.restaurantsService.getAll().subscribe(restaurants => this.restaurants = restaurants);
@@ -19,6 +22,6 @@ export class RestaurantsPageComponent implements OnInit {
     getImage(): string {
         const d = Math.random();
 
-        return 'https://source.unsplash.com/800x600/?art,street&time=' + d.toString();
+        return 'https://source.unsplash.com/800x600/?dinner,food&a=' + d.toString();
     }
 }

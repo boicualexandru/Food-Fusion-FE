@@ -22,4 +22,9 @@ export class AppComponent {
         this.authService.logout();
         this.router.navigate(['/login']);
     }
+
+    showNavBar(): boolean {
+        return this.router.url !== '/login' &&
+            this.router.url !== '/register';
+    }
 }

@@ -14,7 +14,10 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
     restaurant: RestaurantDetailed;
     activeTabIndex = 0;
     private sub: any;
-    private tabRouteNames = ['description', 'menu', 'staff'];
+    private tabRouteNames = ['book', 'menu', 'staff', 'reservations'];
+    // 47.1628553,27.5811555
+    lat = 47.1628553;
+    lng = 27.5811555;
 
     constructor(private route: ActivatedRoute,
         private restaurantsService: RestaurantsService,
@@ -47,6 +50,6 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
         const d = Math.random();
 
         // tslint:disable-next-line:max-line-length
-        return 'url(https://images.unsplash.com/photo-1516709315038-c53bf87e8f48?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9)';
+        return 'url(https://images.unsplash.com/photo-1479044769763-c28e05b5baa5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)';
     }
 }
