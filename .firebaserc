@@ -1,5 +1,6 @@
 {
   "projects": {
-    "foodfusion": "foodfusion"
+    "foodfusion": "foodfusion",
+    "default": "foodfusion"
   }
 }

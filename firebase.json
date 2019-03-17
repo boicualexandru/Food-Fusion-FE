@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "FoodFuionFE",
+    "public": "dist/FoodFusion",
     "ignore": [
       "firebase.json",
       "**/.*",
