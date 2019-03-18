@@ -1,7 +1,7 @@
 ### STAGE 1: Build ###
 
 # We label our stage as ‘builder’
-FROM node:10-alpine as builder
+# FROM node:10-alpine as builder
 
 # COPY package.json package-lock.json ./
 
@@ -29,6 +29,7 @@ COPY nginx/default.conf /etc/nginx/conf.d/
 RUN rm -rf /usr/share/nginx/html/*
 
 ## From ‘builder’ stage copy over the artifacts in dist folder to default nginx public folder
-COPY --from=builder /dist /usr/share/nginx/html
+# COPY --from=builder /dist /usr/share/nginx/html
+COPY /dist /usr/share/nginx/html
 
 CMD ["nginx", "-g", "daemon off;"]
