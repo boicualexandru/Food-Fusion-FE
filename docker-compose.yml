@@ -3,6 +3,5 @@ services:
   frontend:
     build: 
         context: .
-        dockerfile: ./FoodFusion/Dockerfile
     ports:
       - "80:80"
