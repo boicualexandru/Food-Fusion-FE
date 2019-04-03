@@ -9,6 +9,7 @@
   <mat-toolbar-row>
     <span>{{title}}</span>
     <span class="example-spacer"></span>
+    <button mat-button routerLink="/hotel" routerLinkActive="mat-accent">Hotel</button>
     <button mat-button routerLink="/restaurants" routerLinkActive="mat-accent">Restaurants</button>
 
     <button *ngIf="!currentUser" mat-button routerLink="/login" routerLinkActive="mat-accent">Login</button>
