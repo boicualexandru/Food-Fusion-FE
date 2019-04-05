@@ -1,0 +1,45 @@
+<div class="hotel-image-header"></div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 text-center">
+      <div class="title-section py-3">
+        <h1>Welcome to</h1>
+        <h2>Hotel Franco Dacex</h2>
+      </div>
+      <div class="col-md-10 offset-md-1 text-secondary py-3">
+        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est
+          laborum.
+        </h4>
+      </div>
+    </div>
+    <div class="col-md-6 offset-md-3 text-center input-section">
+      <div class="py-3">
+        <h2 class="py-3">Please select a date</h2>
+        <div class="d-flex w-200 mt-2">
+          <span class="flex-shrink-1 pt-3 pr-3 w-50">Date from</span>
+          <mat-form-field class="w-100">
+            <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom"
+              placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFrom></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="d-flex w-200 mt-2">
+          <span class="flex-shrink-1 pt-3 pr-3 w-50">Date to</span>
+          <mat-form-field class="w-100">
+            <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="pickerTo" [(ngModel)]="dateTo"
+              placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+            <mat-datepicker #pickerTo></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <button mat-flat-button color="primary" class="mt-4">Book</button>
+      </div>
+    </div>
+  </div>
+</div>
