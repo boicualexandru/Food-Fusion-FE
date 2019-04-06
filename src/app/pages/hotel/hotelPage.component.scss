@@ -1,15 +1,22 @@
 .hotel-image-header {
-  background-image: url(https://www.w3schools.com/bootstrap/map.jpg);
   position: relative;
   background-size: cover;
   background-position: 50% 50%;
   height: 500px;
-}
 
-.title-section {
-  border-bottom: 1px solid #333;
-}
+  &.small {
+    height: 200px;
+  }
 
-.input-section {
-  border-top: 1px solid #333;
+  &.section-1 {
+    background-image: url(https://images.unsplash.com/photo-1468072263885-69f67a2f57b4?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&h=998&fit=crop&ixid=eyJhcHBfaWQiOjF9);
+  }
+
+  &.section-2 {
+    background-image: url(https://images.unsplash.com/photo-1547291195-54d2471ae3b4?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9);
+  }
+
+  &.section-3 {
+    background-image: url(https://images.unsplash.com/photo-1533794939052-03f5ea84373b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9);
+  }
 }

@@ -1,6 +1,6 @@
 
 <div>
-  <button *ngIf="!showNavBar()" mat-button routerLink="/restaurants" routerLinkActive="mat-accent" class="text-white mt-2 ml-2">
+  <button *ngIf="!showNavBar()" mat-button routerLink="/hotel" routerLinkActive="mat-accent" class="text-white mt-2 ml-2">
     <mat-icon>keyboard_arrow_left</mat-icon>
     Home Page
   </button>
@@ -9,7 +9,10 @@
   <mat-toolbar-row>
     <span>{{title}}</span>
     <span class="example-spacer"></span>
+    <button mat-button routerLink="/hotel" routerLinkActive="mat-accent">Hotel</button>
     <button mat-button routerLink="/restaurants" routerLinkActive="mat-accent">Restaurants</button>
+    <button mat-button routerLink="/events" routerLinkActive="mat-accent">Events</button>
+    <button mat-button routerLink="/contact" routerLinkActive="mat-accent">Contact</button>
 
     <button *ngIf="!currentUser" mat-button routerLink="/login" routerLinkActive="mat-accent">Login</button>
 
@@ -43,7 +46,7 @@
   <div class="container py-4">
     <div class="row">
       <div class="col-4">
-        <span style="font-size: 1.2rem; font-weight: 500; letter-spacing: 0.5px;">FoodFusion</span>
+        <span style="font-size: 1.2rem; font-weight: 500; letter-spacing: 0.5px;">Hotel Franco Dacex</span>
       </div>
       <div class="col-4 text-center">Version: Pre-Alpha 2</div>
       <div class="col-4 text-right">Iasi, Romania</div>

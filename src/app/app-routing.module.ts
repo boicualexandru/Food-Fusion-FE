@@ -17,7 +17,7 @@ const appRoutes: Routes = [
   { path: 'restaurant/:id/:tab', component: RestaurantPageComponent },
   { path: 'restaurant-create', component: RestaurantCreatePageComponent },
   { path: 'reservations', component: UserReservationsPageComponent },
-  { path: '**', redirectTo: 'restaurants' }
+  { path: '**', redirectTo: 'hotel' }
 ];
 
 @NgModule({

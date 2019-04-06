@@ -30,7 +30,7 @@ export class RegisterPageComponent implements OnInit {
         this.authService.register(registerModel).subscribe(
             token =>  {
                 this.showSpinner = false;
-                this.router.navigate(['/restaurants']);
+                this.router.navigate(['/hotel']);
             }
         );
     }

@@ -24,6 +24,4 @@ export class HotelPageComponent implements OnInit {
         if (date < today) { return false; }
         return true;
     }
-
-
 }
