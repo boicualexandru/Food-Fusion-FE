@@ -1,0 +1,72 @@
+<div class="hotel-image-header section-1"></div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 py-3 text-center">
+      <h1>Welcome to</h1>
+      <h2>Franco Dacex</h2>
+      <h2>4-star Hotel</h2>
+    </div>
+  </div>
+</div>
+<div class="hotel-image-header small section-2"></div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 py-3 text-center">
+      <h2>Please select a date</h2>
+      <div class="d-flex w-200">
+        <span class="flex-shrink-1 pt-3 pr-3 w-50">Date from</span>
+        <mat-form-field class="w-100">
+          <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom"
+            placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFrom></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="d-flex w-200">
+        <span class="flex-shrink-1 pt-3 pr-3 w-50">Date to</span>
+        <mat-form-field class="w-100">
+          <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="pickerTo" [(ngModel)]="dateTo"
+            placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+          <mat-datepicker #pickerTo></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <button mat-flat-button color="primary" class="mb-3">Book</button>
+    </div>
+  </div>
+</div>
+<div class="hotel-image-header small section-3"></div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 offset-md-2 py-3">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="text-center">More about us</h2>
+        </div>
+        <div class="col-md-6">
+          <p>Located in the city center of Iasi, Romania, part of the newest modern complex in Moldova – Palas Iasi –
+            the 4-star Hotel International Iasi is the most elegant business, leisure and events location in the
+            Moldavian capital. One of the few hotels in Iasi with views to the Palace of Culture, many consider it to be
+            one of the best hotels in the city center. The hotel is proud to have been recognized for its superior
+            service and hospitality with a number of outstanding awards, including the TripAdvisor Travelers’ Choice
+            Award, Certificate of Excellence and Top Hotel Awards.
+            With numerous tourist attractions and cultural areas nearby, Hotel International Iasi offers modern,
+            luxurious accommodation with complimentary Wi-Fi and access to wellness and it is featuring an exceptional
+            indoor swimming pool, fitness center, dry and wet saunas, emotional shower and hydro-massage tub.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p>All rooms feature air conditioning, cable flat screen television, minibar, tea and coffee making
+            facilities, a writing desk, a safe deposit box, and a private bathroom with shower or tub. Some rooms offer
+            panoramic views of the city, making it the ideal accommodation for business or a romantic couples retreat.
+
+            Guests of the Hotel International Iasi can enjoy an exceptional meal at the three elegant a la carte
+            restaurants or may choose to sit back and relax while enjoying glorious views in the hotel’s Sky Lounge.
+            This 4-star hotel in Iasi also boasts eight conference halls for hosting business meetings and social
+            events.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

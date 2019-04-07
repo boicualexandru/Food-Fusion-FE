@@ -29,7 +29,7 @@ export class LoginPageComponent implements OnInit {
         this.authService.login(loginModel).subscribe(
             token =>  {
                 this.showSpinner = false;
-                this.router.navigate(['/restaurants']);
+                this.router.navigate(['/hotel']);
             }
         );
     }
