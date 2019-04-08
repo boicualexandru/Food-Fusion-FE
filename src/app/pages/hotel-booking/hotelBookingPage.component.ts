@@ -69,12 +69,10 @@ export class HotelBookingPageComponent implements OnInit {
 
     onEndDateChanged(event: any): void {
         this.filters.timeRange.end = this.endMoment.utc(true).toDate();
-        console.log(this.filters.timeRange.end);
         this.loadFilteredRooms();
     }
 
     loadFilteredRooms(): void {
-        console.log(this.filters.timeRange.end);
         this.hotelService.getRooms(this.filters).subscribe(rooms => this.rooms = rooms);
     }
 
