@@ -38,3 +38,15 @@
 .room-price{
     color: #ff4081;
 }
+
+.no-content-placeholder{
+    height: 300px;
+    width: 100%;
+    display: block;
+    max-width: 500px;
+    margin: 0 auto;
+    background-image: url(https://cdn.dribbble.com/users/2519905/screenshots/6181179/___.jpg);
+    background-size: contain;
+    padding-top: 75%;    
+    background-repeat-y: no-repeat;
+}

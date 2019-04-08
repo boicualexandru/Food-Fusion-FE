@@ -1,13 +1,13 @@
 <div class="container mt-4">
     <div class="row">
         <mat-form-field class="col-3 offset-2">
-            <input matInput [matDatepicker]="fromDatePicker" placeholder="From" [(ngModel)]="startMoment"
+            <input matInput [matDatepicker]="fromDatePicker" placeholder="Check In" [(ngModel)]="startMoment"
                 [matDatepickerFilter]="startDateFilter" (dateChange)="onStartDateChanged()">
             <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
             <mat-datepicker #fromDatePicker></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="col-3">
-            <input matInput [matDatepicker]="toDatePicker" placeholder="To" [(ngModel)]="endMoment"
+            <input matInput [matDatepicker]="toDatePicker" placeholder="Check Out" [(ngModel)]="endMoment"
                 [matDatepickerFilter]="endDateFilter" (dateChange)="onEndDateChanged($event)">
             <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
             <mat-datepicker #toDatePicker></mat-datepicker>
@@ -31,7 +31,7 @@
                 <mat-icon class="align-bottom text-nowrap">{{feature.icon}}</mat-icon>
                 {{feature.name}}
             </span>
-            <button mat-stroked-button color="primary" class="btn-advanced-filters" (click)="openAdvancedFiltersDialog()">Advanced</button>
+            <button mat-stroked-button color="primary" class="btn-advanced-filters" (click)="openAdvancedFiltersDialog()">Advanced Filters</button>
         </div>
     </div>
     <div class="row">
@@ -70,5 +70,11 @@
                 </mat-card>
             </div>
         </div>
+        <div class="col-12  mt-5" *ngIf="rooms.length === 0">
+                <div class="mat-h1 text-center">
+                    No room found
+                </div>
+                <div class="no-content-placeholder"></div>
+            </div>
     </div>
 </div>
