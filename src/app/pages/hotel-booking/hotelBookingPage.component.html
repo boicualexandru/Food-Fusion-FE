@@ -35,7 +35,7 @@
             <div *ngFor="let room of rooms" class="px-1">
                 <mat-card class="d-inline-block my-1 c-pointer card hotel-room-card">
                     <mat-card-header>
-                        <mat-card-title>{{room.name}}</mat-card-title>
+                        <mat-card-title>{{room.name}} <span class="mat-small">(Floor {{room.floor}})</span></mat-card-title>
                         <mat-card-subtitle>
                             <mat-icon class="align-bottom">people</mat-icon>
                             {{room.maxGuests}}
