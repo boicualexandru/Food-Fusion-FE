@@ -3,11 +3,13 @@ import { BookRoomDialogComponent } from './book-room-dialog/book-room-dialog.com
 import { HotelBookingPageComponent } from './hotelBookingPage.component';
 import { SharedModule } from 'src/app/shared.module';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { AdvancedFiltersDialogComponent } from './advanced-filters-dialog/advanced-filters-dialog.component';
 
 @NgModule({
     declarations: [
         HotelBookingPageComponent,
-        BookRoomDialogComponent
+        BookRoomDialogComponent,
+        AdvancedFiltersDialogComponent
     ],
     imports: [
         SharedModule,
@@ -17,7 +19,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
         HotelBookingPageComponent
     ],
     entryComponents: [
-        BookRoomDialogComponent
+        BookRoomDialogComponent,
+        AdvancedFiltersDialogComponent
     ],
 })
 export class HotelBookingPageModule {}

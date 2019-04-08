@@ -8,7 +8,7 @@ import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/materia
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatDialog } from '@angular/material';
 import { BookRoomDialogComponent } from './book-room-dialog/book-room-dialog.component';
-import { HotelRoomBooking } from 'src/app/models/hotel/hotelRoomBooking';
+import { AdvancedFiltersDialogComponent } from './advanced-filters-dialog/advanced-filters-dialog.component';
 
 export const MY_FORMATS = {
     parse: {
@@ -38,6 +38,8 @@ export class HotelBookingPageComponent implements OnInit {
     filters: HotelRoomsFilters;
     startMoment: moment.Moment = moment().utc(true).startOf('day').add(1, 'days');
     endMoment: moment.Moment = moment().utc(true).startOf('day').add(3, 'days');
+
+    selectedFeatures: HotelFeature[] = [];
 
     constructor(private hotelService: HotelService, public dialog: MatDialog) {
         this.filters = {
@@ -105,6 +107,23 @@ export class HotelBookingPageComponent implements OnInit {
 
     getAmenities(room: HotelRoom): HotelFeature[] {
         return room.features.filter(f => f.category === 'Amenities') || null;
+    }
+
+    openAdvancedFiltersDialog(): void {
+        const dialogRef = this.dialog.open(AdvancedFiltersDialogComponent, {
+            width: '400px',
+            data: this.filters.featureIds
+        });
+
+        dialogRef.afterClosed().subscribe((features: HotelFeature[]) => {
+            if (features == null) {
+                return;
+            }
+
+            this.filters.featureIds = features.map(f => f.id);
+            this.selectedFeatures = features;
+            this.loadFilteredRooms();
+        });
     }
 
     bookRoom(room: number): void {

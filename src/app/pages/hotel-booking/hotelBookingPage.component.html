@@ -27,7 +27,11 @@
     </div>
     <div class="row mb-4">
         <div class="col-8 offset-2">
-            <button mat-stroked-button color="primary" class="btn-advanced-filters">More</button>
+            <span *ngFor="let feature of selectedFeatures" class="d-inline-block mr-2">
+                <mat-icon class="align-bottom text-nowrap">{{feature.icon}}</mat-icon>
+                {{feature.name}}
+            </span>
+            <button mat-stroked-button color="primary" class="btn-advanced-filters" (click)="openAdvancedFiltersDialog()">Advanced</button>
         </div>
     </div>
     <div class="row">
