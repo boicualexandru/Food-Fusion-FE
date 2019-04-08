@@ -6,6 +6,9 @@ import { HotelRoomsFilters } from 'src/app/models/hotel/hotelRoomsFilters';
 import * as moment from 'moment';
 import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { MatDialog } from '@angular/material';
+import { BookRoomDialogComponent } from './book-room-dialog/book-room-dialog.component';
+import { HotelRoomBooking } from 'src/app/models/hotel/hotelRoomBooking';
 
 export const MY_FORMATS = {
     parse: {
@@ -36,7 +39,7 @@ export class HotelBookingPageComponent implements OnInit {
     startMoment: moment.Moment = moment().utc(true).startOf('day').add(1, 'days');
     endMoment: moment.Moment = moment().utc(true).startOf('day').add(3, 'days');
 
-    constructor(private hotelService: HotelService) {
+    constructor(private hotelService: HotelService, public dialog: MatDialog) {
         this.filters = {
             featureIds: [],
             guests: 1,
@@ -102,5 +105,22 @@ export class HotelBookingPageComponent implements OnInit {
 
     getAmenities(room: HotelRoom): HotelFeature[] {
         return room.features.filter(f => f.category === 'Amenities') || null;
+    }
+
+    bookRoom(roomId: number): void {
+        const bookingDetails: HotelRoomBooking = {
+            guests: this.filters.guests,
+            range: this.filters.timeRange,
+            roomId: roomId
+        };
+
+        const dialogRef = this.dialog.open(BookRoomDialogComponent, {
+            width: '350px',
+            data: bookingDetails
+        });
+
+        dialogRef.afterClosed().subscribe(() => {
+            this.loadFilteredRooms();
+        });
     }
 }

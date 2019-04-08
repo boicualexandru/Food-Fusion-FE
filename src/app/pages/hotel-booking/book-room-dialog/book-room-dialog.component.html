@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Complete your booking</h1>
+<div mat-dialog-content class="pb-4">
+    <div> <strong>Check In: </strong> {{hotelRoomBookingDetails.range.start | date}}</div>
+    <div> <strong>Check Out: </strong> {{hotelRoomBookingDetails.range.end | date}}</div>
+    <div> <strong>Number of guests: </strong> {{hotelRoomBookingDetails.guests}}</div>
+</div>
+<div mat-dialog-actions class="justify-content-end">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-flat-button (click)="book()" color="primary" class="ml-1">Finish</button>
+</div>
