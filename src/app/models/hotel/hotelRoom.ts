@@ -7,5 +7,6 @@ export interface HotelRoom {
     beds: number;
     maxGuests: number;
     imageUrl: string;
+    price: number;
     features: HotelFeature[];
 }

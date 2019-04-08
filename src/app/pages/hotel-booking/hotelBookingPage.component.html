@@ -42,7 +42,7 @@
                         </mat-card-subtitle>
                     </mat-card-header>
                     <img mat-card-image src="{{room.imageUrl}}" alt="{{room.name}}">
-                    <mat-card-content>
+                    <mat-card-content class="mb-0">
                         <div class="d-inline-block mr-2 mb-2">
                             <mat-icon class="align-bottom">{{getRoomView(room).icon}}</mat-icon>
                             {{getRoomView(room).name}} View
@@ -51,10 +51,13 @@
                             <mat-icon class="align-bottom">{{getBedType(room).icon}}</mat-icon>
                             {{getBedType(room).name}} Bed
                         </div>
-
                         <div class="d-inline-block mr-2 mb-2" *ngFor="let feature of getAmenities(room)">
                             <mat-icon class="align-bottom">{{feature.icon}}</mat-icon>
                             {{feature.name}}
+                        </div>
+                        <div class="room-price text-right">
+                            <strong class="mat-h2 mb-1">{{room.price}} </strong>
+                            <span class="mat-small">Lei</span>
                         </div>
                     </mat-card-content>
                     <div class="book-now-overlay text-center align-items-center justify-content-center">
