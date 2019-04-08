@@ -1,15 +1,15 @@
 
 <div>
-  <button *ngIf="!showNavBar()" mat-button routerLink="/hotel" routerLinkActive="mat-accent" class="text-white mt-2 ml-2">
+  <button *ngIf="!showNavBar()" mat-button routerLink="/" routerLinkActive="mat-accent" class="text-white mt-2 ml-2">
     <mat-icon>keyboard_arrow_left</mat-icon>
     Home Page
   </button>
 </div>
 <mat-toolbar *ngIf="showNavBar()">
   <mat-toolbar-row>
-    <span>{{title}}</span>
+    <span class="c-pointer" routerLink="/">{{title}}</span>
     <span class="example-spacer"></span>
-    <button mat-button routerLink="/hotel" routerLinkActive="mat-accent">Hotel</button>
+    <button mat-button routerLink="/rooms" routerLinkActive="mat-accent">Rooms</button>
     <button mat-button routerLink="/restaurants" routerLinkActive="mat-accent">Restaurants</button>
     <button mat-button routerLink="/events" routerLinkActive="mat-accent">Events</button>
     <button mat-button routerLink="/contact" routerLinkActive="mat-accent">Contact</button>

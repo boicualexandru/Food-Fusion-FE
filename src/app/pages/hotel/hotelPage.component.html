@@ -4,38 +4,32 @@
     <div class="col-md-6 offset-md-3 py-3 text-center">
       <h1>Welcome to</h1>
       <h2>Franco Dacex</h2>
-      <h2>4-star Hotel</h2>
+      <h2>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+      </h2>
     </div>
   </div>
 </div>
-<div class="hotel-image-header small section-2"></div>
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6 offset-md-3 py-3 text-center">
-      <h2>Please select a date</h2>
-      <div class="d-flex w-200">
-        <span class="flex-shrink-1 pt-3 pr-3 w-50">Date from</span>
-        <mat-form-field class="w-100">
-          <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom"
-            placeholder="Choose a date">
-          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-          <mat-datepicker #pickerFrom></mat-datepicker>
-        </mat-form-field>
+    <div class="row">
+        <div class="col-6 p-0 hotel-summary c-pointer" routerLink="/rooms">
+          <div class="hotel-image"></div>
+          <div class="hotel-summary-content text-center d-flex align-items-center justify-content-center">
+            <h2 style="font-weight: 400">Book a room in our Hotel</h2>
+          </div>
+        </div>
+        <div class="col-6 p-0 restaurants-summary c-pointer" routerLink="/restaurants">
+          <div class="restaurants-image"></div>
+          <div class="restaurants-summary-content text-center d-flex align-items-center justify-content-center">
+            <h2 style="font-weight: 400">Take a seat at one of our Restaurants</h2>
+          </div>
+        </div>
       </div>
-      <div class="d-flex w-200">
-        <span class="flex-shrink-1 pt-3 pr-3 w-50">Date to</span>
-        <mat-form-field class="w-100">
-          <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="pickerTo" [(ngModel)]="dateTo"
-            placeholder="Choose a date">
-          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-          <mat-datepicker #pickerTo></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <button mat-flat-button color="primary" class="mb-3">Book</button>
-    </div>
-  </div>
 </div>
-<div class="hotel-image-header small section-3"></div>
+<div class="hotel-image-header section-3"></div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8 offset-md-2 py-3">
