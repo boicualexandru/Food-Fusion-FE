@@ -13,6 +13,7 @@ import { SharedModule } from './shared.module';
 import { MenuService } from './services/menu.service';
 import { BookingService } from './services/booking service';
 import { ReservationsService } from './services/reservations.service';
+import { HotelService } from './services/hotel.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ReservationsService } from './services/reservations.service';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    AuthService, RestaurantsService, EmployeesService, MenuService, BookingService, ReservationsService ],
+    AuthService, RestaurantsService, EmployeesService, MenuService, BookingService, ReservationsService, HotelService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

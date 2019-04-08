@@ -8,12 +8,14 @@ import { SharedModule } from '../shared.module';
 import { RestaurantCreatePageComponent } from './restaurant-create/restaurant-create-page.component';
 import { RestaurantPageModule } from './restaurant/restaurantPage.module';
 import { UserReservationsPageComponent } from './user-reservations/user-reservations.page.component';
+import { HotelBookingPageComponent } from './hotel-booking/hotelBookingPage.component';
 
 @NgModule({
     declarations: [
         LoginPageComponent,
         RegisterPageComponent,
         HotelPageComponent,
+        HotelBookingPageComponent,
         RestaurantsPageComponent,
         RestaurantCreatePageComponent,
         UserReservationsPageComponent],
@@ -25,6 +27,7 @@ import { UserReservationsPageComponent } from './user-reservations/user-reservat
         LoginPageComponent,
         RegisterPageComponent,
         HotelPageComponent,
+        HotelBookingPageComponent,
         RestaurantsPageComponent,
         RestaurantCreatePageComponent,
         RestaurantPageModule,

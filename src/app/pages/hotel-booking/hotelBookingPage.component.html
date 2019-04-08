@@ -1,0 +1,66 @@
+<div class="container mt-4">
+    <div class="row">
+        <mat-form-field class="col-3 offset-2">
+            <input matInput [matDatepicker]="fromDatePicker" placeholder="From" [(ngModel)]="startMoment"
+                [matDatepickerFilter]="startDateFilter" (dateChange)="onStartDateChanged()">
+            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromDatePicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-3">
+            <input matInput [matDatepicker]="toDatePicker" placeholder="To" [(ngModel)]="endMoment"
+                [matDatepickerFilter]="endDateFilter" (dateChange)="onEndDateChanged($event)">
+            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #toDatePicker></mat-datepicker>
+        </mat-form-field>
+        <div class="d-flex col-2 text-center">
+            <button mat-icon-button (click)="decrementGuests()" [disabled]="filters.guests <= 1" 
+                class="justify-content-center align-self-center mx-2">
+                <mat-icon aria-label="Decrement participants">remove</mat-icon>
+            </button>
+            <span class="justify-content-center align-self-center mx-1">{{filters.guests}}</span>
+            <mat-icon class="justify-content-center align-self-center">person</mat-icon>
+            <button mat-icon-button (click)="incrementGuests()" 
+                class="justify-content-center align-self-center mx-2">
+                <mat-icon aria-label="Increment participants">add</mat-icon>
+            </button>
+            <!-- <button mat-flat-button color="primary"
+                class="justify-content-center align-self-center w-100">Search</button> -->
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-8 offset-2">
+            <button mat-stroked-button color="primary" class="btn-advanced-filters">More</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card-columns w-100">
+            <div *ngFor="let room of rooms" class="px-1">
+                <mat-card class="d-inline-block my-1 c-pointer card" [routerLink]="'/room/' + room.id">
+                    <mat-card-header>
+                        <mat-card-title>{{room.name}}</mat-card-title>
+                        <mat-card-subtitle>
+                            <mat-icon class="align-bottom">people</mat-icon>
+                            {{room.maxGuests}}
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image src="{{room.imageUrl}}" alt="{{room.name}}">
+                    <mat-card-content>
+                        <div class="d-inline-block mr-2 mb-2">
+                            <mat-icon class="align-bottom">{{getRoomView(room).icon}}</mat-icon>
+                            {{getRoomView(room).name}} View
+                        </div>
+                        <div class="d-inline-block mr-2 mb-2">
+                            <mat-icon class="align-bottom">{{getBedType(room).icon}}</mat-icon>
+                            {{getBedType(room).name}} Bed
+                        </div>
+
+                        <div class="d-inline-block mr-2 mb-2" *ngFor="let feature of getAmenities(room)">
+                            <mat-icon class="align-bottom">{{feature.icon}}</mat-icon>
+                            {{feature.name}}
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
