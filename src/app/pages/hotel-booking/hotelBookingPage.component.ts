@@ -32,7 +32,6 @@ export const MY_FORMATS = {
     ],
 })
 export class HotelBookingPageComponent implements OnInit {
-    hotelFeatures: HotelFeature[] = [];
     rooms: HotelRoom[] = [];
 
     filters: HotelRoomsFilters;
@@ -53,8 +52,7 @@ export class HotelBookingPageComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.hotelService.getFeatures().subscribe(features => this.hotelFeatures = features);
-        this.hotelService.getRooms().subscribe(rooms => this.rooms = rooms);
+        this.loadFilteredRooms();
     }
 
     onStartDateChanged(): void {
