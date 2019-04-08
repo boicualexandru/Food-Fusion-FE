@@ -107,16 +107,10 @@ export class HotelBookingPageComponent implements OnInit {
         return room.features.filter(f => f.category === 'Amenities') || null;
     }
 
-    bookRoom(roomId: number): void {
-        const bookingDetails: HotelRoomBooking = {
-            guests: this.filters.guests,
-            range: this.filters.timeRange,
-            roomId: roomId
-        };
-
+    bookRoom(room: number): void {
         const dialogRef = this.dialog.open(BookRoomDialogComponent, {
-            width: '350px',
-            data: bookingDetails
+            width: '400px',
+            data: { filters: this.filters, room: room }
         });
 
         dialogRef.afterClosed().subscribe(() => {
