@@ -62,10 +62,9 @@ export class HotelBookingPageComponent implements OnInit {
         if (this.startMoment.utc(true).isAfter(this.endMoment.subtract(1, 'days'))) {
             this.endMoment = this.startMoment.utc(true).add(1, 'days');
             this.filters.timeRange.end = this.endMoment.toDate();
-        } else {
-            // load only if the end date will not be changed imediately
-            this.loadFilteredRooms();
         }
+
+        this.loadFilteredRooms();
     }
 
     onEndDateChanged(event: any): void {
