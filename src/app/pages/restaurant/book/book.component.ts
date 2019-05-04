@@ -28,7 +28,9 @@ export class BookComponent implements OnInit {
     minutesPerDay = 1440;
     minutesBetween = 30;
     minutesOfReservation = 60;
-    fromAllMinutes: number[] = Array.from(Array(this.minutesPerDay / this.minutesBetween).keys()).map(x => x * this.minutesBetween);
+    fromAllMinutes: number[] = Array.from(Array(this.minutesPerDay / this.minutesBetween).keys())
+        .map(x => x * this.minutesBetween)
+        .filter(x => x <= this.minutesPerDay - this.minutesOfReservation);
     fromAvailableFrames: number[] = [];
 
     get intervalStart(): string {
@@ -61,7 +63,9 @@ export class BookComponent implements OnInit {
         this.fromAvailableFrames = this.fromAllMinutes;
     }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        this.updateAvailability();
+    }
 
     incrementParticipants(): void {
         this.participantsCount ++;
