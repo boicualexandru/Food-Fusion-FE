@@ -25,6 +25,12 @@ export class BookComponent implements OnInit {
 
     selectedTables: Table[] = [];
 
+    minutesPerDay = 1440;
+    minutesBetween = 30;
+    minutesOfReservation = 60;
+    fromAllMinutes: number[] = Array.from(Array(this.minutesPerDay / this.minutesBetween).keys()).map(x => x * this.minutesBetween);
+    fromAvailableFrames: number[] = [];
+
     get intervalStart(): string {
         return this.formattedInterval.value[0];
     }
@@ -51,6 +57,8 @@ export class BookComponent implements OnInit {
                 this.formattedStringToMinutes(value[1])
             ];
         });
+
+        this.fromAvailableFrames = this.fromAllMinutes;
     }
 
     ngOnInit(): void { }
@@ -92,6 +100,9 @@ export class BookComponent implements OnInit {
                 this.unavailableFrames = unavailableFrames.map(unavailableFrame => [
                     this.dateToMinutes(unavailableFrame.start),
                     this.dateToMinutes(unavailableFrame.end)]);
+
+                this.fromAvailableFrames = this.fromAllMinutes.filter(x =>
+                    this.unavailableFrames.every(frame => frame[0] >= x + this.minutesOfReservation || frame[1] <= x));
             });
     }
 
@@ -111,8 +122,11 @@ export class BookComponent implements OnInit {
     }
 
     get reservationRequest(): ReservationRequest {
-        const timespanStart = Timespan.fromMinutes(this.interval[0]);
-        const timespanEnd = Timespan.fromMinutes(this.interval[1]);
+        // const timespanStart = Timespan.fromMinutes(this.interval[0]);
+        //const timespanEnd = Timespan.fromMinutes(this.interval[1]);
+        // this is just for the hotel feature branch > select options
+        const timespanStart = Timespan.fromMinutes(this.interval[0] + 180);
+        const timespanEnd = Timespan.fromMinutes(this.interval[0] + this.minutesOfReservation + 180);
 
         return {
             restaurantId: this.restaurantId,
