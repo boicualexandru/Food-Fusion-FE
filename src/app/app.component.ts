@@ -13,7 +13,7 @@ export class AppComponent {
     currentUser: UserState;
     title = 'Hotel Franco Dacex';
 
-    constructor(private router: Router, private authService: AuthService) {
+    constructor(private router: Router, public authService: AuthService) {
         this.currentUser = this.authService.currentUser;
         this.authService.currentUserObservable.subscribe(user => this.currentUser = user);
     }

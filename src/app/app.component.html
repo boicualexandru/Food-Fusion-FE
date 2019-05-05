@@ -19,9 +19,18 @@
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <button *ngIf="authService.isAdmin" mat-menu-item routerLink="/hotel-reservations">
+        <mat-icon>hotel</mat-icon>
+        <span>All Hotel Reservations</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item routerLink="/hotel-user-reservations">
+        <mat-icon>hotel</mat-icon>
+        <span>My Hotel Reservations</span>
+      </button>
       <button mat-menu-item routerLink="/reservations">
         <mat-icon>today</mat-icon>
-        <span>My Reservations</span>
+        <span>My Restaurant Reservations</span>
       </button>
       <mat-divider></mat-divider>
       <button mat-menu-item>
