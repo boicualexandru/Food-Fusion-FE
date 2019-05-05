@@ -30,4 +30,8 @@ export class HotelService {
     getUserReservations() {
         return this.http.get<HotelReservationDetailed[]>(environment.apiBaseUrl + '/Hotel/UserReservations');
     }
+
+    markReservationAsPaid(reservationId: number) {
+        return this.http.put<void>(environment.apiBaseUrl + '/Hotel/PayReservation/' + reservationId, null);
+    }
 }

@@ -17,4 +17,8 @@ export class ReservationsService {
     getRestaurantReservations(restaurantId: number): Observable<ReservationDetailed[]> {
         return this.http.get<ReservationDetailed[]>(environment.apiBaseUrl + '/Restaurant/' + restaurantId + '/Reservations');
     }
+
+    markReservationAsPaid(reservationId: number): Observable<void> {
+        return this.http.put<void>(environment.apiBaseUrl + '/PayReservation/' + reservationId, null);
+    }
 }

@@ -21,6 +21,9 @@
                         <span class="reserved-table">{{reservation.room.floor}}</span>
                     </mat-card-subtitle>
                 </div>
+                <div *ngIf="!reservation.paid && isDateInFuture(reservation.range.end)" class="text-right">
+                    <button mat-flat-button color="primary" (click)="payNow(reservation)">Pay Now</button>
+                </div>
             </mat-card>
         </div>
     </div>
