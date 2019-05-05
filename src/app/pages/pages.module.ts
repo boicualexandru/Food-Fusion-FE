@@ -10,6 +10,7 @@ import { RestaurantPageModule } from './restaurant/restaurantPage.module';
 import { UserReservationsPageComponent } from './user-reservations/user-reservations.page.component';
 import { HotelBookingPageModule } from './hotel-booking/hotelBookingPage.module';
 import { HelpPageComponent } from './help/helpPage.component';
+import { HotelReservationsPageComponent } from './hotel-reservations/hotel-reservations.page.component';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { HelpPageComponent } from './help/helpPage.component';
         RestaurantsPageComponent,
         RestaurantCreatePageComponent,
         UserReservationsPageComponent,
+        HotelReservationsPageComponent,
         HelpPageComponent],
     imports: [
         SharedModule,
@@ -34,6 +36,7 @@ import { HelpPageComponent } from './help/helpPage.component';
         RestaurantPageModule,
         HotelBookingPageModule,
         UserReservationsPageComponent,
+        HotelReservationsPageComponent,
         HelpPageComponent]
 })
 export class PagesModule { }

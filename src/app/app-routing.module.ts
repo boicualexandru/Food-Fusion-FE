@@ -9,6 +9,7 @@ import { RestaurantCreatePageComponent } from './pages/restaurant-create/restaur
 import { UserReservationsPageComponent } from './pages/user-reservations/user-reservations.page.component';
 import { HotelBookingPageComponent } from './pages/hotel-booking/hotelBookingPage.component';
 import { HelpPageComponent } from './pages/help/helpPage.component';
+import { HotelReservationsPageComponent } from './pages/hotel-reservations/hotel-reservations.page.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
   { path: 'restaurant/:id/:tab', component: RestaurantPageComponent },
   { path: 'restaurant-create', component: RestaurantCreatePageComponent },
   { path: 'reservations', component: UserReservationsPageComponent },
+  { path: 'hotel-reservations', component: HotelReservationsPageComponent },
   { path: 'help', component: HelpPageComponent },
   { path: '**', redirectTo: '' }
 ];

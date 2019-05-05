@@ -5,6 +5,7 @@ import { HotelRoomsFilters } from '../models/hotel/hotelRoomsFilters';
 import { HotelRoom } from '../models/hotel/hotelRoom';
 import { HotelFeature } from '../models/hotel/hotelFeature';
 import { HotelRoomBooking } from '../models/hotel/hotelRoomBooking';
+import { HotelReservationDetailed } from '../models/hotel/hotelReservationDetailed';
 
 @Injectable()
 export class HotelService {
@@ -20,5 +21,13 @@ export class HotelService {
 
     bookRoom(bookingDetails: HotelRoomBooking) {
         return this.http.post(environment.apiBaseUrl + '/Hotel/Reservations', bookingDetails);
+    }
+
+    getAllReservations() {
+        return this.http.get<HotelReservationDetailed[]>(environment.apiBaseUrl + '/Hotel/Reservations');
+    }
+
+    getUserReservations() {
+        return this.http.get<HotelReservationDetailed[]>(environment.apiBaseUrl + '/Hotel/UserReservations');
     }
 }
