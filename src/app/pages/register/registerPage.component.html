@@ -25,11 +25,14 @@
                 </mat-card-content>
                 <mat-card-actions>
                     <div class="text-right">
-                        <button mat-raised-button (click)="register()" color="primary" class="w-100">
+                        <button mat-raised-button *ngIf="!showSpinner" (click)="register()" color="primary" class="w-100">
                             Sign Up
-                            <mat-spinner [style.display]="showSpinner ? 'inline-block' : 'none'" color="accent" diameter="25"></mat-spinner>
+                        </button>
+                        <button mat-raised-button *ngIf="showSpinner" color="primary" disabled class="w-100">
+                            <mat-spinner style="display: inline-block" color="accent" diameter="25"></mat-spinner>
                         </button>
                     </div>
+                    <div class="text-center mat-small text-danger my-1" *ngIf="showError">Username or passrod incorrect.</div> 
                     <div class="mat-body-strong font-weight-bold text-center pt-3">
                         Already have an account? <a routerLink="/login">Login</a>
                     </div>

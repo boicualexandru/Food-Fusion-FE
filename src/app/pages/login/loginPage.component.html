@@ -5,7 +5,7 @@
             <h1 class="logo" routerLink="/hotel">Hotel Franco Dacex</h1>
         </div>
         <mat-card class="auth-card">
-            <mat-card-content>
+            <mat-card-content class="mb-0">
                 <form class="example-form">
                     <mat-form-field appearance="standard" class="input-full-width">
                         <mat-label>Email</mat-label>
@@ -21,11 +21,14 @@
             </mat-card-content>
             <mat-card-actions>
                 <div class="text-right">
-                    <button mat-raised-button (click)="login()" color="primary" class="w-100">
+                    <button mat-raised-button *ngIf="!showSpinner" (click)="login()" color="primary" class="w-100">
                         Login
-                        <mat-spinner [style.display]="showSpinner ? 'inline-block' : 'none'" color="accent" diameter="25"></mat-spinner>
+                    </button>
+                    <button mat-raised-button *ngIf="showSpinner" color="primary" disabled class="w-100">
+                        <mat-spinner style="display: inline-block" color="accent" diameter="25"></mat-spinner>
                     </button>
                 </div>
+                <div class="text-center mat-small text-danger my-1" *ngIf="showError">Username or passrod incorrect.</div> 
                 <div class="mat-body-strong font-weight-bold text-center pt-3">
                     Don't have an account? <a routerLink="/register">Sign up</a>
                 </div>

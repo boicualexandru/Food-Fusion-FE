@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
     hidePass = true;
     showSpinner = false;
+    showError = false;
 
     email: string;
     password: string;
@@ -20,6 +21,7 @@ export class LoginPageComponent implements OnInit {
 
     login(): void {
         this.showSpinner = true;
+        this.showError = false;
 
         const loginModel: LoginModel = {
             email: this.email,
@@ -30,6 +32,10 @@ export class LoginPageComponent implements OnInit {
             token =>  {
                 this.showSpinner = false;
                 this.router.navigate(['/hotel']);
+            },
+            error => {
+                this.showError = true;
+                this.showSpinner = false;
             }
         );
     }

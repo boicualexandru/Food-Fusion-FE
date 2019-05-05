@@ -10,6 +10,7 @@ import { RegisterModel } from 'src/app/models/registerModel';
 export class RegisterPageComponent implements OnInit {
     hidePass = true;
     showSpinner = false;
+    showError = false;
 
     email: string;
     fullName: string;
@@ -31,6 +32,10 @@ export class RegisterPageComponent implements OnInit {
             token =>  {
                 this.showSpinner = false;
                 this.router.navigate(['/hotel']);
+            },
+            error => {
+                this.showError = true;
+                this.showSpinner = false;
             }
         );
     }
