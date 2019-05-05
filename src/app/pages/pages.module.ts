@@ -11,6 +11,7 @@ import { UserReservationsPageComponent } from './user-reservations/user-reservat
 import { HotelBookingPageModule } from './hotel-booking/hotelBookingPage.module';
 import { HelpPageComponent } from './help/helpPage.component';
 import { HotelReservationsPageComponent } from './hotel-reservations/hotel-reservations.page.component';
+import { HotelUserReservationsPageComponent } from './hotel-user-reservations/hotel-user-reservations.page.component';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { HotelReservationsPageComponent } from './hotel-reservations/hotel-reser
         RestaurantCreatePageComponent,
         UserReservationsPageComponent,
         HotelReservationsPageComponent,
+        HotelUserReservationsPageComponent,
         HelpPageComponent],
     imports: [
         SharedModule,
@@ -37,6 +39,7 @@ import { HotelReservationsPageComponent } from './hotel-reservations/hotel-reser
         HotelBookingPageModule,
         UserReservationsPageComponent,
         HotelReservationsPageComponent,
+        HotelUserReservationsPageComponent,
         HelpPageComponent]
 })
 export class PagesModule { }
