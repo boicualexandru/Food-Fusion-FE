@@ -7,5 +7,6 @@ export interface HotelReservationDetailed {
     room: HotelRoom;
     user: UserSimple;
     guestsCount: number;
+    paid: boolean;
     range: DateRange;
 }

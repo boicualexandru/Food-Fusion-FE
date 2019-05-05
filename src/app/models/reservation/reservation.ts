@@ -7,5 +7,6 @@ export interface Reservation {
     restaurant: RestaurantSimple;
     user: UserSimple;
     participantsCount: number;
+    paid: boolean;
     range: DateRange;
 }
