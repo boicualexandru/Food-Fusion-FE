@@ -101,9 +101,20 @@ export class BookComponent implements OnInit {
     updateAvailability(): void {
         this.bookingService.getUnavailableFramesByDay(this.restaurantId, this.participantsCount, this.date)
             .subscribe(unavailableFrames => {
-                this.unavailableFrames = unavailableFrames.map(unavailableFrame => [
-                    this.dateToMinutes(unavailableFrame.start),
-                    this.dateToMinutes(unavailableFrame.end)]);
+                this.unavailableFrames = unavailableFrames.map(unavailableFrame => {
+                    const startMinutes = this.dateToMinutes(unavailableFrame.start);
+                    let endMinutes = this.dateToMinutes(unavailableFrame.end);
+
+                    if (unavailableFrame.start < unavailableFrame.end &&
+                        startMinutes >  endMinutes) {
+                            endMinutes += this.minutesPerDay;
+                        }
+
+                    return [
+                        startMinutes,
+                        endMinutes
+                    ];
+                });
 
                 this.fromAvailableFrames = this.fromAllMinutes.filter(x =>
                     this.unavailableFrames.every(frame => frame[0] >= x + this.minutesOfReservation || frame[1] <= x));
