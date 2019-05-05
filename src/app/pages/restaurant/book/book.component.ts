@@ -26,7 +26,7 @@ export class BookComponent implements OnInit {
     selectedTables: Table[] = [];
 
     minutesPerDay = 1440;
-    minutesBetween = 30;
+    minutesBetween = 60;
     minutesOfReservation = 60;
     fromAllMinutes: number[] = Array.from(Array(this.minutesPerDay / this.minutesBetween).keys())
         .map(x => x * this.minutesBetween)
