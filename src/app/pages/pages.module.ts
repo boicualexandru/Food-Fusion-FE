@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { LoginPageComponent } from './login/loginPage.component';
 import { RestaurantsPageComponent } from './restaurants/restaurantsPage.component';
-import { HotelPageComponent } from './hotel/hotelPage.component';
+import { HomePageComponent } from './home/homePage.component';
 import { ComponentsModule } from '../components/components.module';
 import { RegisterPageComponent } from './register/registerPage.component';
 import { SharedModule } from '../shared.module';
@@ -17,7 +17,7 @@ import { HotelUserReservationsPageComponent } from './hotel-user-reservations/ho
     declarations: [
         LoginPageComponent,
         RegisterPageComponent,
-        HotelPageComponent,
+        HomePageComponent,
         RestaurantsPageComponent,
         RestaurantCreatePageComponent,
         UserReservationsPageComponent,
@@ -32,7 +32,7 @@ import { HotelUserReservationsPageComponent } from './hotel-user-reservations/ho
     exports: [
         LoginPageComponent,
         RegisterPageComponent,
-        HotelPageComponent,
+        HomePageComponent,
         RestaurantsPageComponent,
         RestaurantCreatePageComponent,
         RestaurantPageModule,

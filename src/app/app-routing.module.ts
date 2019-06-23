@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginPageComponent } from './pages/login/loginPage.component';
 import { RegisterPageComponent } from './pages/register/registerPage.component';
-import { HotelPageComponent } from './pages/hotel/hotelPage.component';
+import { HomePageComponent } from './pages/home/homePage.component';
 import { RestaurantsPageComponent } from './pages/restaurants/restaurantsPage.component';
 import { RestaurantPageComponent } from './pages/restaurant/restaurantPage.component';
 import { RestaurantCreatePageComponent } from './pages/restaurant-create/restaurant-create-page.component';
@@ -15,7 +15,7 @@ import { HotelUserReservationsPageComponent } from './pages/hotel-user-reservati
 const appRoutes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
-  { path: '', component: HotelPageComponent },
+  { path: 'home', component: HomePageComponent },
   { path: 'rooms', component: HotelBookingPageComponent },
   { path: 'restaurants', component: RestaurantsPageComponent },
   { path: 'restaurant/:id', component: RestaurantPageComponent },
@@ -25,7 +25,7 @@ const appRoutes: Routes = [
   { path: 'hotel-reservations', component: HotelReservationsPageComponent },
   { path: 'hotel-user-reservations', component: HotelUserReservationsPageComponent },
   { path: 'help', component: HelpPageComponent },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'restaurants' }
 ];
 
 @NgModule({

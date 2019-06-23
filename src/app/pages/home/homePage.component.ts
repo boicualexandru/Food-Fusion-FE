@@ -8,10 +8,10 @@ import { MatDialog } from '@angular/material';
 import { Table } from 'src/app/models/restaurant/table';
 
 @Component({
-    templateUrl: './hotelPage.component.html',
-    styleUrls: ['./hotelPage.component.scss']
+    templateUrl: './homePage.component.html',
+    styleUrls: ['./homePage.component.scss']
 })
-export class HotelPageComponent implements OnInit {
+export class HomePageComponent implements OnInit {
 
     dateFrom: Date = new Date();
     dateTo: Date = new Date();
