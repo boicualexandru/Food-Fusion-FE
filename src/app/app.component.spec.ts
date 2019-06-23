@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Hotel Franco Dacex'`, () => {
+  it(`should have as title 'Food Fusion'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Hotel Franco Dacex');
+    expect(app.title).toEqual('Food Fusion');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to Hotel Franco Dacex!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to Food Fusion!');
   });
 });

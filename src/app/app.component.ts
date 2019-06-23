@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
     currentUser: UserState;
-    title = 'Hotel Franco Dacex';
+    title = 'Food Fusion';
 
     constructor(private router: Router, public authService: AuthService) {
         this.currentUser = this.authService.currentUser;
