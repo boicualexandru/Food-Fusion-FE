@@ -17,7 +17,7 @@ export class BookComponent implements OnInit {
     @Input()
     restaurantId: number;
 
-    participantsCount = 2;
+    guestsCount = 2;
     date: Date = new Date();
     interval: number[] = [1170, 1320];
     formattedInterval: BehaviorSubject<string[]>;
@@ -67,13 +67,13 @@ export class BookComponent implements OnInit {
         this.updateAvailability();
     }
 
-    incrementParticipants(): void {
-        this.participantsCount ++;
+    incrementGuests(): void {
+        this.guestsCount ++;
         this.updateAvailability();
     }
 
-    decrementParticipants(): void {
-        this.participantsCount --;
+    decrementGuests(): void {
+        this.guestsCount --;
         this.updateAvailability();
     }
 
@@ -99,7 +99,7 @@ export class BookComponent implements OnInit {
     }
 
     updateAvailability(): void {
-        this.bookingService.getUnavailableFramesByDay(this.restaurantId, this.participantsCount, this.date)
+        this.bookingService.getUnavailableFramesByDay(this.restaurantId, this.guestsCount, this.date)
             .subscribe(unavailableFrames => {
                 this.unavailableFrames = unavailableFrames.map(unavailableFrame => {
                     const startMinutes = this.dateToMinutes(unavailableFrame.start);
@@ -138,7 +138,7 @@ export class BookComponent implements OnInit {
 
     get reservationRequest(): ReservationRequest {
         // const timespanStart = Timespan.fromMinutes(this.interval[0]);
-        //const timespanEnd = Timespan.fromMinutes(this.interval[1]);
+        // const timespanEnd = Timespan.fromMinutes(this.interval[1]);
         // this is just for the hotel feature branch > select options
         const timespanStart = Timespan.fromMinutes(this.interval[0] + 180);
         const timespanEnd = Timespan.fromMinutes(this.interval[0] + this.minutesOfReservation + 180);
@@ -149,7 +149,7 @@ export class BookComponent implements OnInit {
                 start: timespanStart.toDate(this.date),
                 end: timespanEnd.toDate(this.date)
             },
-            participantsCount: this.participantsCount,
+            participantsCount: this.guestsCount,
             tableIds: this.selectedTables.map(t => t.id)
         };
     }
