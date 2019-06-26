@@ -30,6 +30,9 @@ export class RestaurantCreatePageComponent implements OnInit {
             Validators.required,
             serverSideValidator(this.serverErrorMessage, 'description')
         ]),
+        imageurl: new FormControl('', [
+            serverSideValidator(this.serverErrorMessage, 'imageUrl')
+        ]),
     });
 
     matcher = new DirtyTouchedSubmittedErrorStateMatcher();

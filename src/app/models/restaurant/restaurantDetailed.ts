@@ -6,5 +6,8 @@ export interface RestaurantDetailed {
     description: string;
     contact: string;
     city: string;
+    imageUrl: string;
+    geoLatitude: number;
+    geoLongitude: number;
     menu: Menu;
 }
