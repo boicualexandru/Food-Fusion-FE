@@ -30,8 +30,14 @@ export class RestaurantCreatePageComponent implements OnInit {
             Validators.required,
             serverSideValidator(this.serverErrorMessage, 'description')
         ]),
-        imageurl: new FormControl('', [
+        imageUrl: new FormControl('', [
             serverSideValidator(this.serverErrorMessage, 'imageUrl')
+        ]),
+        geoLatitude: new FormControl('', [
+            serverSideValidator(this.serverErrorMessage, 'geoLatitude')
+        ]),
+        geoLongitude: new FormControl('', [
+            serverSideValidator(this.serverErrorMessage, 'geoLongitude')
         ]),
     });
 
