@@ -17,11 +17,7 @@
         </div>
         <div class="col-md-6 px-0">
             <agm-map [latitude]="47.1651364" [longitude]="27.5695892" [zoom]="14" [ngStyle]="{'height': clientHeight - 64 + 'px'}">
-                <agm-marker [latitude]="47.1628553" [longitude]="27.5811555"></agm-marker>
-                <agm-marker [latitude]="47.1628553" [longitude]="27.5911555"></agm-marker>
-                <agm-marker [latitude]="47.1528553" [longitude]="27.5871555"></agm-marker>
-                <agm-marker [latitude]="47.1588553" [longitude]="27.5681555"></agm-marker>
-                <agm-marker [latitude]="47.1708553" [longitude]="27.5771555"></agm-marker>
+                <agm-marker *ngFor="let restaurant of restaurants" [latitude]="restaurant.geoLatitude" [longitude]="restaurant.geoLongitude"></agm-marker>
             </agm-map>
         </div>
     </div>
