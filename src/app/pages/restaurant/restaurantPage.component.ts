@@ -15,9 +15,6 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
     activeTabIndex = 0;
     private sub: any;
     private tabRouteNames = ['book', 'menu', 'staff', 'reservations'];
-    // 47.1628553,27.5811555
-    lat = 47.1628553;
-    lng = 27.5811555;
 
     constructor(private route: ActivatedRoute,
         private restaurantsService: RestaurantsService,
@@ -44,12 +41,5 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.sub.unsubscribe();
-    }
-
-    getImage(): string {
-        const d = Math.random();
-
-        // tslint:disable-next-line:max-line-length
-        return 'url(https://images.unsplash.com/photo-1479044769763-c28e05b5baa5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)';
     }
 }
