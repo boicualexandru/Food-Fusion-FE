@@ -23,8 +23,10 @@ export class AppComponent {
         this.router.navigate(['/login']);
     }
 
-    showNavBar(): boolean {
-        return this.router.url !== '/login' &&
-            this.router.url !== '/register';
-    }
+    showNavBar = () =>
+        this.router.url !== '/login' &&
+        this.router.url !== '/register'
+
+    showFooter = () =>
+        this.router.url !== '/restaurants'
 }

@@ -54,7 +54,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>
-<footer class="text-white mt-auto" style="background-color: #3f51b5;">
+<footer *ngIf="showFooter()" class="text-white mt-auto" style="background-color: #3f51b5;">
   <div class="container py-4">
     <div class="row">
       <div class="col-4">
