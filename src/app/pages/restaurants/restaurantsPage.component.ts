@@ -9,6 +9,7 @@ import { Restaurant } from 'src/app/models/restaurant/restaurant';
 export class RestaurantsPageComponent implements OnInit {
     restaurants: Restaurant[] = [];
     clientHeight: number;
+    mapView = true;
 
     constructor(private restaurantsService: RestaurantsService) {
         this.clientHeight = window.innerHeight;

@@ -1,6 +1,7 @@
-<div class="container-fluid">
+<div class="container-fluid" [ngClass]="mapView ? 'mapView' : 'listView'">
     <div class="row">
-        <div class="col-md-6 py-3" [ngStyle]="{'height': clientHeight - 64 + 'px', 'overflow': 'auto'}">
+        <div class="restaurants-list-container py-3" [ngStyle]="{'height': clientHeight - 64 + 'px'}" 
+            [ngClass]="mapView ? 'col-md-6 customScrollBar' : 'col-md-12'">
             <div class="card-columns">
                 <div *ngFor="let restaurant of restaurants" class="px-1">
                     <mat-card class="d-inline-block my-1 c-pointer card" [routerLink]="'/restaurant/' + restaurant.id">
@@ -14,8 +15,14 @@
                     </mat-card>
                 </div>
             </div>
+            <button *ngIf="mapView" mat-fab (click)="mapView = false" class="view-switch-fab" aria-label="Switch to list view">
+                <mat-icon>list</mat-icon>
+            </button>
+            <button *ngIf="!mapView" mat-fab (click)="mapView = true" class="view-switch-fab" aria-label="Switch to map view">
+                <mat-icon>map</mat-icon>
+            </button>
         </div>
-        <div class="col-md-6 px-0">
+        <div *ngIf="mapView" class="col-md-6 px-0">
             <agm-map [latitude]="47.1651364" [longitude]="27.5695892" [zoom]="14" [ngStyle]="{'height': clientHeight - 64 + 'px'}">
                 <agm-marker *ngFor="let restaurant of restaurants" [latitude]="restaurant.geoLatitude" [longitude]="restaurant.geoLongitude"></agm-marker>
             </agm-map>
