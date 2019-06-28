@@ -8,7 +8,8 @@
                             <mat-card-title>{{restaurant.name}}</mat-card-title>
                             <mat-card-subtitle>{{restaurant.city}}</mat-card-subtitle>
                         </mat-card-header>
-                        <img mat-card-image src="{{getImage()}}" alt="{{restaurant.name}}">
+                        <img mat-card-image [src]="restaurant.imageUrl" 
+                            onError="this.src='assets/img/restaurant-fallback.png';" alt="{{restaurant.name}}">
                         <mat-card-content>{{restaurant.description}}</mat-card-content>
                     </mat-card>
                 </div>
@@ -16,11 +17,7 @@
         </div>
         <div class="col-md-6 px-0">
             <agm-map [latitude]="47.1651364" [longitude]="27.5695892" [zoom]="14" [ngStyle]="{'height': clientHeight - 64 + 'px'}">
-                <agm-marker [latitude]="47.1628553" [longitude]="27.5811555"></agm-marker>
-                <agm-marker [latitude]="47.1628553" [longitude]="27.5911555"></agm-marker>
-                <agm-marker [latitude]="47.1528553" [longitude]="27.5871555"></agm-marker>
-                <agm-marker [latitude]="47.1588553" [longitude]="27.5681555"></agm-marker>
-                <agm-marker [latitude]="47.1708553" [longitude]="27.5771555"></agm-marker>
+                <agm-marker *ngFor="let restaurant of restaurants" [latitude]="restaurant.geoLatitude" [longitude]="restaurant.geoLongitude"></agm-marker>
             </agm-map>
         </div>
     </div>

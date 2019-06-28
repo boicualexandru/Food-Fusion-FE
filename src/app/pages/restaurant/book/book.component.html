@@ -1,15 +1,19 @@
-<div class="d-flex w-100 mt-2">
-    <span class="flex-shrink-1 pt-1 pr-3">Participants</span>
-    <div class="w-100 text-right">
-        <button mat-icon-button (click)="decrementParticipants()" [disabled]="participantsCount <= 1">
-            <mat-icon aria-label="Decrement participants">remove_circle_outline</mat-icon>
+<div class="d-flex w-100 mt-2 justify-content-between">
+    <span class="flex-shrink-1 pt-1 pr-3">Guests</span>
+    <div class="d-flex">
+        <button mat-icon-button (click)="decrementGuests()" [disabled]="guestsCount <= 1" 
+            class="justify-content-center align-self-center mx-2">
+            <mat-icon aria-label="Decrement guests">remove</mat-icon>
         </button>
-        <span class="align-middle">{{participantsCount}}</span>
-        <button mat-icon-button (click)="incrementParticipants()">
-            <mat-icon aria-label="Increment participants">add_circle_outline</mat-icon>
+        <span class="justify-content-center align-self-center mx-1">{{guestsCount}}</span>
+        <mat-icon class="justify-content-center align-self-center">person</mat-icon>
+        <button mat-icon-button (click)="incrementGuests()" 
+            class="justify-content-center align-self-center mx-2">
+            <mat-icon aria-label="Increment guests">add</mat-icon>
         </button>
     </div>
 </div>
+
 <div class="d-flex w-100 mt-2">
     <span class="flex-shrink-1 pt-3 pr-3">Date</span>
     <mat-form-field class="w-100">
@@ -20,7 +24,21 @@
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 </div>
-<div class="row mt-2">
+<div class="d-flex w-100 mt-2">
+    <span class="flex-shrink-1 pt-3 pr-3">Time</span>
+    <mat-form-field class="w-100">
+        <mat-label>From</mat-label>
+        <mat-select [(ngModel)]="this.interval[0]">
+          <mat-option *ngFor="let minute of fromAvailableFrames" [value]="minute">
+            {{minute | minutes_to_time}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+</div>
+<div class="d-flex w-100 mt-2">
+    <span class="mat-small">Duration of reservation is set to 60 minutes.</span>
+</div>
+<!-- <div class="row mt-2">
     <div class="col-6">
         <span class="d-block">From</span>
         <mat-form-field class="w-100">
@@ -45,5 +63,5 @@
         <span>{{selectedTables[0]?.name}}</span>
         <button mat-button (click)="openDialogForChoosingTable()">Choose Table (optional)</button>
     </div>
-</div>
+</div> -->
 <button mat-flat-button color="primary" class="w-100 mt-2" (click)="book()">Book</button>

@@ -28,6 +28,19 @@
         <mat-form-field class="w-100">
           <textarea matInput placeholder="Short Description" formControlName="description" [errorStateMatcher]="matcher"></textarea>
         </mat-form-field>
+
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Image" formControlName="imageUrl" [errorStateMatcher]="matcher">
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+          <input matInput type="number" placeholder="Geolocation Latitude" formControlName="geoLatitude" [errorStateMatcher]="matcher">
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+          <input matInput type="number" placeholder="Geolocation Longitude" formControlName="geoLongitude" [errorStateMatcher]="matcher">
+        </mat-form-field>
+
         <button mat-raised-button type="submit" [disabled]="!form.valid" color="primary">Create</button>
       </form>
     </div>

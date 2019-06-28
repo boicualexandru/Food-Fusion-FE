@@ -17,13 +17,21 @@ export class BookComponent implements OnInit {
     @Input()
     restaurantId: number;
 
-    participantsCount = 2;
+    guestsCount = 2;
     date: Date = new Date();
     interval: number[] = [1170, 1320];
     formattedInterval: BehaviorSubject<string[]>;
     unavailableFrames: number[][] = [];
 
     selectedTables: Table[] = [];
+
+    minutesPerDay = 1440;
+    minutesBetween = 60;
+    minutesOfReservation = 60;
+    fromAllMinutes: number[] = Array.from(Array(this.minutesPerDay / this.minutesBetween).keys())
+        .map(x => x * this.minutesBetween)
+        .filter(x => x <= this.minutesPerDay - this.minutesOfReservation);
+    fromAvailableFrames: number[] = [];
 
     get intervalStart(): string {
         return this.formattedInterval.value[0];
@@ -51,17 +59,21 @@ export class BookComponent implements OnInit {
                 this.formattedStringToMinutes(value[1])
             ];
         });
+
+        this.fromAvailableFrames = this.fromAllMinutes;
     }
 
-    ngOnInit(): void { }
-
-    incrementParticipants(): void {
-        this.participantsCount ++;
+    ngOnInit(): void {
         this.updateAvailability();
     }
 
-    decrementParticipants(): void {
-        this.participantsCount --;
+    incrementGuests(): void {
+        this.guestsCount ++;
+        this.updateAvailability();
+    }
+
+    decrementGuests(): void {
+        this.guestsCount --;
         this.updateAvailability();
     }
 
@@ -87,11 +99,25 @@ export class BookComponent implements OnInit {
     }
 
     updateAvailability(): void {
-        this.bookingService.getUnavailableFramesByDay(this.restaurantId, this.participantsCount, this.date)
+        this.bookingService.getUnavailableFramesByDay(this.restaurantId, this.guestsCount, this.date)
             .subscribe(unavailableFrames => {
-                this.unavailableFrames = unavailableFrames.map(unavailableFrame => [
-                    this.dateToMinutes(unavailableFrame.start),
-                    this.dateToMinutes(unavailableFrame.end)]);
+                this.unavailableFrames = unavailableFrames.map(unavailableFrame => {
+                    const startMinutes = this.dateToMinutes(unavailableFrame.start);
+                    let endMinutes = this.dateToMinutes(unavailableFrame.end);
+
+                    if (unavailableFrame.start < unavailableFrame.end &&
+                        startMinutes >  endMinutes) {
+                            endMinutes += this.minutesPerDay;
+                        }
+
+                    return [
+                        startMinutes,
+                        endMinutes
+                    ];
+                });
+
+                this.fromAvailableFrames = this.fromAllMinutes.filter(x =>
+                    this.unavailableFrames.every(frame => frame[0] >= x + this.minutesOfReservation || frame[1] <= x));
             });
     }
 
@@ -111,8 +137,11 @@ export class BookComponent implements OnInit {
     }
 
     get reservationRequest(): ReservationRequest {
-        const timespanStart = Timespan.fromMinutes(this.interval[0]);
-        const timespanEnd = Timespan.fromMinutes(this.interval[1]);
+        // const timespanStart = Timespan.fromMinutes(this.interval[0]);
+        // const timespanEnd = Timespan.fromMinutes(this.interval[1]);
+        // this is just for the hotel feature branch > select options
+        const timespanStart = Timespan.fromMinutes(this.interval[0] + 180);
+        const timespanEnd = Timespan.fromMinutes(this.interval[0] + this.minutesOfReservation + 180);
 
         return {
             restaurantId: this.restaurantId,
@@ -120,7 +149,7 @@ export class BookComponent implements OnInit {
                 start: timespanStart.toDate(this.date),
                 end: timespanEnd.toDate(this.date)
             },
-            participantsCount: this.participantsCount,
+            participantsCount: this.guestsCount,
             tableIds: this.selectedTables.map(t => t.id)
         };
     }

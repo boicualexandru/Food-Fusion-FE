@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Advanced Filters</h1>
+<div mat-dialog-content class="pb-4">
+    <div class="row">
+            <mat-form-field class="col-6">
+                    <mat-label>Room View</mat-label>
+                    <mat-select [(value)]="selectedRoomViewId">
+                        <mat-option *ngFor="let feature of roomViews" [value]="feature.id">
+                            {{feature.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col-6">
+                    <mat-label>Bed Type</mat-label>
+                    <mat-select [(value)]="selectedBedTypeId">
+                        <mat-option *ngFor="let feature of bedTypes" [value]="feature.id">
+                            {{feature.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+    </div>
+    <div class="mat-small">Amenitites</div>
+    <div class="row">
+        <div *ngFor="let amenity of amenities" class="col-6">
+            <mat-checkbox [(ngModel)]="amenity.checked">{{amenity.feature.name}}</mat-checkbox>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions class="justify-content-end">
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-flat-button (click)="filter()" color="primary" class="ml-1">Filter</button>
+</div>

@@ -1,15 +1,17 @@
 
 <div>
-  <button *ngIf="!showNavBar()" mat-button routerLink="/restaurants" routerLinkActive="mat-accent" class="text-white mt-2 ml-2">
+  <button *ngIf="!showNavBar()" mat-button routerLink="/" routerLinkActive="mat-accent" class="text-white mt-2 ml-2">
     <mat-icon>keyboard_arrow_left</mat-icon>
     Home Page
   </button>
 </div>
 <mat-toolbar *ngIf="showNavBar()">
   <mat-toolbar-row>
-    <span>{{title}}</span>
+    <span class="c-pointer" routerLink="/">{{title}}</span>
     <span class="example-spacer"></span>
+    <button mat-button routerLink="/rooms" routerLinkActive="mat-accent">Rooms</button>
     <button mat-button routerLink="/restaurants" routerLinkActive="mat-accent">Restaurants</button>
+    <button mat-button routerLink="/help" routerLinkActive="mat-accent">Help</button>
 
     <button *ngIf="!currentUser" mat-button routerLink="/login" routerLinkActive="mat-accent">Login</button>
 
@@ -17,9 +19,18 @@
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <button *ngIf="authService.isAdmin" mat-menu-item routerLink="/hotel-reservations">
+        <mat-icon>hotel</mat-icon>
+        <span>All Hotel Reservations</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item routerLink="/hotel-user-reservations">
+        <mat-icon>hotel</mat-icon>
+        <span>My Hotel Reservations</span>
+      </button>
       <button mat-menu-item routerLink="/reservations">
         <mat-icon>today</mat-icon>
-        <span>My Reservations</span>
+        <span>My Restaurant Reservations</span>
       </button>
       <mat-divider></mat-divider>
       <button mat-menu-item>
@@ -29,6 +40,10 @@
       <button mat-menu-item>
         <mat-icon>equalizer</mat-icon>
         <span>Preferences</span>
+      </button>
+      <button mat-menu-item routerLink="/restaurant-create">
+        <mat-icon>add</mat-icon>
+        <span>Create New Restaurant</span>
       </button>
       <mat-divider></mat-divider>
       <button mat-menu-item (click)="logout()">
@@ -43,7 +58,7 @@
   <div class="container py-4">
     <div class="row">
       <div class="col-4">
-        <span style="font-size: 1.2rem; font-weight: 500; letter-spacing: 0.5px;">FoodFusion</span>
+        <span style="font-size: 1.2rem; font-weight: 500; letter-spacing: 0.5px;">Food Fusion</span>
       </div>
       <div class="col-4 text-center">Version: Pre-Alpha 2</div>
       <div class="col-4 text-right">Iasi, Romania</div>

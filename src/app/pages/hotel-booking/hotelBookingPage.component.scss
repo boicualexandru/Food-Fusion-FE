@@ -1,0 +1,52 @@
+.btn-advanced-filters {
+    line-height: 24px;
+    padding: 0 8px;
+    min-width: 0;
+}
+
+.card-columns{
+    column-gap: 0;
+}
+
+@media (min-width: 768px) {
+    .card-columns {
+        column-count: 4;
+    }
+}
+
+.hotel-room-card{
+    &:hover .book-now-overlay{
+        opacity: 1;
+        width: 100%;
+        height: 100%;
+        transition: opacity .3s ease-in-out;
+    }
+}
+
+.book-now-overlay{
+    display: flex;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    background-color: rgba($color: #fff, $alpha: .8);
+    transition: opacity .3s ease-in-out, width 0s ease-in-out .3s, height 0s ease-in-out .3s;
+}
+
+.room-price{
+    color: #ff4081;
+}
+
+.no-content-placeholder{
+    height: 300px;
+    width: 100%;
+    display: block;
+    max-width: 500px;
+    margin: 0 auto;
+    background-image: url(https://cdn.dribbble.com/users/2519905/screenshots/6181179/___.jpg);
+    background-size: contain;
+    padding-top: 75%;    
+    background-repeat-y: no-repeat;
+}

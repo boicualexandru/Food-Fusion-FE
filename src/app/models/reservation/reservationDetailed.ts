@@ -8,6 +8,7 @@ export interface ReservationDetailed {
     restaurant: RestaurantSimple;
     user: UserSimple;
     participantsCount: number;
+    paid: boolean;
     range: DateRange;
     tables: Table[];
 }

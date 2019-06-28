@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { RegisterModel } from 'src/app/models/registerModel';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { BasicErrorStateMatcher } from 'src/app/helpers/basicErrorStateMatcher';
 
 @Component({
     templateUrl: './registerPage.component.html',
@@ -10,10 +12,23 @@ import { RegisterModel } from 'src/app/models/registerModel';
 export class RegisterPageComponent implements OnInit {
     hidePass = true;
     showSpinner = false;
+    showError = false;
 
-    email: string;
-    fullName: string;
-    password: string;
+    matcher = new BasicErrorStateMatcher();
+
+    form = new FormGroup({
+        email: new FormControl('', [
+            Validators.required,
+            Validators.email
+        ]),
+        fullName: new FormControl('', [
+            Validators.required
+        ]),
+        password: new FormControl('', [
+            Validators.required,
+            Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+        ])
+    });
 
     constructor(private router: Router, private authService: AuthService) { }
 
@@ -22,15 +37,19 @@ export class RegisterPageComponent implements OnInit {
     register(): void {
         this.showSpinner = true;
         const registerModel: RegisterModel = {
-            email: this.email,
-            fullName: this.fullName,
-            password: this.password
+            email: this.form.value.email,
+            fullName: this.form.value.fullName,
+            password: this.form.value.password
         };
 
         this.authService.register(registerModel).subscribe(
             token =>  {
                 this.showSpinner = false;
-                this.router.navigate(['/restaurants']);
+                this.router.navigate(['/hotel']);
+            },
+            error => {
+                this.showError = true;
+                this.showSpinner = false;
             }
         );
     }

@@ -4,4 +4,7 @@ export interface Restaurant {
     description: string;
     contact: string;
     city: string;
+    imageUrl: string;
+    geoLatitude: number;
+    geoLongitude: number;
 }

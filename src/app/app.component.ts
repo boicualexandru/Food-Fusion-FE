@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
     currentUser: UserState;
-    title = 'FoodFusion';
+    title = 'Food Fusion';
 
-    constructor(private router: Router, private authService: AuthService) {
+    constructor(private router: Router, public authService: AuthService) {
         this.currentUser = this.authService.currentUser;
         this.authService.currentUserObservable.subscribe(user => this.currentUser = user);
     }

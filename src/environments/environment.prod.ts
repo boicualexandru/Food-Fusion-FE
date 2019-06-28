@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'http://34.245.155.215:5000/api',
+  apiBaseUrl: 'http://63.35.227.80:5000/api',
   apiDateFormatMinutePrecision: 'yyyy-MM-ddTHH:mm'
 };

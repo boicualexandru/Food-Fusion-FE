@@ -9,6 +9,7 @@ import { MenuComponent } from './menu/menu.component';
 import { BookComponent } from './book/book.component';
 import { RestaurantReservationsComponent } from './reservations/restaurant-reservations.component';
 import { ChoosetableDialogComponent } from './book/choose-table-dialog/choose-table-dialog.component';
+import { MinutesToTimePipe } from './book/minutes-to-time.pipe';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { ChoosetableDialogComponent } from './book/choose-table-dialog/choose-ta
         RestaurantReservationsComponent,
         ItemEditDialogComponent,
         BookComponent,
-        ChoosetableDialogComponent],
+        ChoosetableDialogComponent,
+        MinutesToTimePipe],
     imports: [
         SharedModule,
         ComponentsModule],
