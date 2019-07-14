@@ -1,3 +1,6 @@
+@import "~bootstrap/scss/functions";
+@import '~bootstrap/scss/variables';
+
 .bg-image{
     background-image: url('https://picsum.photos/800/600/?random');
 }
@@ -52,4 +55,9 @@
     .listView &{
         right: 24px;
     }
+}
+
+.card-columns .card:hover {
+    box-shadow: $box-shadow-lg !important;
+    z-index: 1;
 }
