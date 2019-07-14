@@ -4,13 +4,15 @@
             [ngClass]="mapView ? 'col-md-6 customScrollBar' : 'col-md-12'">
             <div class="card-columns">
                 <div *ngFor="let restaurant of restaurants" class="px-1">
-                    <mat-card class="d-inline-block my-1 c-pointer card" [routerLink]="'/restaurant/' + restaurant.id">
-                        <mat-card-header>
-                            <mat-card-title>{{restaurant.name}}</mat-card-title>
-                            <mat-card-subtitle>{{restaurant.city}}</mat-card-subtitle>
-                        </mat-card-header>
+                    <mat-card class="d-inline-block my-1 c-pointer card shadow border-0" [routerLink]="'/restaurant/' + restaurant.id">
                         <img mat-card-image [src]="restaurant.imageUrl" 
                             onError="this.src='assets/img/restaurant-fallback.png';" alt="{{restaurant.name}}">
+                        <div class="mat-card-header">
+                            <div class="mat-card-header-text d-flex justify-content-between w-100 mx-0 ">
+                                <mat-card-title class="mat-card-title mr-3">{{restaurant.name}}</mat-card-title>
+                                <mat-card-subtitle class="align-items-center mt-0 mat-card-subtitle mt-1">{{restaurant.city}}</mat-card-subtitle>
+                            </div>
+                        </div>
                         <mat-card-content>{{restaurant.description}}</mat-card-content>
                     </mat-card>
                 </div>
