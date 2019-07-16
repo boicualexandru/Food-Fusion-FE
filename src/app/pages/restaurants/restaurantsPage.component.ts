@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, Inject, ViewChildren, QueryList }
 import { RestaurantsService } from 'src/app/services/restaurants.service';
 import { Restaurant } from 'src/app/models/restaurant/restaurant';
 import { AgmInfoWindow, AgmMarker } from '@agm/core';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
     templateUrl: './restaurantsPage.component.html',
@@ -20,8 +21,12 @@ export class RestaurantsPageComponent implements OnInit {
 
     constructor(
         private restaurantsService: RestaurantsService,
-        @Inject(ChangeDetectorRef) private changeDetectorRef: ChangeDetectorRef) {
+        @Inject(ChangeDetectorRef) private changeDetectorRef: ChangeDetectorRef,
+        private meta: Meta) {
         this.clientHeight = window.innerHeight;
+
+        this.meta.addTag({ name: 'og:title', content: 'FoodFusion | Restaurants' });
+        this.meta.addTag({ name: 'og:image', content: 'assets/img/FoodFusionLogo.png' });
     }
 
     ngOnInit(): void {
