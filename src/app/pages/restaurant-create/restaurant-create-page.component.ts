@@ -50,6 +50,6 @@ export class RestaurantCreatePageComponent implements OnInit {
     create(): void {
         this.restaurantsService.create(this.form.value)
             .subscribe(
-                restaurant => this.router.navigate(['restaurant', restaurant.id]));
+                restaurantId => this.router.navigate(['restaurant', restaurantId]));
     }
 }

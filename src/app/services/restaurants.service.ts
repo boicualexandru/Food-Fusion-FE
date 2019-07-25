@@ -17,6 +17,6 @@ export class RestaurantsService {
     }
 
     create(restaurant: Restaurant) {
-        return this.http.post<Restaurant>(environment.apiBaseUrl + '/Restaurants', restaurant);
+        return this.http.post<number>(environment.apiBaseUrl + '/Restaurants', restaurant);
     }
 }
