@@ -7,13 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { AppRoutingModule } from './app-routing.module';
+import { FillPipe } from './pipes/fill.pipe';
 
 @NgModule({
-    declarations: [],
+    declarations: [ FillPipe ],
     imports: [ CommonModule, BrowserModule, BrowserAnimationsModule, HttpClientModule, FormsModule,
         ReactiveFormsModule, MaterialCustomModule, AppRoutingModule, AgmCoreModule],
     exports: [ CommonModule, BrowserModule, BrowserAnimationsModule, HttpClientModule, FormsModule,
-        ReactiveFormsModule, MaterialCustomModule, AppRoutingModule, AgmCoreModule],
+        ReactiveFormsModule, MaterialCustomModule, AppRoutingModule, AgmCoreModule, FillPipe],
     providers: [ DatePipe ],
 })
 export class SharedModule {}

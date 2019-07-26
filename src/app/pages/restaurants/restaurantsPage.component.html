@@ -16,7 +16,16 @@
                                 <mat-card-subtitle class="align-items-center mt-0 mat-card-subtitle mt-1">{{restaurant.city}}</mat-card-subtitle>
                             </div>
                         </div>
-                        <mat-card-content>{{restaurant.description}}</mat-card-content>
+                        <mat-card-content class="d-flex justify-content-between">
+                            <div>
+                                <span *ngFor="let cuisine of restaurant.cuisines; let isLast=last" class="d-inline-block mr-2 mb-2">
+                                    {{cuisine.name}}{{isLast ? '' : ', '}}
+                                </span>
+                            </div>
+                            <div class="align-items-center mt-0 mat-card-subtitle mt-1 price-range-icon">
+                                <mat-icon *ngFor="let i of getPriceIconCount(restaurant.priceRange) | fill" class="align-bottom">attach_money</mat-icon>
+                            </div>
+                        </mat-card-content>
                     </mat-card>
                 </div>
             </div>

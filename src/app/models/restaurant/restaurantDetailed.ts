@@ -1,4 +1,6 @@
 import { Menu } from '../menu/menu';
+import { Cuisine } from '../cuisine/cuisine';
+import { PriceRange } from './priceRange';
 
 export interface RestaurantDetailed {
     id: number;
@@ -10,4 +12,6 @@ export interface RestaurantDetailed {
     geoLatitude: number;
     geoLongitude: number;
     menu: Menu;
+    priceRange: PriceRange;
+    cuisines: Cuisine[];
 }

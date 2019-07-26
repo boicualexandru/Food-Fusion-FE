@@ -1,3 +1,6 @@
+import { Cuisine } from '../cuisine/cuisine';
+import { PriceRange } from './priceRange';
+
 export interface Restaurant {
     id: number;
     name: string;
@@ -7,4 +10,6 @@ export interface Restaurant {
     imageUrl: string;
     geoLatitude: number;
     geoLongitude: number;
+    priceRange: PriceRange;
+    cuisines: Cuisine[];
 }

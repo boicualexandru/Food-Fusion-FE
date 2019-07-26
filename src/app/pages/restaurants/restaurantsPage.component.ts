@@ -3,6 +3,7 @@ import { RestaurantsService } from 'src/app/services/restaurants.service';
 import { Restaurant } from 'src/app/models/restaurant/restaurant';
 import { AgmInfoWindow, AgmMarker } from '@agm/core';
 import { Meta } from '@angular/platform-browser';
+import { PriceRange } from 'src/app/models/restaurant/priceRange';
 
 @Component({
     templateUrl: './restaurantsPage.component.html',
@@ -50,5 +51,18 @@ export class RestaurantsPageComponent implements OnInit {
     clearInfoWindows(): void {
         this.changeDetectorRef.detectChanges();
         this.infoWindows.forEach(element => element.close());
+    }
+
+    getPriceIconCount(priceRange: PriceRange): number {
+        switch (priceRange) {
+            case PriceRange.Low:
+                return 1;
+            case PriceRange.Medium:
+                return 2;
+            case PriceRange.High:
+                return 3;
+            default:
+                return 0;
+        }
     }
 }
