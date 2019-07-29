@@ -14,6 +14,7 @@ import { MenuService } from './services/menu.service';
 import { BookingService } from './services/booking service';
 import { ReservationsService } from './services/reservations.service';
 import { HotelService } from './services/hotel.service';
+import { CuisinesService } from './services/cuisines.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { HotelService } from './services/hotel.service';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    AuthService, RestaurantsService, EmployeesService, MenuService, BookingService, ReservationsService, HotelService ],
+    AuthService, RestaurantsService, EmployeesService, MenuService, BookingService, ReservationsService, HotelService, CuisinesService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { LoginPageComponent } from './login/loginPage.component';
-import { RestaurantsPageComponent } from './restaurants/restaurantsPage.component';
 import { HomePageComponent } from './home/homePage.component';
 import { ComponentsModule } from '../components/components.module';
 import { RegisterPageComponent } from './register/registerPage.component';
@@ -12,13 +11,13 @@ import { HotelBookingPageModule } from './hotel-booking/hotelBookingPage.module'
 import { HelpPageComponent } from './help/helpPage.component';
 import { HotelReservationsPageComponent } from './hotel-reservations/hotel-reservations.page.component';
 import { HotelUserReservationsPageComponent } from './hotel-user-reservations/hotel-user-reservations.page.component';
+import { RestaurantsPageModule } from './restaurants/restaurantsPage.module';
 
 @NgModule({
     declarations: [
         LoginPageComponent,
         RegisterPageComponent,
         HomePageComponent,
-        RestaurantsPageComponent,
         RestaurantCreatePageComponent,
         UserReservationsPageComponent,
         HotelReservationsPageComponent,
@@ -28,14 +27,15 @@ import { HotelUserReservationsPageComponent } from './hotel-user-reservations/ho
         SharedModule,
         ComponentsModule,
         RestaurantPageModule,
+        RestaurantsPageModule,
         HotelBookingPageModule],
     exports: [
         LoginPageComponent,
         RegisterPageComponent,
         HomePageComponent,
-        RestaurantsPageComponent,
         RestaurantCreatePageComponent,
         RestaurantPageModule,
+        RestaurantsPageModule,
         HotelBookingPageModule,
         UserReservationsPageComponent,
         HotelReservationsPageComponent,

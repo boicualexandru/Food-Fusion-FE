@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Advanced Filters</h1>
+<div mat-dialog-content class="pb-4">
+    <div class="mat-small">Price Range</div>
+    <div class="row">
+        <div *ngFor="let priceRange of priceRangeCheckboxes" class="col-4">
+            <mat-checkbox [(ngModel)]="priceRange.checked">{{priceRange.priceRange.value}}</mat-checkbox>
+        </div>
+    </div>
+    <div class="mat-small">Cuisine</div>
+    <div class="row">
+        <div *ngFor="let cuisine of cuisineCheckboxes" class="col-6">
+            <mat-checkbox [(ngModel)]="cuisine.checked">{{cuisine.cuisine.name}}</mat-checkbox>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions class="justify-content-end">
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-flat-button (click)="filter()" color="primary" class="ml-1">Filter</button>
+</div>
