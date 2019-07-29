@@ -5,12 +5,12 @@ export enum PriceRange {
 }
 export interface PriceRangeValue {
     priceRange: PriceRange;
-    value: string;
+    name: string;
 }
 
 const availablePriceRanges: PriceRangeValue[] = [
-    { priceRange: PriceRange.Low, value: 'Low' },
-    { priceRange: PriceRange.Medium, value: 'Medium' },
-    { priceRange: PriceRange.High, value: 'High' }
+    { priceRange: PriceRange.Low, name: 'Low' },
+    { priceRange: PriceRange.Medium, name: 'Medium' },
+    { priceRange: PriceRange.High, name: 'High' }
 ];
 export default availablePriceRanges;

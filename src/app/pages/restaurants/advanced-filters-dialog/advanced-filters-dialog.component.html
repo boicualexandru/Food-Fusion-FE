@@ -3,7 +3,7 @@
     <div class="mat-small">Price Range</div>
     <div class="row">
         <div *ngFor="let priceRange of priceRangeCheckboxes" class="col-4">
-            <mat-checkbox [(ngModel)]="priceRange.checked">{{priceRange.priceRange.value}}</mat-checkbox>
+            <mat-checkbox [(ngModel)]="priceRange.checked">{{priceRange.priceRange.name}}</mat-checkbox>
         </div>
     </div>
     <div class="mat-small">Cuisine</div>
