@@ -1,30 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginPageComponent } from './pages/login/loginPage.component';
-import { RegisterPageComponent } from './pages/register/registerPage.component';
-import { HomePageComponent } from './pages/home/homePage.component';
-import { RestaurantsPageComponent } from './pages/restaurants/restaurantsPage.component';
-import { RestaurantPageComponent } from './pages/restaurant/restaurantPage.component';
-import { RestaurantCreatePageComponent } from './pages/restaurant-create/restaurant-create-page.component';
-import { UserReservationsPageComponent } from './pages/user-reservations/user-reservations.page.component';
-import { HotelBookingPageComponent } from './pages/hotel-booking/hotelBookingPage.component';
-import { HelpPageComponent } from './pages/help/helpPage.component';
-import { HotelReservationsPageComponent } from './pages/hotel-reservations/hotel-reservations.page.component';
-import { HotelUserReservationsPageComponent } from './pages/hotel-user-reservations/hotel-user-reservations.page.component';
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginPageComponent },
-  { path: 'register', component: RegisterPageComponent },
-  { path: 'home', component: HomePageComponent },
-  { path: 'rooms', component: HotelBookingPageComponent },
-  { path: 'restaurants', component: RestaurantsPageComponent },
-  { path: 'restaurant/:id', component: RestaurantPageComponent },
-  { path: 'restaurant/:id/:tab', component: RestaurantPageComponent },
-  { path: 'restaurant-create', component: RestaurantCreatePageComponent },
-  { path: 'reservations', component: UserReservationsPageComponent },
-  { path: 'hotel-reservations', component: HotelReservationsPageComponent },
-  { path: 'hotel-user-reservations', component: HotelUserReservationsPageComponent },
-  { path: 'help', component: HelpPageComponent },
+  { path: 'login', loadChildren: '../app/pages/login/loginPage.module#LoginPageModule' },
+  { path: 'register', loadChildren: '../app/pages/register/registerPage.module#RegisterPageModule' },
+  { path: 'home', loadChildren: '../app/pages/home/homePage.module#HomePageModule' },
+  { path: 'rooms', loadChildren: '../app/pages/hotel-booking/hotelBookingPage.module#HotelBookingPageModule' },
+  { path: 'restaurants', loadChildren: '../app/pages/restaurants/restaurantsPage.module#RestaurantsPageModule' },
+  { path: 'restaurant/:id', loadChildren: '../app/pages/restaurant/restaurantPage.module#RestaurantPageModule' },
+  { path: 'restaurant/:id/:tab', loadChildren: '../app/pages/restaurant/restaurantPage.module#RestaurantPageModule' },
+  { path: 'restaurant-create', loadChildren: '../app/pages/restaurant-create/restaurant-create-page.module#RestaurantCreatePageModule' },
+  { path: 'reservations', loadChildren: '../app/pages/user-reservations/user-reservations.page.module#UserReservationsPageModule' },
+  { path: 'hotel-reservations', loadChildren: '../app/pages/hotel-reservations/hotel-reservations.page.module#HotelReservationsPageModule' },
+  { path: 'hotel-user-reservations', loadChildren: '../app/pages/hotel-user-reservations/hotel-user-reservations.page.module#HotelUserReservationsPageModule' },
+  { path: 'help', loadChildren: '../app/pages/help/helpPage.module#HelpPageModule' },
   { path: '**', redirectTo: 'restaurants' }
 ];
 

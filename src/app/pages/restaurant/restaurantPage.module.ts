@@ -10,6 +10,11 @@ import { BookComponent } from './book/book.component';
 import { RestaurantReservationsComponent } from './reservations/restaurant-reservations.component';
 import { ChoosetableDialogComponent } from './book/choose-table-dialog/choose-table-dialog.component';
 import { MinutesToTimePipe } from './book/minutes-to-time.pipe';
+import { Routes, RouterModule } from '@angular/router';
+
+const lazyModuleRoutes: Routes = [
+    { path: '', component: RestaurantPageComponent }
+];
 
 @NgModule({
     declarations: [
@@ -21,18 +26,19 @@ import { MinutesToTimePipe } from './book/minutes-to-time.pipe';
         ItemEditDialogComponent,
         BookComponent,
         ChoosetableDialogComponent,
-        MinutesToTimePipe],
+        MinutesToTimePipe ],
     imports: [
         SharedModule,
-        ComponentsModule],
+        ComponentsModule,
+        RouterModule.forChild(lazyModuleRoutes) ],
     exports: [
         RestaurantPageComponent,
         EmployeesListComponent,
         MenuComponent,
-        RestaurantReservationsComponent],
+        RestaurantReservationsComponent ],
     entryComponents: [
         EmpoyeeEditDialogComponent,
         ItemEditDialogComponent,
-        ChoosetableDialogComponent]
+        ChoosetableDialogComponent ]
 })
 export class RestaurantPageModule { }

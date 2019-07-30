@@ -3,7 +3,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
-import { PagesModule } from './pages/pages.module';
 import { AuthService } from './services/auth.service';
 import { RestaurantsService } from './services/restaurants.service';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
@@ -15,6 +14,8 @@ import { BookingService } from './services/booking service';
 import { ReservationsService } from './services/reservations.service';
 import { HotelService } from './services/hotel.service';
 import { CuisinesService } from './services/cuisines.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -22,10 +23,11 @@ import { CuisinesService } from './services/cuisines.service';
   ],
   imports: [
     SharedModule,
-    PagesModule,
+    BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyACJzuFEFKJxVATZGSYpxRoNH0tfCB1cqk'
-    })
+    }),
+    AppRoutingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

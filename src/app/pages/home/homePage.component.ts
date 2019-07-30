@@ -1,11 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { BookingService } from 'src/app/services/booking service';
-import { Timespan } from 'src/app/models/boilerplate/timespan';
-import { Router } from '@angular/router';
-import { ReservationRequest } from 'src/app/models/reservation/reservationRequest';
-import { MatDialog } from '@angular/material';
-import { Table } from 'src/app/models/restaurant/table';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     templateUrl: './homePage.component.html',
