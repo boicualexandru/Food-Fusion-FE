@@ -16,9 +16,11 @@ export class RestaurantsPageComponent implements OnInit {
     restaurants: Restaurant[] = [];
     focusedRestaurantId?: number = null;
     filters: RestaurantsFilters = {
+        searchText: '',
         cuisineIds: [],
         priceRanges: []
     };
+    isLoading = false;
     clientHeight: number;
     mapView = true;
 
@@ -43,8 +45,11 @@ export class RestaurantsPageComponent implements OnInit {
     }
 
     loadRestaurants(): void {
-        this.restaurantsService.getAll().subscribe(restaurants => {
+        this.isLoading = true;
+
+        this.restaurantsService.getAll(this.filters).subscribe(restaurants => {
             this.restaurants = restaurants;
+            this.isLoading = false;
         });
     }
 

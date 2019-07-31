@@ -9,8 +9,8 @@ export interface PriceRangeValue {
 }
 
 const availablePriceRanges: PriceRangeValue[] = [
-    { priceRange: PriceRange.Low, name: 'Low' },
-    { priceRange: PriceRange.Medium, name: 'Medium' },
-    { priceRange: PriceRange.High, name: 'High' }
+    { priceRange: PriceRange.Low, name: '$' },
+    { priceRange: PriceRange.Medium, name: '$$' },
+    { priceRange: PriceRange.High, name: '$$$' }
 ];
 export default availablePriceRanges;

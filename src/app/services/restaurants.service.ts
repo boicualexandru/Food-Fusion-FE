@@ -3,13 +3,17 @@ import { Restaurant } from '../models/restaurant/restaurant';
 import { HttpClient } from '@angular/common/http';
 import { RestaurantDetailed } from '../models/restaurant/restaurantDetailed';
 import { environment } from 'src/environments/environment';
+import { RestaurantsFilters, restaurantsFiltersToHttpParams } from '../models/restaurant/restaurantsFilters';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class RestaurantsService {
     constructor(private http: HttpClient) { }
 
-    getAll() {
-        return this.http.get<Restaurant[]>(environment.apiBaseUrl + '/Restaurants');
+    getAll(filters: RestaurantsFilters): Observable<Restaurant[]> {
+        return this.http.get<Restaurant[]>(environment.apiBaseUrl + '/Restaurants', {
+                params: restaurantsFiltersToHttpParams(filters)
+            });
     }
 
     getRestaurant(id: number) {

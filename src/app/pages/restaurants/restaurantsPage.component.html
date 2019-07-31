@@ -2,10 +2,18 @@
     <div class="row">
         <div class="restaurants-list-container py-3" [ngStyle]="{'height': clientHeight - 64 + 'px'}" 
             [ngClass]="mapView ? 'col-md-6 customScrollBar' : 'col-md-12'">
-            <div class="mb-2 ml-1">
-                <button mat-stroked-button color="primary" class="btn-advanced-filters" (click)="openAdvancedFiltersDialog()">Advanced Filters</button>
+            <div class="mb-2 ml-1 d-flex align-items-center">
+                <mat-form-field class="flex-grow-1 mr-2" floatLabel="never">
+                  <input matInput placeholder="Find Restaurant" [(ngModel)]="filters.searchText"
+                    (keyup.enter)="loadRestaurants()" (focusout)="loadRestaurants()">
+                </mat-form-field>
+                <div>
+                    <button mat-icon-button color="primary" aria-label="Filter Restaurants" (click)="openAdvancedFiltersDialog()">
+                        <mat-icon>filter_list</mat-icon>
+                    </button>
+                </div>
             </div>
-            <div class="card-columns">
+            <div class="card-columns" [ngClass]="{'opacity-50': isLoading}">
                 <div *ngFor="let restaurant of restaurants" class="px-1">
                     <mat-card 
                     (mouseenter) ="cardMouseEnter(restaurant.id) "  (mouseleave) ="cardMouseLeave(restaurant.id)"
