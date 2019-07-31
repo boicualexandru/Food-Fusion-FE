@@ -20,15 +20,18 @@
                         <div class="mb-2">
                             {{restaurant.description}}
                         </div>
-                        <div>
+                        <div *ngIf="restaurant.cuisines != null && restaurant.cuisines.length > 0">
                             <strong>Amenities</strong>
-                            <span class="caption ml-2" style="font-size: 12px;">
-                                WiFi
-                                <mat-icon class="align-middle" style="font-size: 1rem;">wifi</mat-icon>
+                            <span class="caption ml-2" *ngFor="let cuisine of restaurant.cuisines; let isLast=last">
+                                {{cuisine.name}}{{isLast ? '' : ', '}}
                             </span>
+                        </div>
+                        <div *ngIf="restaurant.priceRange != null">
+                            <strong>PriceRange</strong>
                             <span class="caption ml-2" style="font-size: 12px;">
-                                Pet Friendly
-                                <mat-icon class="align-middle" style="font-size: 1rem;">pets</mat-icon>
+                                <span class="align-items-center mt-0 mat-card-subtitle mt-1 price-range-icon">
+                                    <mat-icon *ngFor="let i of getPriceIconCount(restaurant.priceRange) | fill">attach_money</mat-icon>
+                                </span>
                             </span>
                         </div>
                     </div>

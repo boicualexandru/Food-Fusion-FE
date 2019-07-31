@@ -5,6 +5,7 @@ import { RestaurantDetailed } from 'src/app/models/restaurant/restaurantDetailed
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material';
 import { Location } from '@angular/common';
+import { PriceRange } from 'src/app/models/restaurant/priceRange';
 
 @Component({
     templateUrl: './restaurantPage.component.html',
@@ -41,5 +42,18 @@ export class RestaurantPageComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.sub.unsubscribe();
+    }
+
+    getPriceIconCount(priceRange: PriceRange): number {
+        switch (priceRange) {
+            case PriceRange.Low:
+                return 1;
+            case PriceRange.Medium:
+                return 2;
+            case PriceRange.High:
+                return 3;
+            default:
+                return 0;
+        }
     }
 }
