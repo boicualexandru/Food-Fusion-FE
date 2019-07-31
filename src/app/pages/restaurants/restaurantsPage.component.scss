@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/functions";
 @import '~bootstrap/scss/variables';
+@import '~@angular/material/theming';
 
 .bg-image{
     background-image: url('https://picsum.photos/800/600/?random');
@@ -57,10 +58,16 @@
     }
 }
 
-.card-columns .card:hover {
-    box-shadow: $box-shadow-lg !important;
-    z-index: 1;
+.card-columns .card {
+    @include mat-elevation(2);
+
+    &:hover {
+        @include mat-elevation(5);
+        z-index: 1;
+    }
 }
+
+
 
 .price-range-icon .mat-icon {
     margin-right: -0.8em; 

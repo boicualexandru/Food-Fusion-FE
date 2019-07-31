@@ -9,7 +9,7 @@
                 <div *ngFor="let restaurant of restaurants" class="px-1">
                     <mat-card 
                     (mouseenter) ="cardMouseEnter(restaurant.id) "  (mouseleave) ="cardMouseLeave(restaurant.id)"
-                    class="d-inline-block my-1 c-pointer card shadow border-0" 
+                    class="d-inline-block my-1 c-pointer card border-0" 
                     [routerLink]="'/restaurant/' + restaurant.id">
                         <img mat-card-image [src]="restaurant.imageUrl" 
                             onError="this.src='assets/img/restaurant-fallback.png';" alt="{{restaurant.name}}">
