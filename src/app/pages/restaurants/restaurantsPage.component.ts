@@ -6,7 +6,8 @@ import { Meta } from '@angular/platform-browser';
 import { PriceRange } from 'src/app/models/restaurant/priceRange';
 import { MatDialog } from '@angular/material';
 import { AdvancedFiltersDialogComponent } from './advanced-filters-dialog/advanced-filters-dialog.component';
-import { RestaurantsFilters } from 'src/app/models/restaurant/restaurantsFilters';
+import { RestaurantsFilters, restaurantsFiltersToHttpParams } from 'src/app/models/restaurant/restaurantsFilters';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: './restaurantsPage.component.html',
@@ -31,6 +32,8 @@ export class RestaurantsPageComponent implements OnInit {
 
     constructor(
         private restaurantsService: RestaurantsService,
+        private router: Router,
+        private route: ActivatedRoute,
         @Inject(ChangeDetectorRef) private changeDetectorRef: ChangeDetectorRef,
         public dialog: MatDialog,
         private meta: Meta) {
@@ -41,11 +44,29 @@ export class RestaurantsPageComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.route.queryParams
+            .subscribe(params => {
+                if (params.searchText != null) {
+                    this.filters.searchText = params.searchText;
+                }
+
+                if (params.cuisineIds != null && params.cuisineIds.length > 0) {
+                    this.filters.cuisineIds = params.cuisineIds.map(cuisineId => +cuisineId);
+                }
+
+                if (params.priceRanges != null && params.priceRanges.length > 0) {
+                    this.filters.priceRanges = params.priceRanges.map(priceRange => +priceRange);
+                }
+            });
         this.loadRestaurants();
     }
 
     loadRestaurants(): void {
         this.isLoading = true;
+
+        this.router.navigate([], {
+            queryParams: restaurantsFiltersToHttpParams(this.filters)
+        });
 
         this.restaurantsService.getAll(this.filters).subscribe(restaurants => {
             this.restaurants = restaurants;
